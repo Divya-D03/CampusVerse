@@ -38,8 +38,8 @@ export default function ProfilePage() {
       <main className="flex-1 p-4 sm:p-6 md:p-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-6 mb-8">
-            <div className="relative h-24 w-24 rounded-full border-4 border-primary">
-               <Image src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} layout="fill" className="rounded-full" />
+            <div className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden">
+               <Image src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} fill className="object-cover" />
             </div>
             <div>
               <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>
