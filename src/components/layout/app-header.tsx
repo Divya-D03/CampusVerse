@@ -40,21 +40,19 @@ export function AppHeader() {
               </Link>
             </div>
 
-            <div className="flex flex-1 items-center space-x-2">
-               <div className="flex items-center space-x-2">
-                <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
-                  {user.role === 'Regular User' ? 'User' : 'Club Member'}
-                </Label>
-                <Switch
-                  id="role-switch"
-                  checked={user.role === 'Club Member'}
-                  onCheckedChange={toggleRole}
-                  aria-label="Toggle user role"
-                />
-              </div>
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
+                {user.role === 'Regular User' ? 'User' : 'Club Member'}
+              </Label>
+              <Switch
+                id="role-switch"
+                checked={user.role === 'Club Member'}
+                onCheckedChange={toggleRole}
+                aria-label="Toggle user role"
+              />
             </div>
             
-            <div className="flex items-center justify-end space-x-4">
+            <div className="flex flex-1 items-center justify-end space-x-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                    <div className="flex items-center gap-2 cursor-pointer">
