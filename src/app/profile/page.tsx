@@ -4,17 +4,18 @@ import { useAuth } from '@/contexts/auth-context';
 import { LoadingScreen } from '@/components/layout/loading-screen';
 import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Award, BarChart3, CalendarCheck2, Home } from 'lucide-react';
+import { Award, BarChart3, CalendarCheck2, Home, Camera } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function ProfilePage() {
-  const { user, loading } = useAuth();
+  const { user, loading, updateUserProfilePicture } = useAuth();
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -25,13 +26,29 @@ export default function ProfilePage() {
   if (loading || !user) {
     return <LoadingScreen />;
   }
-  
+
   const allEvents = [...culturalEvents, ...hackathons, ...techEvents];
   // Dummy data for demonstration
   const participatedEvents = allEvents.slice(0, 2);
   const wonEvents = allEvents.slice(2, 3);
-  
-  const userInitial = user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const dataUrl = reader.result as string;
+        updateUserProfilePicture(dataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -40,8 +57,23 @@ export default function ProfilePage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-start mb-8">
             <div className="flex items-center gap-6">
-              <div className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden">
-                 <Image src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} fill className="object-cover" />
+              <div className="relative group">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                  accept="image/*"
+                />
+                <button
+                  onClick={handleAvatarClick}
+                  className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                >
+                  <Image src={avatarSrc} alt={user.email} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Camera className="text-white h-8 w-8" />
+                  </div>
+                </button>
               </div>
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>

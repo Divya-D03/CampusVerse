@@ -23,6 +23,8 @@ export function Chatbot() {
   const { user } = useAuth();
   
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
+  const userAvatar = user?.profilePicture || `https://api.dicebear.com/8.x/bottts/svg?seed=${user?.email}`;
+
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -61,7 +63,7 @@ export function Chatbot() {
 
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50">
-          <Card className="w-80 h-96 flex flex-col shadow-2xl">
+          <Card className="w-80 h-96 flex flex-col shadow-2xl holographic-card">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Bot /> CampusVerse Helper
@@ -88,7 +90,7 @@ export function Chatbot() {
                       </div>
                       {message.role === 'user' && user && (
                          <Avatar className="h-8 w-8">
-                           <AvatarImage src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} />
+                           <AvatarImage src={userAvatar} alt={user.email} />
                            <AvatarFallback>{userInitial}</AvatarFallback>
                          </Avatar>
                       )}

@@ -25,6 +25,7 @@ export function AppHeader() {
   if (!user) return null;
 
   const userInitial = user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`;
 
   return (
     <>
@@ -79,7 +80,7 @@ export function AppHeader() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} />
+                      <AvatarImage src={avatarSrc} alt={user.email} />
                       <AvatarFallback>{userInitial}</AvatarFallback>
                     </Avatar>
                   </Button>

@@ -5,6 +5,7 @@ export interface User {
   email: string;
   role: UserRole;
   coupons: number;
+  profilePicture?: string;
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Full' | 'On-Spot Registration';

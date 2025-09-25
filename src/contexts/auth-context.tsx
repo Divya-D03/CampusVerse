@@ -12,6 +12,7 @@ interface AuthContextType {
   logout: () => void;
   toggleRole: () => void;
   updateUserName: (name: string) => void;
+  updateUserProfilePicture: (dataUrl: string) => void;
   markFirstLoginDone: () => void;
 }
 
@@ -82,13 +83,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateUserProfilePicture = (dataUrl: string) => {
+    setUser(currentUser => {
+      if (!currentUser) return null;
+      const updatedUser = { ...currentUser, profilePicture: dataUrl };
+      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
+      return updatedUser;
+    });
+  };
+
   const markFirstLoginDone = () => {
     setIsFirstLogin(false);
     localStorage.setItem('campusverse_first_login_done', 'true');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, markFirstLoginDone }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, markFirstLoginDone }}>
       {children}
     </AuthContext.Provider>
   );
