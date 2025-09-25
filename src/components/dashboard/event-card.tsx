@@ -4,7 +4,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Calendar, Ticket, Award } from 'lucide-react';
+import { Calendar, Award } from 'lucide-react';
 
 type EventCardProps = {
   event: Event;
@@ -53,10 +53,6 @@ export function EventCard({ event }: EventCardProps) {
         <Badge variant="outline" className={cn(statusStyles[event.status])}>
           {event.status}
         </Badge>
-        <div className="flex items-center gap-1 text-primary">
-          <Ticket className="w-4 h-4"/>
-          <span className="font-bold">{event.coupons > 0 ? `${event.coupons} Coupons` : 'Free'}</span>
-        </div>
       </CardFooter>
     </Card>
   );
