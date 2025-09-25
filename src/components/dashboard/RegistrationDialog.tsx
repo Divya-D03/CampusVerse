@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -51,11 +52,21 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
   const { toast } = useToast();
 
   const handleSubmit = async () => {
+    const semesterNumber = parseInt(semester, 10);
     if (!srn || !course || !semester || !school) {
       toast({
         variant: 'destructive',
         title: 'Incomplete Form',
         description: 'Please fill out all the fields to register.',
+      });
+      return;
+    }
+    
+    if (isNaN(semesterNumber) || semesterNumber < 1 || semesterNumber > 8) {
+      toast({
+        variant: 'destructive',
+        title: 'Invalid Semester',
+        description: 'Please enter a semester between 1 and 8.',
       });
       return;
     }
@@ -118,6 +129,8 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
             <Input
               id="semester"
               type="number"
+              min="1"
+              max="8"
               value={semester}
               onChange={(e) => setSemester(e.target.value)}
               className="col-span-3"
