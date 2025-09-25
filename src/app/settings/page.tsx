@@ -95,9 +95,9 @@ export default function SettingsPage() {
                     name="mobileNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Mobile Number</FormLabel>
+                        <FormLabel>New Mobile Number</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your mobile number" {...field} />
+                          <Input placeholder="Enter your new mobile number" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
