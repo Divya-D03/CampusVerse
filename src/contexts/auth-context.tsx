@@ -13,6 +13,7 @@ interface AuthContextType {
   toggleRole: () => void;
   updateUserName: (name: string) => void;
   updateUserProfilePicture: (dataUrl: string) => void;
+  updateUserSettings: (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => void;
   markFirstLoginDone: () => void;
   addCouponTransaction: (transaction: Omit<CouponTransaction, 'id' | 'date'>) => void;
 }
@@ -104,6 +105,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateUserSettings = (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => {
+    setUser(currentUser => {
+      if (!currentUser) return null;
+      const updatedUser = { ...currentUser, ...settings };
+      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
+      return updatedUser;
+    });
+  };
+
   const markFirstLoginDone = () => {
     setIsFirstLogin(false);
     localStorage.setItem('campusverse_first_login_done', 'true');
@@ -134,7 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, markFirstLoginDone, addCouponTransaction }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCouponTransaction }}>
       {children}
     </AuthContext.Provider>
   );

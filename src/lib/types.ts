@@ -15,6 +15,9 @@ export interface User {
   coupons: number;
   profilePicture?: string;
   couponHistory?: CouponTransaction[];
+  mobileNumber?: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Full' | 'On-Spot Registration';
