@@ -20,6 +20,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Helper to generate unique IDs for transactions
+const generateUniqueTxId = () => `txn-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -48,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = (email: string) => {
     const welcomeTransaction: CouponTransaction = {
-      id: `txn-${Date.now()}`,
+      id: generateUniqueTxId(),
       reason: 'Welcome Bonus!',
       amount: 50,
       type: 'earned',
@@ -113,7 +116,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       const newTransaction: CouponTransaction = {
         ...transaction,
-        id: `txn-${Date.now()}`,
+        id: generateUniqueTxId(),
         date: new Date().toISOString(),
       };
       
