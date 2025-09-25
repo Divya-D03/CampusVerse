@@ -34,42 +34,43 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <>
-      <div onClick={handleCardClick} className="cursor-pointer h-full">
-        <Card className="holographic-card flex flex-col h-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
-          <CardHeader>
-            <div className="relative aspect-[3/2] w-full rounded-md overflow-hidden mb-4">
-              {image && (
-                <Image
-                  src={image.imageUrl}
-                  alt={image.description}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  data-ai-hint={image.imageHint}
-                />
-              )}
-            </div>
-            <CardTitle className="font-headline text-xl">{event.title}</CardTitle>
-            <CardDescription className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              <span>{event.date}</span>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow space-y-4">
-            <p className="text-sm text-foreground/80">{event.description}</p>
-            {event.coupons > 0 && (
-                <div className="flex items-center gap-2 text-sm text-accent-foreground p-2 bg-accent/10 rounded-md">
-                    <Award className="w-4 h-4 text-accent" />
-                    <span className="font-medium">Win up to {event.coupons} coupons!</span>
-                </div>
+      <Card
+        onClick={handleCardClick}
+        className="holographic-card flex flex-col h-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 cursor-pointer"
+      >
+        <CardHeader>
+          <div className="relative aspect-[3/2] w-full rounded-md overflow-hidden mb-4">
+            {image && (
+              <Image
+                src={image.imageUrl}
+                alt={image.description}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                data-ai-hint={image.imageHint}
+              />
             )}
-          </CardContent>
-          <CardFooter className="flex justify-between items-center pt-4">
-            <Badge variant="outline" className={cn(statusStyles[event.status])}>
-              {event.status}
-            </Badge>
-          </CardFooter>
-        </Card>
-      </div>
+          </div>
+          <CardTitle className="font-headline text-xl">{event.title}</CardTitle>
+          <CardDescription className="flex items-center gap-2 text-muted-foreground">
+            <Calendar className="w-4 h-4" />
+            <span>{event.date}</span>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow space-y-4">
+          <p className="text-sm text-foreground/80">{event.description}</p>
+          {event.coupons > 0 && (
+              <div className="flex items-center gap-2 text-sm text-accent-foreground p-2 bg-accent/10 rounded-md">
+                  <Award className="w-4 h-4 text-accent" />
+                  <span className="font-medium">Win up to {event.coupons} coupons!</span>
+              </div>
+          )}
+        </CardContent>
+        <CardFooter className="flex justify-between items-center pt-4">
+          <Badge variant="outline" className={cn(statusStyles[event.status])}>
+            {event.status}
+          </Badge>
+        </CardFooter>
+      </Card>
       <EventRegistrationDialog event={event} open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );
