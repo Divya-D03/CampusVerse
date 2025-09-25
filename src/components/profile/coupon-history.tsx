@@ -29,8 +29,8 @@ export function CouponHistory({ transactions }: CouponHistoryProps) {
         {sortedTransactions.length > 0 ? (
           <ScrollArea className="h-[450px]">
             <div className="space-y-4 pr-4">
-              {sortedTransactions.map((tx) => (
-                <div key={tx.id} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+              {sortedTransactions.map((tx, index) => (
+                <div key={`${tx.id}-${index}`} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className={cn(
                       "flex items-center justify-center w-8 h-8 rounded-full",
