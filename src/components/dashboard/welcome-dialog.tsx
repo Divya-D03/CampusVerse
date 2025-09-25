@@ -25,17 +25,19 @@ export function WelcomeDialog({ open, onOpenChange }: WelcomeDialogProps) {
             <Gift className="w-8 h-8 text-primary" />
             Welcome to CampusVerse!
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-base pt-4">
-            As a welcome gift, you've been awarded
-            <span className="font-bold text-primary mx-1">50 free coupons!</span>
-            <br />
-            <br />
-            <div className="p-3 rounded-md bg-muted/50 border">
-              <p className="flex items-center gap-2">
-                <Award className="w-4 h-4 text-accent" />
-                <span>2 Coupons = 1 Rupee</span>
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">Participate in events to win more coupons and redeem exciting rewards.</p>
+          <AlertDialogDescription asChild>
+            <div className="text-base pt-4">
+              As a welcome gift, you've been awarded
+              <span className="font-bold text-primary mx-1">50 free coupons!</span>
+              <br />
+              <br />
+              <div className="p-3 rounded-md bg-muted/50 border">
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-accent" />
+                  <span>2 Coupons = 1 Rupee</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">Participate in events to win more coupons and redeem exciting rewards.</p>
+              </div>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
