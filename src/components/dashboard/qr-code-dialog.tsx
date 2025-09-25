@@ -2,8 +2,10 @@
 
 import {
   AlertDialog,
+  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
@@ -39,6 +41,9 @@ export function QrCodeDialog({ user, open, onOpenChange }: QrCodeDialogProps) {
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction onClick={() => onOpenChange(false)}>Go Back</AlertDialogAction>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
