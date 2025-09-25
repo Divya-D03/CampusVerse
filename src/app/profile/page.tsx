@@ -6,7 +6,7 @@ import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Award, BarChart3, CalendarCheck2, Home, Camera } from 'lucide-react';
+import { Award, BarChart3, CalendarCheck2, Home, Camera, FileText } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -120,7 +120,7 @@ export default function ProfilePage() {
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <h2 className="text-2xl font-headline font-bold mb-4">Event History</h2>
               <div className="space-y-4">
@@ -155,6 +155,51 @@ export default function ProfilePage() {
               <CouponHistory transactions={user.couponHistory || []} />
             </div>
           </div>
+
+          <div>
+            <h2 className="text-2xl font-headline font-bold mb-4">Certificates</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="font-bold text-lg text-primary mb-4">Winning Certificates</h3>
+                   <div className="space-y-4">
+                    {wonEvents.map(event => (
+                      <Card key={`cert-won-${event.id}`} className="holographic-card">
+                        <CardContent className="p-4 flex items-center justify-between">
+                            <div className='flex items-center gap-4'>
+                                <FileText className="w-6 h-6 text-accent"/>
+                                <div>
+                                    <p className="font-bold">{event.title}</p>
+                                    <p className="text-sm text-muted-foreground">Winning Certificate</p>
+                                </div>
+                            </div>
+                            <Button variant="outline" size="sm">Download</Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+                 <div>
+                  <h3 className="font-bold text-lg text-primary mb-4">Participation Certificates</h3>
+                  <div className="space-y-4">
+                    {participatedEvents.map(event => (
+                      <Card key={`cert-part-${event.id}`} className="holographic-card">
+                         <CardContent className="p-4 flex items-center justify-between">
+                            <div className='flex items-center gap-4'>
+                                <FileText className="w-6 h-6 text-accent"/>
+                                <div>
+                                    <p className="font-bold">{event.title}</p>
+                                    <p className="text-sm text-muted-foreground">Participation Certificate</p>
+                                </div>
+                            </div>
+                            <Button variant="outline" size="sm">Download</Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+            </div>
+          </div>
+
         </div>
       </main>
     </div>
