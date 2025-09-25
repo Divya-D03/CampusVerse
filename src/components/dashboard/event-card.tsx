@@ -1,17 +1,17 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { type Event, type EventStatus } from '@/lib/types';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Calendar, Award } from 'lucide-react';
+import { Calendar, Award, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
 
 type EventCardProps = {
   event: Event;
-  onRegisterClick: (event: Event) => void;
 };
 
 const statusStyles: Record<EventStatus, string> = {
@@ -21,7 +21,7 @@ const statusStyles: Record<EventStatus, string> = {
   'On-Spot Registration': 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
 };
 
-export function EventCard({ event, onRegisterClick }: EventCardProps) {
+export function EventCard({ event }: EventCardProps) {
   const image = PlaceHolderImages.find((img) => img.id === event.imageId);
 
   return (
@@ -60,7 +60,11 @@ export function EventCard({ event, onRegisterClick }: EventCardProps) {
           <Badge variant="outline" className={cn(statusStyles[event.status])}>
             {event.status}
           </Badge>
-          <Button variant="secondary" onClick={() => onRegisterClick(event)}>Register</Button>
+          <Button asChild variant="secondary">
+            <Link href={`/events/${event.id}`}>
+              View Details <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </CardFooter>
       </Card>
     </div>
