@@ -11,7 +11,7 @@ interface AuthContextType {
   login: (email: string) => void;
   logout: () => void;
   toggleRole: () => void;
-  updateUserName: (name: string) => void;
+  updateUser: (data: Partial<Pick<User, 'name' | 'mobileNumber' | 'gender'>>) => void;
   updateUserProfilePicture: (dataUrl: string) => void;
   updateUserSettings: (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => void;
   markFirstLoginDone: () => void;
@@ -22,6 +22,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Helper to generate unique IDs for transactions
 const generateUniqueTxId = () => crypto.randomUUID();
+
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -87,10 +88,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const updateUserName = (name: string) => {
+  const updateUser = (data: Partial<Pick<User, 'name' | 'mobileNumber' | 'gender'>>) => {
     setUser(currentUser => {
         if (!currentUser) return null;
-        const updatedUser = { ...currentUser, name };
+        const updatedUser = { ...currentUser, ...data };
         localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
         return updatedUser;
     });
@@ -144,7 +145,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCouponTransaction }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCouponTransaction }}>
       {children}
     </AuthContext.Provider>
   );

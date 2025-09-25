@@ -18,6 +18,7 @@ export interface User {
   mobileNumber?: string;
   githubUrl?: string;
   linkedinUrl?: string;
+  gender?: 'Male' | 'Female' | 'Other' | 'Prefer not to say';
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Full' | 'On-Spot Registration';

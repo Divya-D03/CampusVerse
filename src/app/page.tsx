@@ -8,7 +8,7 @@ import { LoadingScreen } from '@/components/layout/loading-screen';
 import { EventTabs } from '@/components/dashboard/event-tabs';
 import { WelcomeDialog } from '@/components/dashboard/welcome-dialog';
 import Confetti from '@/components/effects/confetti';
-import { NameDialog } from '@/components/dashboard/name-dialog';
+import { UserDetailsDialog } from '@/components/dashboard/name-dialog';
 import { ClubMemberProof } from '@/components/dashboard/club-member-proof';
 import { Chatbot } from '@/components/chatbot/chatbot';
 
@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const { user, loading, isFirstLogin, markFirstLoginDone } = useAuth();
   const router = useRouter();
   const [showWelcome, setShowWelcome] = useState(false);
-  const [showNameDialog, setShowNameDialog] = useState(false);
+  const [showDetailsDialog, setShowDetailsDialog] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -27,7 +27,7 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!loading && user && isFirstLogin) {
       if (!user.name) {
-        setShowNameDialog(true);
+        setShowDetailsDialog(true);
       } else {
         setShowWelcome(true);
       }
@@ -39,8 +39,8 @@ export default function DashboardPage() {
     markFirstLoginDone();
   };
 
-  const handleNameDialogClose = () => {
-    setShowNameDialog(false);
+  const handleDetailsDialogClose = () => {
+    setShowDetailsDialog(false);
     // After name is submitted, we might want to show the welcome dialog
     if(isFirstLogin){
       setShowWelcome(true);
@@ -55,7 +55,7 @@ export default function DashboardPage() {
     <div className="flex flex-col min-h-screen">
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
-      <NameDialog open={showNameDialog} onOpenChange={handleNameDialogClose} />
+      <UserDetailsDialog open={showDetailsDialog} onOpenChange={handleDetailsDialogClose} />
       
       <AppHeader />
       <main className="flex-1 p-4 sm:p-6 md:p-8">
