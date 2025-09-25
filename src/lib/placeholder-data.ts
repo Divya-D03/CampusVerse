@@ -115,4 +115,13 @@ export const clubs: Club[] = [
     coupons: 0,
     imageId: 'club-3',
   },
+  {
+    id: 'cl4',
+    title: 'Sports Club',
+    description: 'Join us for various sports activities and stay fit. We have teams for cricket, football, and basketball.',
+    date: 'Ongoing',
+    status: 'Available',
+    coupons: 0,
+    imageId: 'club-4',
+  }
 ];
