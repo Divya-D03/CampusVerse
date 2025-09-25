@@ -1,8 +1,9 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import type { User, UserRole } from '@/lib/types';
+import type { User, UserRole, CouponTransaction } from '@/lib/types';
 import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
 
 interface AuthContextType {
   user: User | null;
@@ -14,6 +15,7 @@ interface AuthContextType {
   updateUserName: (name: string) => void;
   updateUserProfilePicture: (dataUrl: string) => void;
   markFirstLoginDone: () => void;
+  addCouponTransaction: (transaction: Omit<CouponTransaction, 'id' | 'date'>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -45,10 +47,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = (email: string) => {
+    const welcomeTransaction: CouponTransaction = {
+      id: `txn-${Date.now()}`,
+      reason: 'Welcome Bonus!',
+      amount: 50,
+      type: 'earned',
+      date: new Date().toISOString(),
+    };
     const newUser: User = {
       email,
       role: 'Regular User',
       coupons: 50,
+      couponHistory: [welcomeTransaction],
     };
     localStorage.setItem('campusverse_user', JSON.stringify(newUser));
     localStorage.removeItem('campusverse_first_login_done');
@@ -97,8 +107,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('campusverse_first_login_done', 'true');
   };
 
+  const addCouponTransaction = (transaction: Omit<CouponTransaction, 'id' | 'date'>) => {
+    setUser(currentUser => {
+      if (!currentUser) return null;
+      
+      const newTransaction: CouponTransaction = {
+        ...transaction,
+        id: `txn-${Date.now()}`,
+        date: new Date().toISOString(),
+      };
+      
+      const updatedHistory = [...(currentUser.couponHistory || []), newTransaction];
+      const updatedCoupons = currentUser.coupons + (newTransaction.type === 'earned' ? newTransaction.amount : -newTransaction.amount);
+
+      const updatedUser: User = {
+        ...currentUser,
+        coupons: updatedCoupons,
+        couponHistory: updatedHistory
+      };
+
+      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
+      return updatedUser;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, markFirstLoginDone }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, updateUserProfilePicture, markFirstLoginDone, addCouponTransaction }}>
       {children}
     </AuthContext.Provider>
   );

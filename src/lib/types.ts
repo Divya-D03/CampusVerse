@@ -1,11 +1,20 @@
 export type UserRole = 'Regular User' | 'Club Member';
 
+export interface CouponTransaction {
+  id: string;
+  reason: string;
+  amount: number;
+  type: 'earned' | 'spent';
+  date: string;
+}
+
 export interface User {
   name?: string;
   email: string;
   role: UserRole;
   coupons: number;
   profilePicture?: string;
+  couponHistory?: CouponTransaction[];
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Full' | 'On-Spot Registration';
