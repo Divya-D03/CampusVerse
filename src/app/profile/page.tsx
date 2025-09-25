@@ -71,7 +71,7 @@ export default function ProfilePage() {
               <div className="relative group">
                 <input
                   type="file"
-                  ref={fileInputref}
+                  ref={fileInputRef}
                   onChange={handleFileChange}
                   className="hidden"
                   accept="image/*"
@@ -170,5 +170,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-    
