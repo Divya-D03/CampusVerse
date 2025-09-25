@@ -3,7 +3,6 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/contexts/auth-context';
-import { MagicSparkles } from '@/components/effects/magic-sparkles';
 
 export const metadata: Metadata = {
   title: 'CampusVerse',
@@ -31,7 +30,6 @@ export default function RootLayout({
         )}
       >
         <AuthProvider>
-          <MagicSparkles />
           {children}
           <Toaster />
         </AuthProvider>

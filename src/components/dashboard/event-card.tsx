@@ -21,7 +21,7 @@ export function EventCard({ event }: EventCardProps) {
   const image = PlaceHolderImages.find((img) => img.id === event.imageId);
 
   return (
-    <Card className="holographic-card flex flex-col h-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
+    <Card className="holographic-card flex flex-col h-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 animate-float">
       <CardHeader>
         <div className="relative aspect-[3/2] w-full rounded-md overflow-hidden mb-4">
           {image && (

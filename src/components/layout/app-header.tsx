@@ -16,6 +16,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
+import Link from 'next/link';
 
 export function AppHeader() {
   const { user, logout, toggleRole } = useAuth();
@@ -95,9 +96,11 @@ export function AppHeader() {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                   <DropdownMenuItem asChild>
+                    <Link href="/profile">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profile</span>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <UserCog className="mr-2 h-4 w-4" />
