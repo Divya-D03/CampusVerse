@@ -8,11 +8,14 @@ import { LoadingScreen } from '@/components/layout/loading-screen';
 import { EventTabs } from '@/components/dashboard/event-tabs';
 import { WelcomeDialog } from '@/components/dashboard/welcome-dialog';
 import Confetti from '@/components/effects/confetti';
+import { NameDialog } from '@/components/dashboard/name-dialog';
+import { ClubMemberProof } from '@/components/dashboard/club-member-proof';
 
 export default function DashboardPage() {
-  const { user, loading, isFirstLogin, markFirstLoginDone } = useAuth();
+  const { user, loading, isFirstLogin, markFirstLoginDone, updateUserName } = useAuth();
   const router = useRouter();
   const [showWelcome, setShowWelcome] = useState(false);
+  const [showNameDialog, setShowNameDialog] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -22,7 +25,11 @@ export default function DashboardPage() {
   
   useEffect(() => {
     if (!loading && user && isFirstLogin) {
-      setShowWelcome(true);
+      if (!user.name) {
+        setShowNameDialog(true);
+      } else {
+        setShowWelcome(true);
+      }
     }
   }, [user, loading, isFirstLogin]);
 
@@ -30,6 +37,15 @@ export default function DashboardPage() {
     setShowWelcome(false);
     markFirstLoginDone();
   };
+
+  const handleNameDialogClose = () => {
+    setShowNameDialog(false);
+    // After name is submitted, we might want to show the welcome dialog
+    if(isFirstLogin){
+      setShowWelcome(true);
+    }
+  };
+
 
   if (loading || !user) {
     return <LoadingScreen />;
@@ -39,11 +55,13 @@ export default function DashboardPage() {
     <div className="flex flex-col min-h-screen">
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
+      <NameDialog open={showNameDialog} onOpenChange={handleNameDialogClose} />
       <AppHeader />
       <main className="flex-1 p-4 sm:p-6 md:p-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold font-headline mb-2">Welcome to CampusVerse</h1>
+          <h1 className="text-3xl md:text-4xl font-bold font-headline mb-2">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
           <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
+          {user.role === 'Club Member' && <ClubMemberProof />}
           <EventTabs />
         </div>
       </main>

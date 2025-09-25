@@ -11,6 +11,7 @@ interface AuthContextType {
   login: (email: string) => void;
   logout: () => void;
   toggleRole: () => void;
+  updateUserName: (name: string) => void;
   markFirstLoginDone: () => void;
 }
 
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(parsedUser);
         
         const firstLoginFlag = localStorage.getItem('campusverse_first_login_done');
-        if (!firstLoginFlag) {
+        if (!firstLoginFlag || !parsedUser.name) {
             setIsFirstLogin(true);
         }
       }
@@ -72,13 +73,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateUserName = (name: string) => {
+    setUser(currentUser => {
+        if (!currentUser) return null;
+        const updatedUser = { ...currentUser, name };
+        localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
+        return updatedUser;
+    });
+  };
+
   const markFirstLoginDone = () => {
     setIsFirstLogin(false);
     localStorage.setItem('campusverse_first_login_done', 'true');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, markFirstLoginDone }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUserName, markFirstLoginDone }}>
       {children}
     </AuthContext.Provider>
   );

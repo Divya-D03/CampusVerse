@@ -20,7 +20,7 @@ export function AppHeader() {
   
   if (!user) return null;
 
-  const userInitial = user.email.charAt(0).toUpperCase();
+  const userInitial = user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -33,60 +33,65 @@ export function AppHeader() {
             </span>
           </a>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <div className="flex items-center gap-2 border-r pr-4 border-dashed">
-            <Award className="w-5 h-5 text-primary"/>
-            <span className="font-bold text-lg">{user.coupons}</span>
+        <div className="flex flex-1 items-center justify-between">
+           <div className="text-sm font-medium">
+            {user.name ? `Hi, ${user.name}` : ''}
           </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 border-r pr-4 border-dashed">
+              <Award className="w-5 h-5 text-primary"/>
+              <span className="font-bold text-lg">{user.coupons}</span>
+            </div>
 
-          <div className="flex items-center space-x-2">
-            <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
-              {user.role === 'Regular User' ? 'User' : 'Club Member'}
-            </Label>
-            <Switch
-              id="role-switch"
-              checked={user.role === 'Club Member'}
-              onCheckedChange={toggleRole}
-              aria-label="Toggle user role"
-            />
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
+                {user.role === 'Regular User' ? 'User' : 'Club Member'}
+              </Label>
+              <Switch
+                id="role-switch"
+                checked={user.role === 'Club Member'}
+                onCheckedChange={toggleRole}
+                aria-label="Toggle user role"
+              />
+            </div>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} />
+                    <AvatarFallback>{userInitial}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">
+                      {user.name || user.email.split('@')[0]}
+                    </p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      {user.email}
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <UserCog className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} />
-                  <AvatarFallback>{userInitial}</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    {user.email.split('@')[0]}
-                  </p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    {user.email}
-                  </p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <UserCog className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
       </div>
     </header>

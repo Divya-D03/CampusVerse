@@ -1,6 +1,7 @@
 export type UserRole = 'Regular User' | 'Club Member';
 
 export interface User {
+  name?: string;
   email: string;
   role: UserRole;
   coupons: number;
