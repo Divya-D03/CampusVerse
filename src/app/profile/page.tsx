@@ -6,7 +6,7 @@ import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Award, BarChart3, CalendarCheck2, Home, Camera, FileText } from 'lucide-react';
+import { Ticket, BarChart3, CalendarCheck2, Home, Camera, FileText } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -93,7 +93,7 @@ export default function ProfilePage() {
             <Card className="holographic-card">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium">Coupons</CardTitle>
-                <Award className="w-4 h-4 text-muted-foreground" />
+                <Ticket className="w-4 h-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{user.coupons}</div>

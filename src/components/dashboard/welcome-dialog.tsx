@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Gift, Award } from 'lucide-react';
+import { Gift, Ticket } from 'lucide-react';
 
 interface WelcomeDialogProps {
   open: boolean;
@@ -33,7 +33,7 @@ export function WelcomeDialog({ open, onOpenChange }: WelcomeDialogProps) {
               <br />
               <div className="p-3 rounded-md bg-muted/50 border">
                 <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-accent" />
+                  <Ticket className="w-4 h-4 text-accent" />
                   <span>2 Coupons = 1 Rupee</span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">Participate in events to win more coupons and redeem exciting rewards.</p>

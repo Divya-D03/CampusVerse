@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Award, LogOut, User, UserCog, Gift } from 'lucide-react';
+import { Award, LogOut, User, UserCog, Gift, Ticket } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
@@ -45,7 +45,7 @@ export function AppHeader() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-2 cursor-pointer">
-                  <Award className="w-5 h-5 text-primary"/>
+                  <Ticket className="w-5 h-5 text-primary"/>
                   <span className="font-bold text-lg">{user.coupons}</span>
                 </div>
               </DropdownMenuTrigger>
