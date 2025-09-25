@@ -6,10 +6,11 @@ import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Award, BarChart3, CalendarCheck2 } from 'lucide-react';
+import { Award, BarChart3, CalendarCheck2, Home } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
@@ -37,14 +38,22 @@ export default function ProfilePage() {
       <AppHeader />
       <main className="flex-1 p-4 sm:p-6 md:p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-6 mb-8">
-            <div className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden">
-               <Image src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} fill className="object-cover" />
+          <div className="flex justify-between items-start mb-8">
+            <div className="flex items-center gap-6">
+              <div className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden">
+                 <Image src={`https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`} alt={user.email} fill className="object-cover" />
+              </div>
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>
+                <p className="text-muted-foreground">{user.email}</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>
-              <p className="text-muted-foreground">{user.email}</p>
-            </div>
+            <Button asChild variant="outline">
+              <Link href="/">
+                <Home className="mr-2 h-4 w-4" />
+                Back to Home
+              </Link>
+            </Button>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
