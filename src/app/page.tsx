@@ -10,6 +10,7 @@ import { WelcomeDialog } from '@/components/dashboard/welcome-dialog';
 import Confetti from '@/components/effects/confetti';
 import { NameDialog } from '@/components/dashboard/name-dialog';
 import { ClubMemberProof } from '@/components/dashboard/club-member-proof';
+import { Chatbot } from '@/components/chatbot/chatbot';
 
 export default function DashboardPage() {
   const { user, loading, isFirstLogin, markFirstLoginDone, updateUserName } = useAuth();
@@ -65,6 +66,7 @@ export default function DashboardPage() {
           <EventTabs />
         </div>
       </main>
+      <Chatbot />
     </div>
   );
 }
