@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import type { User, UserRole, CouponTransaction } from '@/lib/types';
 import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
 
 interface AuthContextType {
   user: User | null;
@@ -21,7 +20,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Helper to generate unique IDs for transactions
-const generateUniqueTxId = () => `txn-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+const generateUniqueTxId = () => crypto.randomUUID();
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
