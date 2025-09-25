@@ -31,6 +31,7 @@ interface RegistrationDialogProps {
 
 const schools = [
   'School of Computer Science and Engineering',
+  'School of CSIT',
   'School of Electronics and Communication Engineering',
   'School of Mechanical Engineering',
   'School of Civil Engineering',
