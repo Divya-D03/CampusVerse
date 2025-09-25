@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/auth-context';
 import { LoadingScreen } from '@/components/layout/loading-screen';
 import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Award, BarChart3, CalendarCheck2, Home, Camera } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
@@ -14,25 +14,15 @@ import Link from 'next/link';
 import { CouponHistory } from '@/components/profile/coupon-history';
 
 export default function ProfilePage() {
-  const { user, loading, updateUserProfilePicture, addCouponTransaction } = useAuth();
+  const { user, loading, updateUserProfilePicture } = useAuth();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [hasAddedMockData, setHasAddedMockData] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
       router.replace('/login');
     }
   }, [user, loading, router]);
-
-  useEffect(() => {
-    // Add some mock transaction data for demonstration if not already present
-    if (user && !hasAddedMockData && (!user.couponHistory || user.couponHistory.length <= 1)) {
-      addCouponTransaction({ reason: 'Won Hack-AI-Thon', amount: 50, type: 'earned' });
-      addCouponTransaction({ reason: 'Redeemed at Food Court', amount: 20, type: 'spent' });
-      setHasAddedMockData(true);
-    }
-  }, [user, addCouponTransaction, hasAddedMockData]);
 
   if (loading || !user) {
     return <LoadingScreen />;
