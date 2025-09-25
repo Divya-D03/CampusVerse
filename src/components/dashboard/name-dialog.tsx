@@ -40,16 +40,18 @@ export function NameDialog({ open, onOpenChange }: NameDialogProps) {
             <UserPlus className="w-8 h-8 text-primary" />
             What should we call you?
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-base pt-4">
-            Please enter your name. This will be displayed across the app.
-            <div className="mt-4">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your name"
-              />
+          <AlertDialogDescription asChild>
+            <div className="text-base pt-4">
+              Please enter your name. This will be displayed across the app.
+              <div className="mt-4">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                />
+              </div>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
