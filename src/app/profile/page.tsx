@@ -49,7 +49,7 @@ export default function ProfilePage() {
     }
   };
 
-  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/bottts/svg?seed=${user.email}`;
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}`;
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -23,7 +23,7 @@ export function Chatbot() {
   const { user } = useAuth();
   
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
-  const userAvatar = user?.profilePicture || `https://api.dicebear.com/8.x/bottts/svg?seed=${user?.email}`;
+  const userAvatar = user?.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user?.email}`;
 
 
   const handleSend = async () => {
