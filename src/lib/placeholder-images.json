@@ -25,6 +25,18 @@
       "imageHint": "futuristic interface"
     },
     {
+      "id": "ideathon-1",
+      "description": "A group of people collaborating around a whiteboard with sticky notes.",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpZGVhdGhvbnxlbnwwfHx8fDE3NjA0NTI4ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ideathon collaboration"
+    },
+    {
+      "id": "project-expo-1",
+      "description": "A technology project on display at an expo.",
+      "imageUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwZXhwb3xlbnwwfHx8fDE3NjA0NTI5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech expo"
+    },
+    {
       "id": "tech-event-1",
       "description": "A speaker presenting at a tech conference.",
       "imageUrl": "https://images.unsplash.com/photo-1582192493926-93f4847e1323?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0ZWNoJTIwY29uZmVyZW5jZXxlbnwwfHx8fDE3NTg3ODUwNzN8MA&ixlib=rb-4.1.0&q=80&w=1080",

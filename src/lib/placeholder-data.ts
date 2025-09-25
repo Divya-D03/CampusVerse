@@ -42,6 +42,30 @@ export const hackathons: Event[] = [
   },
 ];
 
+export const ideathons: Event[] = [
+  {
+    id: 'id1',
+    title: 'Future Cities Ideathon',
+    description: 'Brainstorm and pitch innovative ideas to create sustainable and smart cities for the future.',
+    date: 'November 20, 2024',
+    status: 'Available',
+    coupons: 30,
+    imageId: 'ideathon-1',
+  },
+];
+
+export const projectExpos: Event[] = [
+    {
+    id: 'pe1',
+    title: 'InnovateX Project Expo',
+    description: 'Showcase your best projects and see what your peers have been building. Prizes for top projects.',
+    date: 'December 5, 2024',
+    status: 'Available',
+    coupons: 25,
+    imageId: 'project-expo-1',
+  },
+]
+
 export const techEvents: Event[] = [
   {
     id: 'te1',
