@@ -19,7 +19,7 @@ export function EventTabs({ onEventClick }: EventTabsProps) {
       <TabsContent value="cultural" className="mt-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {culturalEvents.map((event) => (
-            <EventCard key={event.id} event={event} onClick={onEventClick} />
+            <EventCard key={event.id} event={event} onRegisterClick={onEventClick} />
           ))}
         </div>
       </TabsContent>
@@ -33,21 +33,21 @@ export function EventTabs({ onEventClick }: EventTabsProps) {
           <TabsContent value="hackathons" className="mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {hackathons.map((event) => (
-                <EventCard key={event.id} event={event} onClick={onEventClick} />
+                <EventCard key={event.id} event={event} onRegisterClick={onEventClick} />
               ))}
             </div>
           </TabsContent>
           <TabsContent value="ideathons" className="mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {ideathons.map((event) => (
-                <EventCard key={event.id} event={event} onClick={onEventClick} />
+                <EventCard key={event.id} event={event} onRegisterClick={onEventClick} />
               ))}
             </div>
           </TabsContent>
           <TabsContent value="expos" className="mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {projectExpos.map((event) => (
-                <EventCard key={event.id} event={event} onClick={onEventClick} />
+                <EventCard key={event.id} event={event} onRegisterClick={onEventClick} />
               ))}
             </div>
           </TabsContent>
@@ -56,7 +56,7 @@ export function EventTabs({ onEventClick }: EventTabsProps) {
        <TabsContent value="clubs" className="mt-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {clubs.map((club) => (
-            <EventCard key={club.id} event={club} onClick={onEventClick} />
+            <EventCard key={club.id} event={club} onRegisterClick={onEventClick} />
           ))}
         </div>
       </TabsContent>

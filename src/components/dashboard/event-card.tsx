@@ -7,10 +7,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Calendar, Award } from 'lucide-react';
+import { Button } from '../ui/button';
 
 type EventCardProps = {
   event: Event;
-  onClick: (event: Event) => void;
+  onRegisterClick: (event: Event) => void;
 };
 
 const statusStyles: Record<EventStatus, string> = {
@@ -20,11 +21,11 @@ const statusStyles: Record<EventStatus, string> = {
   'On-Spot Registration': 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
 };
 
-export function EventCard({ event, onClick }: EventCardProps) {
+export function EventCard({ event, onRegisterClick }: EventCardProps) {
   const image = PlaceHolderImages.find((img) => img.id === event.imageId);
 
   return (
-    <div onClick={() => onClick(event)} className="cursor-pointer h-full group">
+    <div className="h-full group">
       <Card
         className="holographic-card flex flex-col h-full overflow-hidden"
       >
@@ -59,6 +60,7 @@ export function EventCard({ event, onClick }: EventCardProps) {
           <Badge variant="outline" className={cn(statusStyles[event.status])}>
             {event.status}
           </Badge>
+          <Button variant="secondary" onClick={() => onRegisterClick(event)}>Register</Button>
         </CardFooter>
       </Card>
     </div>
