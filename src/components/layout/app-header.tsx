@@ -17,7 +17,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Award, LogOut, Moon, Sun, User, UserCog } from 'lucide-react';
+import { Award, LogOut, Moon, Sun, User, UserCog, Gift } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 
@@ -53,17 +53,29 @@ export function AppHeader() {
               />
             </div>
 
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div className="flex items-center gap-2 cursor-pointer">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                 <div className="flex items-center gap-2 cursor-pointer">
                   <Award className="w-5 h-5 text-primary"/>
                   <span className="font-bold text-lg">{user.coupons}</span>
                 </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>2 Coupons = 1 Rupee</p>
-              </TooltipContent>
-            </Tooltip>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64" align="end" forceMount>
+                <DropdownMenuLabel>Your Coupons</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <div className="p-2 text-sm text-muted-foreground">
+                  <p>Redeem your coupons at the college food court.</p>
+                  <p className="font-bold text-foreground mt-1">2 Coupons = 1 Rupee</p>
+                </div>
+                <DropdownMenuSeparator />
+                 <DropdownMenuItem>
+                    <Button className="w-full">
+                        <Gift className="mr-2 h-4 w-4" />
+                        Redeem Now
+                    </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
