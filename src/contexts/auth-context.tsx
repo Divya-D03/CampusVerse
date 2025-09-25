@@ -21,7 +21,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Helper to generate unique IDs for transactions
-const generateUniqueTxId = () => `txn-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+const generateUniqueTxId = () => `txn-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
