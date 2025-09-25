@@ -31,7 +31,7 @@ export function AppHeader() {
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/60 backdrop-blur-md">
           <div className="container flex h-16 items-center">
-            <div className="mr-4 flex items-center">
+            <div className="flex items-center">
               <Link className="mr-6 flex items-center space-x-2" href="/">
                  <Award className="h-6 w-6 text-primary" />
                 <span className="hidden font-bold sm:inline-block font-headline">
@@ -39,20 +39,20 @@ export function AppHeader() {
                 </span>
               </Link>
             </div>
-
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
-                {user.role === 'Regular User' ? 'User' : 'Club Member'}
-              </Label>
-              <Switch
-                id="role-switch"
-                checked={user.role === 'Club Member'}
-                onCheckedChange={toggleRole}
-                aria-label="Toggle user role"
-              />
-            </div>
             
             <div className="flex flex-1 items-center justify-end space-x-4">
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
+                  {user.role === 'Regular User' ? 'User' : 'Club Member'}
+                </Label>
+                <Switch
+                  id="role-switch"
+                  checked={user.role === 'Club Member'}
+                  onCheckedChange={toggleRole}
+                  aria-label="Toggle user role"
+                />
+              </div>
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                    <div className="flex items-center gap-2 cursor-pointer">
