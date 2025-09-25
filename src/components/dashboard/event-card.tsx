@@ -4,7 +4,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Calendar, Ticket } from 'lucide-react';
+import { Calendar, Ticket, Award } from 'lucide-react';
 
 type EventCardProps = {
   event: Event;
@@ -40,16 +40,22 @@ export function EventCard({ event }: EventCardProps) {
           <span>{event.date}</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent className="flex-grow space-y-4">
         <p className="text-sm text-foreground/80">{event.description}</p>
+        {event.coupons > 0 && (
+            <div className="flex items-center gap-2 text-sm text-accent-foreground p-2 bg-accent/10 rounded-md">
+                <Award className="w-4 h-4 text-accent" />
+                <span className="font-medium">Win up to {event.coupons} coupons!</span>
+            </div>
+        )}
       </CardContent>
-      <CardFooter className="flex justify-between items-center">
+      <CardFooter className="flex justify-between items-center pt-4">
         <Badge variant="outline" className={cn(statusStyles[event.status])}>
           {event.status}
         </Badge>
         <div className="flex items-center gap-1 text-primary">
           <Ticket className="w-4 h-4"/>
-          <span className="font-bold">{event.coupons} Coupons</span>
+          <span className="font-bold">{event.coupons > 0 ? `${event.coupons} Coupons` : 'Free'}</span>
         </div>
       </CardFooter>
     </Card>
