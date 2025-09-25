@@ -11,12 +11,16 @@ import Confetti from '@/components/effects/confetti';
 import { NameDialog } from '@/components/dashboard/name-dialog';
 import { ClubMemberProof } from '@/components/dashboard/club-member-proof';
 import { Chatbot } from '@/components/chatbot/chatbot';
+import { RegistrationDialog } from '@/components/dashboard/RegistrationDialog';
+import { type Event } from '@/lib/types';
 
 export default function DashboardPage() {
   const { user, loading, isFirstLogin, markFirstLoginDone, updateUserName } = useAuth();
   const router = useRouter();
   const [showWelcome, setShowWelcome] = useState(false);
   const [showNameDialog, setShowNameDialog] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -46,6 +50,11 @@ export default function DashboardPage() {
       setShowWelcome(true);
     }
   };
+  
+  const handleEventClick = (event: Event) => {
+    setSelectedEvent(event);
+    setShowRegistration(true);
+  };
 
 
   if (loading || !user) {
@@ -57,13 +66,19 @@ export default function DashboardPage() {
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
       <NameDialog open={showNameDialog} onOpenChange={handleNameDialogClose} />
+      <RegistrationDialog 
+        event={selectedEvent} 
+        open={showRegistration} 
+        onOpenChange={setShowRegistration} 
+      />
+
       <AppHeader />
       <main className="flex-1 p-4 sm:p-6 md:p-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold font-headline mb-2">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
           <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
           {user.role === 'Club Member' && <ClubMemberProof />}
-          <EventTabs />
+          <EventTabs onEventClick={handleEventClick} />
         </div>
       </main>
       <Chatbot />
