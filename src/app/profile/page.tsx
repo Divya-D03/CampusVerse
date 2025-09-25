@@ -48,15 +48,8 @@ export default function ProfilePage() {
       reader.readAsDataURL(file);
     }
   };
-
-  let avatarSexOption = '';
-  if (user.gender === 'Male') {
-    avatarSexOption = '&sex=male';
-  } else if (user.gender === 'Female') {
-    avatarSexOption = '&sex=female';
-  }
   
-  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
 
   return (
     <div className="flex flex-col min-h-screen">

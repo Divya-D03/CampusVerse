@@ -25,15 +25,8 @@ export function AppHeader() {
   if (!user) return null;
 
   const userInitial = user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
-
-  let avatarSexOption = '';
-  if (user.gender === 'Male') {
-    avatarSexOption = '&sex=male';
-  } else if (user.gender === 'Female') {
-    avatarSexOption = '&sex=female';
-  }
   
-  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
 
 
   return (

@@ -26,13 +26,7 @@ export function Chatbot() {
   
   let userAvatar = '';
   if (user) {
-    let avatarSexOption = '';
-    if (user.gender === 'Male') {
-      avatarSexOption = '&sex=male';
-    } else if (user.gender === 'Female') {
-      avatarSexOption = '&sex=female';
-    }
-    userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
+    userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
   }
 
 
