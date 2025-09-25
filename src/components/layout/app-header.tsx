@@ -25,13 +25,22 @@ export function AppHeader() {
   if (!user) return null;
 
   const userInitial = user.name ? user.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
-  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}`;
+
+  let avatarSexOption = '';
+  if (user.gender === 'Male') {
+    avatarSexOption = '&sex=male';
+  } else if (user.gender === 'Female') {
+    avatarSexOption = '&sex=female';
+  }
+  
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
+
 
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/60 backdrop-blur-md">
         <div className="container flex h-16 items-center">
-          <div className="mr-4 flex items-center">
+          <div className="mr-auto flex items-center">
             <Link className="mr-6 flex items-center space-x-2" href="/">
               <Award className="h-6 w-6 text-primary" />
               <span className="hidden font-bold sm:inline-block font-headline">
@@ -39,7 +48,7 @@ export function AppHeader() {
               </span>
             </Link>
           </div>
-          <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="flex items-center justify-end space-x-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-2 cursor-pointer">

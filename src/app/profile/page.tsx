@@ -49,7 +49,14 @@ export default function ProfilePage() {
     }
   };
 
-  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}`;
+  let avatarSexOption = '';
+  if (user.gender === 'Male') {
+    avatarSexOption = '&sex=male';
+  } else if (user.gender === 'Female') {
+    avatarSexOption = '&sex=female';
+  }
+  
+  const avatarSrc = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
 
   return (
     <div className="flex flex-col min-h-screen">

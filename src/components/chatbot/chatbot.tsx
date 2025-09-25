@@ -23,7 +23,17 @@ export function Chatbot() {
   const { user } = useAuth();
   
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
-  const userAvatar = user?.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user?.email}`;
+  
+  let userAvatar = '';
+  if (user) {
+    let avatarSexOption = '';
+    if (user.gender === 'Male') {
+      avatarSexOption = '&sex=male';
+    } else if (user.gender === 'Female') {
+      avatarSexOption = '&sex=female';
+    }
+    userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/adventurer/svg?seed=${user.email}${avatarSexOption}`;
+  }
 
 
   const handleSend = async () => {
