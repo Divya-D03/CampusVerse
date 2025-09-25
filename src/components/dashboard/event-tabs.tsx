@@ -3,12 +3,13 @@ import { culturalEvents, hackathons, techEvents, clubs } from '@/lib/placeholder
 import { EventCard } from './event-card';
 
 export function EventTabs() {
+  const allTechEvents = [...techEvents, ...hackathons];
+
   return (
     <Tabs defaultValue="cultural">
-      <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto">
+      <TabsList className="grid w-full grid-cols-3 h-auto">
         <TabsTrigger value="cultural">Cultural</TabsTrigger>
-        <TabsTrigger value="hackathons">Hackathons</TabsTrigger>
-        <TabsTrigger value="tech">Tech Events</TabsTrigger>
+        <TabsTrigger value="tech">Tech</TabsTrigger>
         <TabsTrigger value="clubs">Clubs</TabsTrigger>
       </TabsList>
       <TabsContent value="cultural" className="mt-6">
@@ -18,16 +19,9 @@ export function EventTabs() {
           ))}
         </div>
       </TabsContent>
-      <TabsContent value="hackathons" className="mt-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {hackathons.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
-      </TabsContent>
       <TabsContent value="tech" className="mt-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {techEvents.map((event) => (
+          {allTechEvents.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </div>

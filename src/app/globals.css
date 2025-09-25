@@ -99,8 +99,10 @@
 .holographic-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid transparent;
-  background-clip: padding-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: hsl(var(--border) / 0.5);
+  background-color: hsl(var(--card) / 0.7);
 }
 
 .holographic-card::before {

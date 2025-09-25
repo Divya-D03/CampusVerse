@@ -11,13 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { Award, LogOut, Moon, Sun, User, UserCog, Gift } from 'lucide-react';
+import { Award, LogOut, User, UserCog, Gift } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
@@ -33,8 +27,7 @@ export function AppHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <TooltipProvider>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/60 backdrop-blur-md">
           <div className="container flex h-16 items-center">
             <div className="mr-4 hidden md:flex">
               <a className="mr-6 flex items-center space-x-2" href="/">
@@ -119,7 +112,6 @@ export function AppHeader() {
               </DropdownMenu>
             </div>
           </div>
-        </TooltipProvider>
       </header>
       {user && <QrCodeDialog user={user} open={isQrCodeDialogOpen} onOpenChange={setIsQrCodeDialogOpen} />}
     </>
