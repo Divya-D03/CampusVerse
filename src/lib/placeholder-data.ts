@@ -10,7 +10,7 @@ export const culturalEvents: Event[] = [
     coins: 10,
     imageId: 'cultural-event-1',
     category: 'cultural',
-    registrationFee: 100,
+    registrationFee: 20,
   },
   {
     id: 'ce2',
@@ -21,7 +21,7 @@ export const culturalEvents: Event[] = [
     coins: 15,
     imageId: 'cultural-event-2',
     category: 'cultural',
-    registrationFee: 150,
+    registrationFee: 30,
   },
 ];
 
@@ -35,7 +35,7 @@ export const hackathons: Event[] = [
     coins: 50,
     imageId: 'hackathon-1',
     category: 'hackathon',
-    registrationFee: 250,
+    registrationFee: 50,
   },
   {
     id: 'hk2',
@@ -46,7 +46,7 @@ export const hackathons: Event[] = [
     coins: 40,
     imageId: 'hackathon-2',
     category: 'hackathon',
-    registrationFee: 200,
+    registrationFee: 40,
   },
 ];
 
@@ -60,7 +60,7 @@ export const ideathons: Event[] = [
     coins: 30,
     imageId: 'ideathon-1',
     category: 'ideathon',
-    registrationFee: 120,
+    registrationFee: 25,
   },
 ];
 
@@ -74,7 +74,7 @@ export const projectExpos: Event[] = [
     coins: 25,
     imageId: 'project-expo-1',
     category: 'project-expo',
-    registrationFee: 80,
+    registrationFee: 15,
   },
 ]
 
@@ -88,7 +88,7 @@ export const techEvents: Event[] = [
     coins: 20,
     imageId: 'tech-event-1',
     category: 'tech',
-    registrationFee: 50,
+    registrationFee: 10,
   },
   {
     id: 'te2',
@@ -99,7 +99,7 @@ export const techEvents: Event[] = [
     coins: 25,
     imageId: 'tech-event-2',
     category: 'tech',
-    registrationFee: 180,
+    registrationFee: 35,
   },
 ];
 

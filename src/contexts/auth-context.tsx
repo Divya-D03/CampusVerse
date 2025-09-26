@@ -19,6 +19,7 @@ interface AuthContextType {
   updateUserSettings: (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => void;
   markFirstLoginDone: () => void;
   addCoinTransaction: (transaction: Omit<CoinTransaction, 'id' | 'date'>) => void;
+  deductCoinsForRegistration: (amount: number, eventName: string) => void;
   addEvent: (event: Event) => void;
 }
 
@@ -179,6 +180,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     updateUserAndUsersList(updatedUser);
   };
 
+  const deductCoinsForRegistration = (amount: number, eventName: string) => {
+    addCoinTransaction({
+      reason: `Fee for ${eventName}`,
+      amount: amount,
+      type: 'spent',
+    });
+  };
+
   const addEvent = (event: Event) => {
     setEvents(currentEvents => {
       const updatedEvents = [...currentEvents, event];
@@ -188,7 +197,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, allUsers, isFirstLogin, events, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction, addEvent }}>
+    <AuthContext.Provider value={{ user, loading, allUsers, isFirstLogin, events, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction, deductCoinsForRegistration, addEvent }}>
       {children}
     </AuthContext.Provider>
   );
