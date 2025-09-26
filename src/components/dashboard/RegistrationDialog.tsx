@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import type { Event } from '@/lib/types';
-import { Loader2, UploadCloud } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface RegistrationDialogProps {
@@ -157,7 +157,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
             <div className="space-y-4 pt-4 border-t">
               <h3 className="font-semibold text-lg">Payment Details</h3>
               <p className="text-sm text-muted-foreground">
-                Make sure your payment is completed before submitting this form. The registration fee is <span className='font-bold text-primary'>{event.registrationFee} coins</span>.
+                The registration fee is <span className='font-bold text-primary'>{event.registrationFee} coins</span>. Make sure your payment is completed before submitting.
               </p>
               
               <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="space-y-2">
@@ -174,36 +174,39 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                   <RadioGroupItem value="card" id="card" />
                   <Label htmlFor="card" className="flex-1 cursor-pointer">Credit/Debit Card</Label>
                 </div>
-                <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
-                  <RadioGroupItem value="on-spot" id="on-spot" />
-                  <Label htmlFor="on-spot" className="flex-1 cursor-pointer">On-spot Payment</Label>
-                </div>
+                {event.status === 'On-Spot Registration' && (
+                  <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
+                    <RadioGroupItem value="on-spot" id="on-spot" />
+                    <Label htmlFor="on-spot" className="flex-1 cursor-pointer">On-spot Payment</Label>
+                  </div>
+                )}
               </RadioGroup>
 
               {paymentMethod !== 'on-spot' && (
-                <div className="space-y-2">
-                  <Label htmlFor="transactionId">Payment Reference/Transaction ID</Label>
-                  <Input
-                    id="transactionId"
-                    value={transactionId}
-                    onChange={(e) => setTransactionId(e.target.value)}
-                    placeholder="Enter your transaction ID"
-                  />
-                </div>
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="transactionId">Payment Reference/Transaction ID</Label>
+                    <Input
+                      id="transactionId"
+                      value={transactionId}
+                      onChange={(e) => setTransactionId(e.target.value)}
+                      placeholder="Enter your transaction ID"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="paymentProof">Upload Payment Proof (Optional)</Label>
+                    <Input
+                      id="paymentProof"
+                      type="file"
+                      onChange={(e) => setPaymentProof(e.target.files ? e.target.files[0] : null)}
+                      className="file:text-primary file:font-bold"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Upload a screenshot or PDF of your payment confirmation.
+                    </p>
+                  </div>
+                </>
               )}
-
-              <div className="space-y-2">
-                <Label htmlFor="paymentProof">Upload Payment Proof (Optional)</Label>
-                <Input
-                  id="paymentProof"
-                  type="file"
-                  onChange={(e) => setPaymentProof(e.target.files ? e.target.files[0] : null)}
-                  className="file:text-primary file:font-bold"
-                />
-                 <p className="text-xs text-muted-foreground">
-                  (Recommended) Upload a screenshot or PDF of your payment confirmation.
-                </p>
-              </div>
             </div>
           )}
         </div>
