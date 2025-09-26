@@ -15,6 +15,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function DashboardPage() {
   const { user, loading, isFirstLogin, markFirstLoginDone } = useAuth();
@@ -92,9 +98,24 @@ export default function DashboardPage() {
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-2">
                 <div className="flex items-center gap-4">
                   <h1 className="text-3xl md:text-4xl font-bold font-headline">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
-                  <Badge variant="outline" className={cn("text-base", rankStyles)}>
-                      {rank}
-                  </Badge>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                         <Badge variant="outline" className={cn("text-base cursor-pointer", rankStyles)}>
+                            {rank}
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="font-bold text-lg text-center mb-2">{rank} Rank</p>
+                        <ul className="list-disc list-inside space-y-1">
+                            <li><span className="font-semibold">Newbie:</span> Default rank.</li>
+                            <li><span className="font-semibold">Pro:</span> Win 5 events.</li>
+                            <li><span className="font-semibold">Master:</span> Win 10 events.</li>
+                            <li><span className="font-semibold">Grandmaster:</span> Win 20+ events.</li>
+                        </ul>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </div>
               <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
