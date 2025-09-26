@@ -56,6 +56,7 @@ export default function EventDetailsPage() {
   }
   
   const image = PlaceHolderImages.find((img) => img.id === event.imageId);
+  const isRegistrationDisabled = event.status === 'Ended' || event.status === 'Ongoing';
 
   return (
     <>
@@ -78,53 +79,73 @@ export default function EventDetailsPage() {
             </div>
             
             <Card className="neumorphic-flat overflow-hidden">
-              {image && (
-                <div className="relative aspect-[16/9] w-full">
-                  <Image
-                    src={image.imageUrl}
-                    alt={image.description}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={image.imageHint}
-                  />
+              <div className="grid md:grid-cols-5 gap-0">
+                <div className="md:col-span-3">
+                  {image && (
+                    <div className="relative aspect-[16/9] w-full h-full">
+                      <Image
+                        src={image.imageUrl}
+                        alt={image.description}
+                        fill
+                        className="object-cover"
+                        data-ai-hint={image.imageHint}
+                      />
+                    </div>
+                  )}
                 </div>
-              )}
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-                  <div>
-                    <CardTitle className="font-headline text-3xl md:text-4xl mb-2">{event.title}</CardTitle>
-                    <CardDescription className="flex items-center gap-2 text-base text-muted-foreground">
-                      <Calendar className="w-5 h-5" />
-                      <span>{event.date}</span>
-                    </CardDescription>
+                <div className="md:col-span-2 p-6 flex flex-col">
+                  <div className="flex-grow">
+                    <CardHeader className="p-0 mb-4">
+                      <div className="flex justify-between items-start gap-4">
+                          <CardTitle className="font-headline text-2xl md:text-3xl">{event.title}</CardTitle>
+                          <Badge variant="outline" className={cn("text-sm", statusStyles[event.status])}>
+                              {event.status}
+                          </Badge>
+                      </div>
+                      <CardDescription className="flex items-center gap-2 text-base text-muted-foreground pt-2">
+                        <Calendar className="w-5 h-5" />
+                        <span>{event.date}</span>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-0 space-y-4 text-base">
+                      <p className="text-foreground/80 text-sm">{event.description}</p>
+                      
+                      <div className="flex flex-wrap items-center gap-4">
+                        {event.coins > 0 && (
+                            <div className="flex items-center gap-3 text-md text-yellow-400 p-2 bg-yellow-500/10 rounded-lg">
+                                <Coins className="w-5 h-5" />
+                                <span className="font-medium">Win {event.coins} coins!</span>
+                            </div>
+                        )}
+                        {event.registrationFee && event.registrationFee > 0 && (
+                            <div className="flex items-center gap-3 text-md text-primary p-2 bg-primary/10 rounded-lg">
+                                <Ticket className="w-5 h-5" />
+                                <span className="font-medium">Fee: {event.registrationFee} coins</span>
+                            </div>
+                        )}
+                      </div>
+                    </CardContent>
                   </div>
-                  <Badge variant="outline" className={cn("text-base", statusStyles[event.status])}>
-                    {event.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6 text-base">
-                <p className="text-foreground/80">{event.description}</p>
-                
-                <div className="flex flex-wrap items-center gap-4">
-                   {event.coins > 0 && (
-                      <div className="flex items-center gap-3 text-lg text-yellow-400 p-3 bg-yellow-500/10 rounded-lg">
-                          <Coins className="w-6 h-6" />
-                          <span className="font-medium">Win up to {event.coins} coins!</span>
+                  <div className="mt-6">
+                    <button 
+                      onClick={() => setShowRegistration(true)} 
+                      disabled={isRegistrationDisabled}
+                      className={cn(
+                        "w-full neumorphic-raised-interactive group relative flex items-center justify-center p-4 rounded-lg overflow-hidden transition-all duration-300",
+                        isRegistrationDisabled ? "opacity-50 cursor-not-allowed" : "hover:shadow-lg",
+                      )}
+                    >
+                      <div className="absolute left-0 top-0 h-full w-12 flex items-center justify-center border-r-2 border-dashed border-background/50">
+                        <Ticket className={cn("w-8 h-8 transition-transform duration-300 group-hover:rotate-12", isRegistrationDisabled ? "text-muted-foreground" : "text-primary")} />
                       </div>
-                  )}
-                  {event.registrationFee && event.registrationFee > 0 && (
-                      <div className="flex items-center gap-3 text-lg text-primary p-3 bg-primary/10 rounded-lg">
-                          <Ticket className="w-6 h-6" />
-                          <span className="font-medium">Fee: {event.registrationFee} coins</span>
+                      <div className="text-center">
+                        <p className="font-bold text-lg">{isRegistrationDisabled ? 'Registration Closed' : 'Register Now'}</p>
+                        <p className="text-sm text-muted-foreground">{isRegistrationDisabled ? event.status : 'Click to join the event'}</p>
                       </div>
-                  )}
+                    </button>
+                  </div>
                 </div>
-
-                 <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto neumorphic-raised" disabled={event.status === 'Ended' || event.status === 'Ongoing'}>
-                  {event.status === 'Ended' ? 'Registration Closed' : 'Register for this Event'}
-                </Button>
-              </CardContent>
+              </div>
             </Card>
           </div>
         </main>

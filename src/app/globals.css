@@ -27,10 +27,10 @@
     --radius: 0.8rem;
     
     /* Neumorphic Shadows */
-    --shadow-light: -6px -6px 12px hsl(220 20% 100% / 0.8);
-    --shadow-dark: 6px 6px 12px hsl(220 20% 88% / 0.9);
-    --shadow-inset-light: inset -6px -6px 12px hsl(220 20% 100% / 0.8);
-    --shadow-inset-dark: inset 6px 6px 12px hsl(220 20% 88% / 0.9);
+    --shadow-light: -6px -6px 12px hsl(0 0% 100% / 0.6);
+    --shadow-dark: 6px 6px 12px hsl(220 20% 80% / 0.9);
+    --shadow-inset-light: inset -4px -4px 8px hsl(0 0% 100% / 0.7);
+    --shadow-inset-dark: inset 4px 4px 8px hsl(220 20% 80% / 0.9);
   }
 
   .dark {

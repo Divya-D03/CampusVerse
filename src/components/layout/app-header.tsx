@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { User, UserCog, Coins, PlusCircle } from 'lucide-react';
+import { User, UserCog, Coins, PlusCircle, Sun, Moon } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
@@ -29,6 +29,23 @@ import {
 import { Label } from '@/components/ui/label';
 import { useClubMemberVerification } from '../dashboard/club-member-proof';
 import { HostEventDialog } from '../dashboard/host-event-dialog';
+import { useTheme } from 'next-themes';
+
+export function ThemeToggle() {
+    const { setTheme, theme } = useTheme();
+    return (
+        <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            className="neumorphic-raised-interactive"
+        >
+            <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+        </Button>
+    );
+}
 
 export function AppHeader() {
   const { user, toggleRole } = useAuth();
@@ -60,6 +77,7 @@ export function AppHeader() {
             </Link>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
+            <ThemeToggle />
             <div className="flex items-center space-x-2 neumorphic-flat p-1 rounded-full">
               <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block pl-2">
                 {user.role === 'Regular User' ? 'User' : 'Club Member'}
