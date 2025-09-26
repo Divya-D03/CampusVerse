@@ -27,7 +27,7 @@
   }
 
   .dark {
-    --background: 240 5% 14%; /* Cool grey background */
+    --background: 240 5% 18%; /* Cool grey background */
     --foreground: 0 0% 98%;
     --card: 240 5% 18%; /* Slightly lighter grey for cards */
     --card-foreground: 0 0% 98%;
@@ -111,5 +111,15 @@
     /* Fix for shadcn components that might have their own background */
     .neumorphic-flat, .neumorphic-raised, .neumorphic-pressed {
         background-color: hsl(var(--background));
+    }
+
+    .event-card-shadow {
+        @apply transition-shadow duration-300;
+    }
+    .event-card-shadow:hover {
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+    }
+    .dark .event-card-shadow:hover {
+         box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.07);
     }
 }

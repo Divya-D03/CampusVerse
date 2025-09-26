@@ -17,7 +17,7 @@ export function EventCard({ event }: EventCardProps) {
   const image = PlaceHolderImages.find((img) => img.id === event.imageId);
 
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm event-card-shadow">
       <CardHeader className="p-0">
         <div className="relative aspect-[16/9] w-full">
           {image && (
