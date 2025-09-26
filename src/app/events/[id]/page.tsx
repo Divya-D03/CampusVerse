@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RegistrationDialog } from '@/components/dashboard/RegistrationDialog';
-import { Calendar, Coins, Home, ArrowLeft, Ticket } from 'lucide-react';
+import { Calendar, Coins, ArrowLeft, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const statusStyles: Record<EventStatus, string> = {
@@ -123,8 +123,8 @@ export default function EventDetailsPage() {
                   )}
                 </div>
 
-                 <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto">
-                  Register for this Event
+                 <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto" disabled={event.status === 'Ended' || event.status === 'Ongoing'}>
+                  {event.status === 'Ended' ? 'Registration Closed' : 'Register for this Event'}
                 </Button>
               </CardContent>
             </Card>
