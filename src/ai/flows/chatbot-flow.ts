@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview A chatbot flow to answer user questions.
+ * @fileOverview A chatbot flow to answer user questions about events.
  *
  * - chat - A function that handles the chatbot conversation.
  * - ChatbotInput - The input type for the chat function.
@@ -18,12 +18,12 @@ const MessageSchema = z.object({
 
 const ChatbotInputSchema = z.object({
   history: z.array(MessageSchema),
-  query: z.string().describe('The user\'s latest query.'),
+  query: z.string().describe("The user's latest query."),
 });
 export type ChatbotInput = z.infer<typeof ChatbotInputSchema>;
 
 const ChatbotOutputSchema = z.object({
-  response: z.string().describe('The chatbot\'s response.'),
+  response: z.string().describe("The chatbot's response."),
 });
 export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 
@@ -36,11 +36,16 @@ const prompt = ai.definePrompt({
   input: { schema: ChatbotInputSchema },
   output: { schema: ChatbotOutputSchema },
   tools: [searchEventsTool],
-  prompt: `You are a friendly and helpful chatbot for CampusVerse, a university event hub application.
-Your goal is to assist users with their questions about events, clubs, coins, and how to use the app.
-Be concise and clear in your answers.
-If you use a tool, do not start your response with "Based on the tool output...". Just give the answer directly.
-You MUST reply with a valid JSON object that conforms to the output schema.
+  prompt: `You are a helpful assistant for a college events app. Your ONLY job is to answer questions about event details and availability.
+
+- Use the searchEvents tool to find information about cultural events, hackathons, or club activities.
+- If an event is found, reply with the event name, date, and status.
+- Use these statuses:
+  - 🔴 for 'Ended'
+  - 🟡 for 'Almost Full' or 'On-Spot Registration'
+  - 🟢 for 'Available' or 'Ongoing'
+- If no event is found for the user's query, politely say that the event is not found. Do not say 'anything is available.'
+- Keep your answers short, clear, and helpful.
 
 Here's the conversation history:
 {{#each history}}
