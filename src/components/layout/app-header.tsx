@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useAuth } from '@/contexts/auth-context';
@@ -17,6 +18,7 @@ import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
 import Link from 'next/link';
+import { AppLogo } from './app-logo';
 
 export function AppHeader() {
   const { user, logout, toggleRole } = useAuth();
@@ -35,13 +37,24 @@ export function AppHeader() {
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <Ticket className="h-6 w-6 text-primary" />
+              <AppLogo />
               <span className="hidden font-bold sm:inline-block font-headline">
                 CampusVerse
               </span>
             </Link>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
+                {user.role === 'Regular User' ? 'User' : 'Club Member'}
+              </Label>
+              <Switch
+                id="role-switch"
+                checked={user.role === 'Club Member'}
+                onCheckedChange={toggleRole}
+                aria-label="Toggle user role"
+              />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-2 cursor-pointer">
@@ -65,18 +78,6 @@ export function AppHeader() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
-                {user.role === 'Regular User' ? 'User' : 'Club Member'}
-              </Label>
-              <Switch
-                id="role-switch"
-                checked={user.role === 'Club Member'}
-                onCheckedChange={toggleRole}
-                aria-label="Toggle user role"
-              />
-            </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -120,3 +121,4 @@ export function AppHeader() {
     </>
   );
 }
+
