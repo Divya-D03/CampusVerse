@@ -31,6 +31,7 @@ export interface Event {
   status: EventStatus;
   coins: number;
   imageId: string;
+  registrationFee?: number;
 }
 
 export type Club = Event;

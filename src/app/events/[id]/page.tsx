@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RegistrationDialog } from '@/components/dashboard/RegistrationDialog';
-import { Calendar, Coins, Home, ArrowLeft } from 'lucide-react';
+import { Calendar, Coins, Home, ArrowLeft, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const statusStyles: Record<EventStatus, string> = {
@@ -107,12 +107,22 @@ export default function EventDetailsPage() {
               </CardHeader>
               <CardContent className="space-y-6 text-base">
                 <p className="text-foreground/80">{event.description}</p>
-                {event.coins > 0 && (
-                    <div className="flex items-center gap-3 text-lg text-yellow-400 p-4 bg-yellow-500/10 rounded-lg">
-                        <Coins className="w-6 h-6" />
-                        <span className="font-medium">Win up to {event.coins} coins!</span>
-                    </div>
-                )}
+                
+                <div className="flex flex-wrap items-center gap-4">
+                   {event.coins > 0 && (
+                      <div className="flex items-center gap-3 text-lg text-yellow-400 p-3 bg-yellow-500/10 rounded-lg">
+                          <Coins className="w-6 h-6" />
+                          <span className="font-medium">Win up to {event.coins} coins!</span>
+                      </div>
+                  )}
+                  {event.registrationFee && event.registrationFee > 0 && (
+                      <div className="flex items-center gap-3 text-lg text-primary p-3 bg-primary/10 rounded-lg">
+                          <Ticket className="w-6 h-6" />
+                          <span className="font-medium">Fee: {event.registrationFee} coins</span>
+                      </div>
+                  )}
+                </div>
+
                  <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto">
                   Register for this Event
                 </Button>

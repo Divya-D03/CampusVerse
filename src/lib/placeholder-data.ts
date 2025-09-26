@@ -30,6 +30,7 @@ export const hackathons: Event[] = [
     status: 'Available',
     coins: 50,
     imageId: 'hackathon-1',
+    registrationFee: 20,
   },
   {
     id: 'hk2',
