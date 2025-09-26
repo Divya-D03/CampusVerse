@@ -66,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     localStorage.setItem('campusverse_user', JSON.stringify(newUser));
     localStorage.removeItem('campusverse_first_login_done');
+    localStorage.removeItem('club_member_verified');
     setUser(newUser);
     setIsFirstLogin(true);
   };
@@ -73,6 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => {
     localStorage.removeItem('campusverse_user');
     localStorage.removeItem('campusverse_first_login_done');
+    localStorage.removeItem('club_member_verified');
     setUser(null);
     setIsFirstLogin(false);
     router.push('/login');
