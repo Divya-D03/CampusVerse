@@ -1,3 +1,4 @@
+
 import type { Event, Club } from './types';
 
 export const culturalEvents: Event[] = [
