@@ -10,55 +10,43 @@
     --card-foreground: 220 10% 25%;
     --popover: 220 20% 96%;
     --popover-foreground: 220 10% 25%;
-    --primary: 217 91% 60%;
+    --primary: 262 82% 66%; /* Electric Purple */
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 90%;
     --secondary-foreground: 220 10% 25%;
     --muted: 220 20% 90%;
     --muted-foreground: 220 10% 45%;
-    --accent: 220 20% 90%;
-    --accent-foreground: 220 10% 25%;
+    --accent: 181 100% 50%; /* Neon Cyan */
+    --accent-foreground: 210 20% 8%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 220 20% 90%;
     --input: 220 20% 88%;
-    --ring: 217 91% 60%;
+    --ring: 181 100% 50%;
 
     --radius: 0.8rem;
-    
-    /* Neumorphic Shadows */
-    --shadow-light: -6px -6px 12px hsl(0 0% 100% / 0.6);
-    --shadow-dark: 6px 6px 12px hsl(220 20% 80% / 0.9);
-    --shadow-inset-light: inset -4px -4px 8px hsl(0 0% 100% / 0.7);
-    --shadow-inset-dark: inset 4px 4px 8px hsl(220 20% 80% / 0.9);
   }
 
   .dark {
-    --background: 220 15% 15%;
+    --background: 220 44% 12%; /* Deep space blue */
     --foreground: 220 15% 85%;
-    --card: 220 15% 15%;
+    --card: 220 30% 16%;
     --card-foreground: 220 15% 85%;
     --popover: 220 15% 15%;
     --popover-foreground: 220 15% 85%;
-    --primary: 217 91% 60%;
+    --primary: 262 82% 66%; /* Electric Purple */
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 15% 20%;
+    --secondary: 220 30% 20%;
     --secondary-foreground: 220 15% 85%;
-    --muted: 220 15% 20%;
+    --muted: 220 30% 20%;
     --muted-foreground: 220 15% 65%;
-    --accent: 220 15% 20%;
-    --accent-foreground: 220 15% 85%;
-    --destructive: 0 72% 51%;
+    --accent: 181 100% 50%; /* Neon Cyan */
+    --accent-foreground: 210 20% 8%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 15% 25%;
-    --input: 220 15% 22%;
-    --ring: 217 91% 60%;
-    
-    /* Neumorphic Shadows */
-    --shadow-light: -6px -6px 12px hsl(220 15% 20% / 0.8);
-    --shadow-dark: 6px 6px 12px hsl(220 15% 10% / 0.9);
-    --shadow-inset-light: inset -6px -6px 12px hsl(220 15% 20% / 0.8);
-    --shadow-inset-dark: inset 6px 6px 12px hsl(220 15% 10% / 0.9);
+    --border: 220 30% 25%;
+    --input: 220 30% 22%;
+    --ring: 181 100% 50%;
   }
 }
 
@@ -72,23 +60,5 @@
 }
 
 @layer components {
-  .neumorphic-flat {
-    @apply bg-background rounded-[var(--radius)];
-  }
-  .neumorphic-raised {
-    @apply bg-background rounded-[var(--radius)] transition-all duration-200;
-    box-shadow: var(--shadow-light), var(--shadow-dark);
-  }
-  .neumorphic-pressed {
-    @apply bg-background rounded-[var(--radius)] transition-all duration-200;
-    box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
-  }
-  
-  .neumorphic-raised-interactive:hover {
-    box-shadow: var(--shadow-light), var(--shadow-dark), 0 0 0 2px hsl(var(--ring) / 0.2);
-  }
-  
-  .neumorphic-raised-interactive:active, .neumorphic-raised-interactive:focus-visible {
-     box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
-  }
+  /* You can add custom component styles here if needed */
 }

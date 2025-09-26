@@ -38,7 +38,6 @@ export function ThemeToggle() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            className="neumorphic-raised-interactive"
         >
             <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -64,21 +63,21 @@ export function AppHeader() {
   return (
     <>
       <HostEventDialog open={showHostEventDialog} onOpenChange={setShowHostEventDialog} />
-      <header className="sticky top-0 z-50 w-full border-b border-transparent bg-background/80 backdrop-blur-sm">
-        <div className="container flex h-16 items-center">
+      <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm">
+        <div className="container flex h-20 items-center">
           <div className="mr-auto flex items-center">
             <button onClick={() => setIsAppInfoOpen(true)} className="mr-2 focus:outline-none focus:ring-2 focus:ring-ring rounded-sm">
                 <AppLogo />
             </button>
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <span className="hidden font-bold sm:inline-block font-headline">
+              <span className="hidden font-bold sm:inline-block font-headline text-lg">
                 CampusVerse
               </span>
             </Link>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
             <ThemeToggle />
-            <div className="flex items-center space-x-2 neumorphic-flat p-1 rounded-full">
+            <div className="flex items-center space-x-2 bg-card/50 p-1 rounded-full">
               <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block pl-2">
                 {user.role === 'Regular User' ? 'User' : 'Club Member'}
               </Label>
@@ -89,7 +88,7 @@ export function AppHeader() {
                 aria-label="Toggle user role"
               />
                {user.role === 'Club Member' && isVerified && (
-                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline" className="neumorphic-raised-interactive">
+                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline">
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Host Event
                   </Button>
@@ -97,12 +96,14 @@ export function AppHeader() {
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 cursor-pointer neumorphic-raised-interactive px-3 py-1.5 rounded-full">
-                  <Coins className="w-5 h-5 text-yellow-400"/>
-                  <span className="font-bold text-lg">{user.coins}</span>
-                </div>
+                <Button variant="outline" className="px-3 py-1.5 rounded-full h-auto">
+                  <div className="flex items-center gap-2 cursor-pointer">
+                    <Coins className="w-5 h-5 text-yellow-400"/>
+                    <span className="font-bold text-lg">{user.coins}</span>
+                  </div>
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 neumorphic-flat" align="end" forceMount>
+              <DropdownMenuContent className="w-64" align="end" forceMount>
                 <DropdownMenuLabel>Your Coins</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="p-2 text-sm text-muted-foreground">
@@ -111,7 +112,7 @@ export function AppHeader() {
                 </div>
                 <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => setIsQrCodeDialogOpen(true)}>
-                    <Button className="w-full neumorphic-raised-interactive">
+                    <Button className="w-full">
                         <Coins className="mr-2 h-4 w-4" />
                         Redeem Now
                     </Button>
@@ -121,14 +122,14 @@ export function AppHeader() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full neumorphic-raised-interactive">
-                  <Avatar className="h-8 w-8">
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Avatar className="h-10 w-10">
                     <AvatarImage src={avatarSrc} alt={user.email || ''} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 neumorphic-flat" align="end" forceMount>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">
@@ -159,7 +160,7 @@ export function AppHeader() {
       </header>
       {user && <QrCodeDialog user={user} open={isQrCodeDialogOpen} onOpenChange={setIsQrCodeDialogOpen} />}
       <AlertDialog open={isAppInfoOpen} onOpenChange={setIsAppInfoOpen}>
-        <AlertDialogContent className="neumorphic-flat">
+        <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 text-2xl font-headline">
               <AppLogo />
@@ -177,7 +178,7 @@ export function AppHeader() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setIsAppInfoOpen(false)} className="neumorphic-raised-interactive">
+            <AlertDialogAction onClick={() => setIsAppInfoOpen(false)}>
               Got it!
             </AlertDialogAction>
           </AlertDialogFooter>

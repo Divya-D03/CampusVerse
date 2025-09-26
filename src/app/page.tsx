@@ -98,20 +98,20 @@ export default function DashboardPage() {
       
       <AppHeader />
       <ScrollArea className="flex-1">
-        <main className="p-4 sm:p-6 md:p-8">
+        <main className="p-6 sm:p-8 md:p-12">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex-shrink-0">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
                 <div className="flex items-center gap-4">
                   <h1 className="text-3xl md:text-4xl font-bold font-headline">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                         <Badge variant="outline" className={cn("text-base cursor-pointer neumorphic-raised", rankStyles)}>
+                         <Badge variant="outline" className={cn("text-base cursor-pointer", rankStyles)}>
                             {rank}
                         </Badge>
                       </TooltipTrigger>
-                      <TooltipContent className="neumorphic-raised">
+                      <TooltipContent>
                         <p className="font-bold text-lg text-center mb-2">{rank} Rank</p>
                         <ul className="list-disc list-inside space-y-1">
                             <li><span className="font-semibold">Newbie:</span> Default rank.</li>
@@ -122,12 +122,12 @@ export default function DashboardPage() {
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)} className="neumorphic-raised-interactive">
+                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)}>
                     <Trophy className="w-6 h-6 text-yellow-500" />
                   </Button>
                 </div>
               </div>
-              <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
+              <p className="text-muted-foreground mb-10">Your central hub for all university events and clubs.</p>
               {user.role === 'Club Member' && <ClubMemberProof />}
             </div>
             <EventTabs />

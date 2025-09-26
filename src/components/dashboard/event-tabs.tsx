@@ -3,14 +3,6 @@ import { useAuth } from '@/contexts/auth-context';
 import { EventCard } from './event-card';
 import { Paintbrush, Code, Users } from 'lucide-react';
 
-const statusLegend = [
-  { status: 'Available', color: 'bg-green-500' },
-  { status: 'Almost Full', color: 'bg-orange-500' },
-  { status: 'Ended', color: 'bg-red-500' },
-  { status: 'On-Spot Registration', color: 'bg-blue-500' },
-  { status: 'Ongoing', color: 'bg-gray-500' },
-];
-
 export function EventTabs() {
   const { events } = useAuth();
 
@@ -24,53 +16,42 @@ export function EventTabs() {
   return (
     <>
       <Tabs defaultValue="cultural" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="cultural">
-            <Paintbrush className="mr-2 h-4 w-4" />
+        <TabsList className="grid w-full max-w-md grid-cols-3 bg-transparent p-0 mb-8">
+          <TabsTrigger value="cultural" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+            <Paintbrush className="mr-2 h-5 w-5" />
             Cultural
           </TabsTrigger>
-          <TabsTrigger value="tech">
-            <Code className="mr-2 h-4 w-4" />
+          <TabsTrigger value="tech" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+            <Code className="mr-2 h-5 w-5" />
             Tech
           </TabsTrigger>
-          <TabsTrigger value="clubs">
-            <Users className="mr-2 h-4 w-4" />
+          <TabsTrigger value="clubs" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+            <Users className="mr-2 h-5 w-5" />
             Clubs
           </TabsTrigger>
         </TabsList>
         <TabsContent value="cultural" className="mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {culturalEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </TabsContent>
         <TabsContent value="tech" className="mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {techEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </TabsContent>
         <TabsContent value="clubs" className="mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {clubs.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </TabsContent>
       </Tabs>
-      <div className="mt-8 pt-4 border-t border-dashed">
-        <h3 className="text-lg font-semibold mb-4 text-center sm:text-left">Status Legend</h3>
-        <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2">
-          {statusLegend.map(({ status, color }) => (
-            <div key={status} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full ${color}`}></div>
-              <span className="text-sm text-muted-foreground">{status}</span>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 }
