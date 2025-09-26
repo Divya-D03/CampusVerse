@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -46,6 +47,11 @@ export function UserDetailsDialog({ open, onOpenChange }: UserDetailsDialogProps
     }
   };
 
+  const handleMobileNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/g, '');
+    setMobileNumber(numericValue.slice(0, 10));
+  };
+
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
@@ -71,8 +77,9 @@ export function UserDetailsDialog({ open, onOpenChange }: UserDetailsDialogProps
                 <Input
                   id="mobileNumber"
                   value={mobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
-                  placeholder="Enter your mobile number"
+                  onChange={handleMobileNumberChange}
+                  placeholder="Enter your 10-digit mobile number"
+                  maxLength={10}
                 />
               </div>
               <div>
@@ -85,7 +92,6 @@ export function UserDetailsDialog({ open, onOpenChange }: UserDetailsDialogProps
                     <SelectItem value="Male">Male</SelectItem>
                     <SelectItem value="Female">Female</SelectItem>
                     <SelectItem value="Other">Other</SelectItem>
-                    <SelectItem value="Prefer not to say">Prefer not to say</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
