@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -21,8 +22,9 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import type { Event } from '@/lib/types';
-import { Loader2, Coins, AlertCircle, ArrowLeft, Upload } from 'lucide-react';
-import { useAuth } from '@/contexts/auth-context';
+import { Loader2, ArrowLeft, Upload, Check, Copy } from 'lucide-react';
+import { UpiApps } from '../ui/upi-icons';
+import { cn } from '@/lib/utils';
 
 interface RegistrationDialogProps {
   event: Event | null;
@@ -43,26 +45,32 @@ const schools = [
   'School of Law',
 ];
 
+type UpiApp = 'paytm' | 'phonepe' | 'gpay';
 type PaymentMethod = 'upi' | 'bank';
 
+const UPI_ID = "campusverse@reva.edu.in";
+
 export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDialogProps) {
-  const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [srn, setSrn] = useState('');
   const [school, setSchool] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('upi');
+  const [selectedUpiApp, setSelectedUpiApp] = useState<UpiApp | null>(null);
   const [transactionId, setTransactionId] = useState('');
   const [paymentProof, setPaymentProof] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const registrationFee = event?.registrationFee || 0;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${UPI_ID}&pn=CampusVerse&am=${registrationFee}&cu=INR&tn=Registration%20for%20${encodeURIComponent(event?.title || "")}`;
+
 
   const resetForm = () => {
     setStep(1);
     setSrn('');
     setSchool('');
-    setPaymentMethod(null);
+    setPaymentMethod('upi');
+    setSelectedUpiApp(null);
     setTransactionId('');
     setPaymentProof(null);
     setIsSubmitting(false);
@@ -87,29 +95,22 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
     if (registrationFee > 0) {
       setStep(2);
     } else {
-      // If event is free, submit directly
       handleSubmit();
     }
   };
 
-  const handlePaymentSubmit = () => {
-    if (!paymentMethod || !transactionId) {
-      toast({
+  const handleSubmit = async () => {
+    if (registrationFee > 0 && (!transactionId)) {
+       toast({
         variant: 'destructive',
         title: 'Payment Details Incomplete',
-        description: 'Please select a payment method and enter the transaction ID.',
+        description: 'Please enter the transaction ID.',
       });
       return;
     }
-    handleSubmit();
-  };
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
     
-    // Simulate API call
+    setIsSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     setIsSubmitting(false);
     onOpenChange(false);
     toast({
@@ -125,6 +126,13 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
     }
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(UPI_ID);
+    toast({
+      title: 'Copied to Clipboard!',
+      description: 'UPI ID has been copied.',
+    });
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -137,43 +145,25 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                 Please fill out your information to join the event.
               </DialogDescription>
             </DialogHeader>
-
             <div className="grid gap-6 py-4">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="srn">Student Registration Number (SRN)</Label>
-                  <Input
-                    id="srn"
-                    value={srn}
-                    onChange={(e) => setSrn(e.target.value)}
-                    placeholder="Enter your unique SRN"
-                    disabled={isSubmitting}
-                  />
+                  <Input id="srn" value={srn} onChange={(e) => setSrn(e.target.value)} placeholder="Enter your unique SRN" disabled={isSubmitting} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="school">School/Department</Label>
                   <Select onValueChange={setSchool} value={school} disabled={isSubmitting}>
-                    <SelectTrigger id="school">
-                      <SelectValue placeholder="Select your school" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {schools.map((s) => (
-                        <SelectItem key={s} value={s}>
-                          {s}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
+                    <SelectTrigger id="school"><SelectValue placeholder="Select your school" /></SelectTrigger>
+                    <SelectContent>{schools.map((s) => (<SelectItem key={s} value={s}>{s}</SelectItem>))}</SelectContent>
                   </Select>
                 </div>
               </div>
             </div>
-
             <DialogFooter>
-              <Button variant="outline" onClick={() => handleOpenChange(false)} disabled={isSubmitting}>
-                Cancel
-              </Button>
+              <Button variant="outline" onClick={() => handleOpenChange(false)} disabled={isSubmitting}>Cancel</Button>
               <Button onClick={handleDetailsSubmit} disabled={isSubmitting}>
-                {registrationFee > 0 ? 'Next' : 'Register'}
+                {registrationFee > 0 ? 'Proceed to Payment' : 'Register for Free'}
               </Button>
             </DialogFooter>
           </>
@@ -183,12 +173,10 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
            <>
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                 <button onClick={() => setStep(1)} className="p-1 rounded-full hover:bg-muted"><ArrowLeft className="w-4 h-4" /></button>
-                Payment Details
+                 <button onClick={() => setStep(1)} className="p-1 rounded-full hover:bg-muted disabled:opacity-50" disabled={isSubmitting}><ArrowLeft className="w-4 h-4" /></button>
+                Complete Your Payment
               </DialogTitle>
-              <DialogDescription>
-                Complete the payment to finalize your registration for {event?.title}.
-              </DialogDescription>
+              <DialogDescription>To finalize your registration for {event?.title}, please complete the payment.</DialogDescription>
             </DialogHeader>
 
             <div className="grid gap-6 py-4">
@@ -197,66 +185,62 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                     <p className="text-lg font-bold text-primary">₹{registrationFee}</p>
                 </div>
                 
-                <div className="space-y-2">
+                <div className="space-y-4">
                     <Label>Select Payment Method</Label>
-                    <div className="grid grid-cols-2 gap-4">
-                        <Button
-                            variant={paymentMethod === 'upi' ? 'default' : 'outline'}
-                            onClick={() => setPaymentMethod('upi')}
-                            className="neumorphic-raised-interactive"
-                        >
-                            UPI
-                        </Button>
-                        <Button
-                            variant={paymentMethod === 'bank' ? 'default' : 'outline'}
-                            onClick={() => setPaymentMethod('bank')}
-                            className="neumorphic-raised-interactive"
-                        >
-                            Bank Transfer
-                        </Button>
+                    <div className="grid grid-cols-3 gap-2">
+                       { (['paytm', 'phonepe', 'gpay'] as UpiApp[]).map(app => (
+                          <button key={app} onClick={() => setSelectedUpiApp(app)}
+                            className={cn(
+                              "neumorphic-raised-interactive p-3 rounded-lg flex flex-col items-center justify-center gap-2 transition-all duration-200",
+                              selectedUpiApp === app ? "ring-2 ring-primary" : ""
+                            )}
+                          >
+                            <UpiApps app={app} className="w-8 h-8"/>
+                            <span className="text-xs font-medium capitalize">{app}</span>
+                            {selectedUpiApp === app && <Check className="w-4 h-4 text-primary absolute top-1 right-1"/>}
+                          </button>
+                       ))}
                     </div>
                 </div>
 
+                {selectedUpiApp && (
+                  <div className="text-center bg-muted/50 p-4 rounded-lg border space-y-4">
+                      <p className='font-semibold'>Scan to Pay with {selectedUpiApp}</p>
+                      <div className="flex justify-center">
+                        <Image src={qrCodeUrl} alt="Payment QR Code" width={150} height={150} className='rounded-md' />
+                      </div>
+                      <div className="relative">
+                          <Input value={UPI_ID} readOnly className="pr-10 text-center" />
+                          <Button size="icon" variant="ghost" className="absolute right-1 top-1 h-8 w-8" onClick={copyToClipboard}>
+                              <Copy className="h-4 w-4" />
+                          </Button>
+                      </div>
+                  </div>
+                )}
+                
                 <div className="space-y-2">
-                    <Label htmlFor="transactionId">Transaction ID</Label>
-                    <Input
-                        id="transactionId"
-                        value={transactionId}
-                        onChange={(e) => setTransactionId(e.target.value)}
-                        placeholder="Enter the ID from your payment app"
-                        disabled={isSubmitting}
-                    />
+                    <Label htmlFor="transactionId">Transaction ID / UPI Reference No.</Label>
+                    <Input id="transactionId" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} placeholder="Enter the 12-digit ID" disabled={isSubmitting}/>
                 </div>
                 
                 <div className="space-y-2">
                     <Label htmlFor="payment-proof">Payment Proof (Optional)</Label>
                     <div className="flex items-center gap-2">
-                      <Input id="payment-proof" type="file" onChange={handleFileChange} className="flex-1"/>
-                      <Button variant="outline" size="icon" asChild>
-                        <label htmlFor="payment-proof" className="cursor-pointer">
+                      <Input id="payment-proof" type="file" onChange={handleFileChange} className="flex-1" disabled={isSubmitting}/>
+                       <Button variant="outline" size="icon" asChild>
+                        <label htmlFor="payment-proof" className={cn("cursor-pointer", isSubmitting && "cursor-not-allowed opacity-50")}>
                           <Upload className="w-4 h-4"/>
                         </label>
                       </Button>
                     </div>
                     {paymentProof && <p className="text-xs text-muted-foreground">File: {paymentProof.name}</p>}
                 </div>
-                
-                <div className="text-xs text-muted-foreground bg-muted/50 p-3 rounded-md border">
-                    To be eligible for prizes, you must submit your project and provide proof of payment.
-                </div>
             </div>
 
             <DialogFooter>
-              <Button variant="outline" onClick={() => setStep(1)} disabled={isSubmitting}>
-                Back
-              </Button>
-              <Button onClick={handlePaymentSubmit} disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : 'Submit Registration'}
+              <Button variant="outline" onClick={() => setStep(1)} disabled={isSubmitting}>Back</Button>
+              <Button onClick={handleSubmit} disabled={isSubmitting || !transactionId}>
+                {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting...</> : 'Submit Registration'}
               </Button>
             </DialogFooter>
            </>
