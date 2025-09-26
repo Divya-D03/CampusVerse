@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import type { Event } from '@/lib/types';
-import { Loader2, BadgeHelp } from 'lucide-react';
+import { Loader2, BadgeHelp, UploadCloud } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Tooltip,
@@ -238,7 +238,10 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                     />
                   </div>
                   <div className="space-y-3">
-                    <Label htmlFor="paymentProof" className="font-semibold text-base">3. Upload Proof of Payment</Label>
+                    <Label htmlFor="paymentProof" className="font-semibold text-base flex items-center gap-2">
+                      3. Upload Proof of Payment
+                      <UploadCloud className='w-4 h-4 text-muted-foreground' />
+                      </Label>
                     <Input
                       id="paymentProof"
                       type="file"
