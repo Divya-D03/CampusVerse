@@ -57,3 +57,59 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Neumorphic Styles */
+@layer components {
+    .neumorphic-flat {
+        @apply bg-background rounded-lg border border-transparent;
+        box-shadow: 
+            -5px -5px 10px rgba(255, 255, 255, 0.05), 
+            5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    .dark .neumorphic-flat {
+        box-shadow: 
+            -6px -6px 12px rgba(40, 40, 40, 0.75), 
+            6px 6px 12px rgba(10, 10, 10, 0.5);
+    }
+
+    .neumorphic-raised {
+        @apply bg-background rounded-lg border border-transparent;
+        box-shadow: 
+            -8px -8px 16px rgba(255, 255, 255, 0.1), 
+            8px 8px 16px rgba(0, 0, 0, 0.25);
+    }
+    .dark .neumorphic-raised {
+        box-shadow: 
+            -8px -8px 16px rgba(45, 45, 45, 0.75), 
+            8px 8px 16px rgba(5, 5, 5, 0.5);
+    }
+
+    .neumorphic-raised-interactive {
+        @apply neumorphic-raised transition-all duration-200;
+    }
+    .neumorphic-raised-interactive:hover {
+        transform: translateY(-2px);
+    }
+    .neumorphic-raised-interactive:active {
+        @apply neumorphic-pressed;
+        transform: translateY(1px);
+    }
+    
+
+    .neumorphic-pressed {
+        @apply bg-background rounded-lg border-transparent;
+        box-shadow: 
+            inset -5px -5px 10px rgba(255, 255, 255, 0.05), 
+            inset 5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    .dark .neumorphic-pressed {
+        box-shadow: 
+            inset -6px -6px 12px rgba(40, 40, 40, 0.75), 
+            inset 6px 6px 12px rgba(10, 10, 10, 0.5);
+    }
+
+    /* Fix for shadcn components that might have their own background */
+    .neumorphic-flat, .neumorphic-raised, .neumorphic-pressed {
+        background-color: hsl(var(--background));
+    }
+}
