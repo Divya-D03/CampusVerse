@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,7 +21,6 @@ export function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
   
@@ -29,18 +28,6 @@ export function Chatbot() {
   if (user) {
     userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
   }
-
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    // We use a timeout to ensure the DOM has updated before we try to scroll
-    setTimeout(scrollToBottom, 0);
-  }, [messages, isLoading]);
-
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -123,7 +110,6 @@ export function Chatbot() {
                       </div>
                     </div>
                   )}
-                  <div ref={messagesEndRef} />
                 </div>
               </ScrollArea>
               <div className="p-4 border-t">
