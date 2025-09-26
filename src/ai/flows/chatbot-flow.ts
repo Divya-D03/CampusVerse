@@ -40,6 +40,7 @@ const prompt = ai.definePrompt({
 Your goal is to assist users with their questions about events, clubs, coins, and how to use the app.
 Be concise and clear in your answers.
 If you use a tool, do not start your response with "Based on the tool output...". Just give the answer directly.
+You MUST reply with a valid JSON object that conforms to the output schema.
 
 Here's the conversation history:
 {{#each history}}
