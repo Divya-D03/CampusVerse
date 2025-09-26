@@ -10,6 +10,7 @@ interface AuthContextType {
   loading: boolean;
   isFirstLogin: boolean;
   events: Event[];
+  allUsers: User[];
   login: (email: string) => void;
   logout: () => void;
   toggleRole: () => void;
@@ -35,8 +36,18 @@ const initialEvents: Event[] = [
   ...projectExpos
 ];
 
+// Mock data for other users for the leaderboard
+const mockUsers: User[] = [
+  { email: 'jane.doe@reva.edu.in', name: 'Jane Doe', role: 'Regular User', coins: 1250, eventsWon: 12 },
+  { email: 'john.smith@reva.edu.in', name: 'John Smith', role: 'Club Member', coins: 800, eventsWon: 7 },
+  { email: 'alex.jones@reva.edu.in', name: 'Alex Jones', role: 'Regular User', coins: 1500, eventsWon: 21 },
+  { email: 'emily.white@reva.edu.in', name: 'Emily White', role: 'Regular User', coins: 450, eventsWon: 3 },
+  { email: 'michael.brown@reva.edu.in', name: 'Michael Brown', role: 'Club Member', coins: 200, eventsWon: 1 },
+];
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [allUsers, setAllUsers] = useState<User[]>(mockUsers);
   const [loading, setLoading] = useState(true);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [events, setEvents] = useState<Event[]>(initialEvents);
@@ -48,6 +59,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
+        setAllUsers(currentUsers => {
+            const otherUsers = currentUsers.filter(u => u.email !== parsedUser.email);
+            return [...otherUsers, parsedUser];
+        });
         
         const firstLoginFlag = localStorage.getItem('campusverse_first_login_done');
         if (!firstLoginFlag || !parsedUser.name) {
@@ -82,12 +97,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       role: 'Regular User',
       coins: 50,
       coinHistory: [welcomeTransaction],
+      eventsWon: 0,
     };
     localStorage.setItem('campusverse_user', JSON.stringify(newUser));
     localStorage.removeItem('campusverse_first_login_done');
     localStorage.removeItem('club_member_verified');
     localStorage.setItem('campusverse_events', JSON.stringify(initialEvents));
     setUser(newUser);
+    setAllUsers([...mockUsers, newUser]);
     setEvents(initialEvents);
     setIsFirstLogin(true);
   };
@@ -98,45 +115,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('club_member_verified');
     localStorage.removeItem('campusverse_events');
     setUser(null);
+    setAllUsers(mockUsers);
     setIsFirstLogin(false);
     router.push('/login');
   }, [router]);
 
-  const toggleRole = () => {
-    setUser((currentUser) => {
-      if (!currentUser) return null;
-      const newRole: UserRole = currentUser.role === 'Regular User' ? 'Club Member' : 'Regular User';
-      const updatedUser = { ...currentUser, role: newRole };
-      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
-      return updatedUser;
+  const updateUserAndUsersList = (updatedUser: User) => {
+    setUser(updatedUser);
+    setAllUsers(currentUsers => {
+        const otherUsers = currentUsers.filter(u => u.email !== updatedUser.email);
+        return [...otherUsers, updatedUser];
     });
+    localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
+  }
+
+  const toggleRole = () => {
+    if (!user) return;
+    const newRole: UserRole = user.role === 'Regular User' ? 'Club Member' : 'Regular User';
+    const updatedUser = { ...user, role: newRole };
+    updateUserAndUsersList(updatedUser);
   };
 
   const updateUser = (data: Partial<Pick<User, 'name' | 'mobileNumber' | 'gender'>>) => {
-    setUser(currentUser => {
-        if (!currentUser) return null;
-        const updatedUser = { ...currentUser, ...data };
-        localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
-        return updatedUser;
-    });
+    if (!user) return;
+    const updatedUser = { ...user, ...data };
+    updateUserAndUsersList(updatedUser);
   };
 
   const updateUserProfilePicture = (dataUrl: string) => {
-    setUser(currentUser => {
-      if (!currentUser) return null;
-      const updatedUser = { ...currentUser, profilePicture: dataUrl };
-      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
-      return updatedUser;
-    });
+    if (!user) return;
+    const updatedUser = { ...user, profilePicture: dataUrl };
+    updateUserAndUsersList(updatedUser);
   };
 
   const updateUserSettings = (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => {
-    setUser(currentUser => {
-      if (!currentUser) return null;
-      const updatedUser = { ...currentUser, ...settings };
-      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
-      return updatedUser;
-    });
+    if (!user) return;
+    const updatedUser = { ...user, ...settings };
+    updateUserAndUsersList(updatedUser);
   };
 
   const markFirstLoginDone = () => {
@@ -145,27 +160,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const addCoinTransaction = (transaction: Omit<CoinTransaction, 'id' | 'date'>) => {
-    setUser(currentUser => {
-      if (!currentUser) return null;
-      
-      const newTransaction: CoinTransaction = {
-        ...transaction,
-        id: generateUniqueTxId(),
-        date: new Date().toISOString(),
-      };
-      
-      const updatedHistory = [...(currentUser.coinHistory || []), newTransaction];
-      const updatedCoins = currentUser.coins + (newTransaction.type === 'earned' ? newTransaction.amount : -newTransaction.amount);
+    if (!user) return;
+    
+    const newTransaction: CoinTransaction = {
+      ...transaction,
+      id: generateUniqueTxId(),
+      date: new Date().toISOString(),
+    };
+    
+    const updatedHistory = [...(user.coinHistory || []), newTransaction];
+    const updatedCoins = user.coins + (newTransaction.type === 'earned' ? newTransaction.amount : -newTransaction.amount);
 
-      const updatedUser: User = {
-        ...currentUser,
-        coins: updatedCoins,
-        coinHistory: updatedHistory
-      };
-
-      localStorage.setItem('campusverse_user', JSON.stringify(updatedUser));
-      return updatedUser;
-    });
+    const updatedUser: User = {
+      ...user,
+      coins: updatedCoins,
+      coinHistory: updatedHistory
+    };
+    updateUserAndUsersList(updatedUser);
   };
 
   const addEvent = (event: Event) => {
@@ -177,7 +188,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, events, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction, addEvent }}>
+    <AuthContext.Provider value={{ user, loading, allUsers, isFirstLogin, events, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction, addEvent }}>
       {children}
     </AuthContext.Provider>
   );

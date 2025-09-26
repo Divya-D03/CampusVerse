@@ -20,6 +20,7 @@ export interface User {
   linkedinUrl?: string;
   gender?: 'Male' | 'Female' | 'Other';
   skills?: string[];
+  eventsWon?: number;
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Ended' | 'On-Spot Registration' | 'Ongoing';

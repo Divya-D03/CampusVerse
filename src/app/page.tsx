@@ -21,12 +21,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Trophy } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { LeaderboardDialog } from '@/components/dashboard/leaderboard-dialog';
 
 export default function DashboardPage() {
-  const { user, loading, isFirstLogin, markFirstLoginDone } = useAuth();
+  const { user, loading, isFirstLogin, markFirstLoginDone, allUsers } = useAuth();
   const router = useRouter();
   const [showWelcome, setShowWelcome] = useState(false);
   const [showDetailsDialog, setShowDetailsDialog] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+
 
   useEffect(() => {
     if (!loading && !user) {
@@ -89,6 +94,7 @@ export default function DashboardPage() {
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
       <UserDetailsDialog open={showDetailsDialog} onOpenChange={handleDetailsDialogClose} />
+      <LeaderboardDialog open={showLeaderboard} onOpenChange={setShowLeaderboard} users={allUsers} />
       
       <AppHeader />
       <ScrollArea className="flex-1">
@@ -116,6 +122,9 @@ export default function DashboardPage() {
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
+                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)}>
+                    <Trophy className="w-6 h-6 text-yellow-500" />
+                  </Button>
                 </div>
               </div>
               <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
