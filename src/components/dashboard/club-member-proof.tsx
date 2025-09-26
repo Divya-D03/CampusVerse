@@ -57,7 +57,7 @@ export function ClubMemberProof() {
   if (isSubmitted) {
     return (
       <ClubMemberVerificationContext.Provider value={{ isVerified: true }}>
-        <Card className="mb-8 bg-green-500/10 border-green-500/30">
+        <Card className="mb-8 bg-green-500/10 border-green-500/30 neumorphic-flat">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CheckCircle className="text-green-400" />
@@ -74,7 +74,7 @@ export function ClubMemberProof() {
 
   return (
      <ClubMemberVerificationContext.Provider value={{ isVerified: false }}>
-        <Card className="mb-8 holographic-card">
+        <Card className="mb-8 neumorphic-flat">
         <CardHeader>
             <CardTitle>Verify Club Membership</CardTitle>
             <CardDescription>
@@ -84,9 +84,9 @@ export function ClubMemberProof() {
         <CardContent className="space-y-4">
             <div className="space-y-2">
             <Label htmlFor="proof-upload">Proof Document</Label>
-            <Input id="proof-upload" type="file" onChange={handleFileChange} className="file:text-primary file:font-bold" />
+            <Input id="proof-upload" type="file" onChange={handleFileChange} />
             </div>
-            <Button onClick={handleSubmit} disabled={isUploading || !file}>
+            <Button onClick={handleSubmit} disabled={isUploading || !file} className="neumorphic-raised-interactive">
             <UploadCloud className="mr-2 h-4 w-4" />
             {isUploading ? 'Submitting...' : 'Submit for Verification'}
             </Button>

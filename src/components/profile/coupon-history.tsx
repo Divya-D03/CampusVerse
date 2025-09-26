@@ -15,7 +15,7 @@ export function CouponHistory({ transactions }: CoinHistoryProps) {
   const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <Card className="holographic-card h-full">
+    <Card className="neumorphic-raised h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <History className="w-5 h-5" />
@@ -30,11 +30,11 @@ export function CouponHistory({ transactions }: CoinHistoryProps) {
           <ScrollArea className="h-[450px]">
             <div className="space-y-4 pr-4">
               {sortedTransactions.map((tx, index) => (
-                <div key={`${tx.id}-${index}`} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                <div key={`${tx.id}-${index}`} className="flex items-center justify-between p-3 rounded-md neumorphic-flat">
                   <div className="flex items-center gap-3">
                     <div className={cn(
-                      "flex items-center justify-center w-8 h-8 rounded-full",
-                      tx.type === 'earned' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
+                      "flex items-center justify-center w-8 h-8 rounded-full neumorphic-pressed",
+                      tx.type === 'earned' ? 'text-green-500' : 'text-red-500'
                     )}>
                       {tx.type === 'earned' ? (
                         <ArrowDownLeft className="w-4 h-4" />
@@ -51,7 +51,7 @@ export function CouponHistory({ transactions }: CoinHistoryProps) {
                   </div>
                   <div className={cn(
                     "font-bold text-lg",
-                    tx.type === 'earned' ? 'text-green-400' : 'text-red-400'
+                    tx.type === 'earned' ? 'text-green-500' : 'text-red-500'
                   )}>
                     {tx.type === 'earned' ? '+' : '-'}{tx.amount}
                   </div>

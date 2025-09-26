@@ -42,7 +42,7 @@ export function LeaderboardDialog({ open, onOpenChange, users }: LeaderboardDial
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md neumorphic-flat">
         <DialogHeader>
           <DialogTitle className="text-2xl font-headline flex items-center gap-2">
             <Trophy className="text-primary" />
@@ -58,16 +58,16 @@ export function LeaderboardDialog({ open, onOpenChange, users }: LeaderboardDial
               const rank = getRank(user.eventsWon || 0);
               const isCurrentUser = user.email === currentUser?.email;
               return (
-                <div key={user.email} className={cn("flex items-center justify-between p-3 rounded-lg border", isCurrentUser ? "bg-primary/10 border-primary" : "bg-muted/50")}>
+                <div key={user.email} className={cn("flex items-center justify-between p-3 rounded-lg border", isCurrentUser ? "bg-primary/10 border-primary" : "neumorphic-flat")}>
                   <div className="flex items-center gap-4">
                     {getRankIcon(index)}
-                    <Avatar>
+                    <Avatar className="neumorphic-pressed">
                         <AvatarImage src={`https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`} alt={user.name} />
                         <AvatarFallback>{user.name ? user.name.charAt(0).toUpperCase() : 'U'}</AvatarFallback>
                     </Avatar>
                     <div>
                       <p className={cn("font-bold", isCurrentUser && "text-primary")}>{user.name || user.email.split('@')[0]}</p>
-                      <p className={cn("text-xs px-2 py-0.5 rounded-full inline-block", rank.styles)}>{rank.name}</p>
+                      <p className={cn("text-xs px-2 py-0.5 rounded-full inline-block neumorphic-raised", rank.styles)}>{rank.name}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-lg font-bold text-yellow-400">

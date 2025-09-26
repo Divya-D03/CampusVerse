@@ -147,7 +147,7 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md neumorphic-flat">
         <DialogHeader>
           <DialogTitle>Host a New Event</DialogTitle>
           <DialogDescription>
@@ -168,7 +168,7 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <Label htmlFor="description">Description</Label>
-              <Button onClick={handleGenerateDescription} variant="outline" size="sm" disabled={isGenerating}>
+              <Button onClick={handleGenerateDescription} variant="outline" size="sm" disabled={isGenerating} className="neumorphic-raised-interactive">
                 {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
                 <span className="ml-2">Generate with AI</span>
               </Button>
@@ -185,10 +185,10 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
           <div className="space-y-2">
             <Label htmlFor="category">Event Category</Label>
             <Select onValueChange={(value) => setCategory(value as EventCategory)} value={category}>
-                <SelectTrigger id="category">
+                <SelectTrigger id="category" className="neumorphic-pressed">
                     <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="neumorphic-flat">
                     {eventCategories.map((cat) => (
                     <SelectItem key={cat.value} value={cat.value}>
                         {cat.label}
@@ -210,10 +210,10 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting} className="neumorphic-raised-interactive">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={isSubmitting}>
+          <Button onClick={handleSubmit} disabled={isSubmitting} className="neumorphic-raised-interactive">
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

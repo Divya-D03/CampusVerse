@@ -77,7 +77,7 @@ export default function EventDetailsPage() {
               </Button>
             </div>
             
-            <Card className="holographic-card overflow-hidden">
+            <Card className="neumorphic-flat overflow-hidden">
               {image && (
                 <div className="relative aspect-[16/9] w-full">
                   <Image
@@ -121,7 +121,7 @@ export default function EventDetailsPage() {
                   )}
                 </div>
 
-                 <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto" disabled={event.status === 'Ended' || event.status === 'Ongoing'}>
+                 <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto neumorphic-raised" disabled={event.status === 'Ended' || event.status === 'Ongoing'}>
                   {event.status === 'Ended' ? 'Registration Closed' : 'Register for this Event'}
                 </Button>
               </CardContent>

@@ -74,7 +74,7 @@ export default function SettingsPage() {
         <div className="max-w-2xl mx-auto">
            <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold font-headline">Settings</h1>
-             <Button asChild variant="outline">
+             <Button asChild variant="outline" className="neumorphic-raised-interactive">
               <Link href="/">
                 <Home className="mr-2 h-4 w-4" />
                 Back to Home
@@ -82,7 +82,7 @@ export default function SettingsPage() {
             </Button>
           </div>
 
-          <Card className="holographic-card">
+          <Card className="neumorphic-flat">
             <CardHeader>
               <CardTitle>Profile Information</CardTitle>
               <CardDescription>Update your personal details and social links.</CardDescription>
@@ -129,7 +129,7 @@ export default function SettingsPage() {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit">
+                  <Button type="submit" className="neumorphic-raised-interactive">
                     <Save className="mr-2 h-4 w-4" />
                     Save Changes
                   </Button>

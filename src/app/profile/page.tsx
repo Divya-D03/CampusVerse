@@ -66,7 +66,7 @@ export default function ProfilePage() {
   const wonEvents = allEvents.slice(2, 3);
   const userSkills = user.skills || ['React', 'Node.js', 'Cybersecurity', 'Public Speaking'];
 
-  const wonEventsCount = wonEvents.length;
+  const wonEventsCount = user.eventsWon || wonEvents.length;
   let rank: 'Newbie' | 'Pro' | 'Master' | 'Grandmaster' = 'Newbie';
   let rankStyles = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
 
@@ -118,7 +118,7 @@ export default function ProfilePage() {
                   />
                   <button
                     onClick={handleAvatarClick}
-                    className="relative h-24 w-24 rounded-full border-4 border-primary overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    className="relative h-24 w-24 rounded-full overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 neumorphic-pressed"
                   >
                     <Image src={avatarSrc} alt={user.email || 'user avatar'} fill className="object-cover" />
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -135,25 +135,25 @@ export default function ProfilePage() {
                       {isClubMemberVerified ? 'Verified Club Member' : 'Unverified Club Member'}
                     </p>
                    )}
-                   <Badge variant="outline" className={cn("mt-2 text-base", rankStyles)}>
+                   <Badge variant="outline" className={cn("mt-2 text-base neumorphic-raised", rankStyles)}>
                         {rank}
                     </Badge>
                 </div>
               </div>
               <div className='flex items-start gap-2'>
                 {user.role === 'Club Member' && isClubMemberVerified && (
-                  <Button onClick={() => setShowHostEventDialog(true)}>
+                  <Button onClick={() => setShowHostEventDialog(true)} className="neumorphic-raised-interactive">
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Host Event
                   </Button>
                 )}
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="neumorphic-raised-interactive">
                   <Link href="/">
                     <Home className="mr-2 h-4 w-4" />
                     Back to Home
                   </Link>
                 </Button>
-                 <Button variant="destructive" onClick={logout}>
+                 <Button variant="destructive" onClick={logout} className="neumorphic-raised-interactive">
                   <LogOut className="mr-2 h-4 w-4" />
                   Log Out
                 </Button>
@@ -161,7 +161,7 @@ export default function ProfilePage() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-              <Card className="holographic-card md:col-span-2">
+              <Card className="neumorphic-raised md:col-span-2">
                 <CardHeader>
                   <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
                 </CardHeader>
@@ -170,7 +170,7 @@ export default function ProfilePage() {
                   <p className="text-xs text-muted-foreground mt-2">{Math.round(profileCompletion)}% complete. <Link href="/settings" className="text-primary hover:underline">Add more details</Link>.</p>
                 </CardContent>
               </Card>
-              <Card className="holographic-card">
+              <Card className="neumorphic-raised">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Coins</CardTitle>
                   <Coins className="w-4 h-4 text-yellow-400" />
@@ -180,7 +180,7 @@ export default function ProfilePage() {
                   <p className="text-xs text-muted-foreground">5 coins = 1 Rupee</p>
                 </CardContent>
               </Card>
-              <Card className="holographic-card">
+              <Card className="neumorphic-raised">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Events Won</CardTitle>
                   <BarChart3 className="w-4 h-4 text-muted-foreground" />
@@ -195,7 +195,7 @@ export default function ProfilePage() {
                 <h2 className="text-2xl font-headline font-bold mb-4">My Skills</h2>
                 <div className="flex flex-wrap gap-2">
                   {userSkills.map((skill, index) => (
-                     <Badge key={index} variant="secondary" className="text-base py-1 px-3">{skill}</Badge>
+                     <Badge key={index} variant="secondary" className="text-base py-1 px-3 neumorphic-raised">{skill}</Badge>
                   ))}
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   <h3 className="font-bold text-lg text-primary">Events Won</h3>
                   {wonEvents.map(event => (
-                    <Card key={event.id} className="holographic-card">
+                    <Card key={event.id} className="neumorphic-raised">
                        <CardHeader>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.date}</CardDescription>
@@ -219,7 +219,7 @@ export default function ProfilePage() {
                   ))}
                    <h3 className="font-bold text-lg text-primary mt-6">Events Participated</h3>
                    {participatedEvents.map(event => (
-                    <Card key={event.id} className="holographic-card">
+                    <Card key={event.id} className="neumorphic-raised">
                       <CardHeader>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.date}</CardDescription>
@@ -244,7 +244,7 @@ export default function ProfilePage() {
                     <h3 className="font-bold text-lg text-primary mb-4">Winning Certificates</h3>
                      <div className="space-y-4">
                       {wonEvents.map(event => (
-                        <Card key={`cert-won-${event.id}`} className="holographic-card">
+                        <Card key={`cert-won-${event.id}`} className="neumorphic-raised">
                           <CardContent className="p-4 flex items-center justify-between">
                               <div className='flex items-center gap-4'>
                                   <FileText className="w-6 h-6 text-accent"/>
@@ -253,7 +253,7 @@ export default function ProfilePage() {
                                       <p className="text-sm text-muted-foreground">Winning Certificate</p>
                                   </div>
                               </div>
-                              <Button variant="outline" size="sm">Download</Button>
+                              <Button variant="outline" size="sm" className="neumorphic-raised-interactive">Download</Button>
                           </CardContent>
                         </Card>
                       ))}
@@ -263,7 +263,7 @@ export default function ProfilePage() {
                     <h3 className="font-bold text-lg text-primary mb-4">Participation Certificates</h3>
                     <div className="space-y-4">
                       {participatedEvents.map(event => (
-                        <Card key={`cert-part-${event.id}`} className="holographic-card">
+                        <Card key={`cert-part-${event.id}`} className="neumorphic-raised">
                            <CardContent className="p-4 flex items-center justify-between">
                               <div className='flex items-center gap-4'>
                                   <FileText className="w-6 h-6 text-accent"/>
@@ -272,7 +272,7 @@ export default function ProfilePage() {
                                       <p className="text-sm text-muted-foreground">Participation Certificate</p>
                                   </div>
                               </div>
-                              <Button variant="outline" size="sm">Download</Button>
+                              <Button variant="outline" size="sm" className="neumorphic-raised-interactive">Download</Button>
                           </CardContent>
                         </Card>
                       ))}
@@ -287,5 +287,3 @@ export default function ProfilePage() {
     </>
   );
 }
-
-    

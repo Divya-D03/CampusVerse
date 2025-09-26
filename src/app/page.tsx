@@ -107,11 +107,11 @@ export default function DashboardPage() {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                         <Badge variant="outline" className={cn("text-base cursor-pointer", rankStyles)}>
+                         <Badge variant="outline" className={cn("text-base cursor-pointer neumorphic-raised", rankStyles)}>
                             {rank}
                         </Badge>
                       </TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="neumorphic-raised">
                         <p className="font-bold text-lg text-center mb-2">{rank} Rank</p>
                         <ul className="list-disc list-inside space-y-1">
                             <li><span className="font-semibold">Newbie:</span> Default rank.</li>
@@ -122,7 +122,7 @@ export default function DashboardPage() {
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)}>
+                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)} className="neumorphic-raised-interactive">
                     <Trophy className="w-6 h-6 text-yellow-500" />
                   </Button>
                 </div>

@@ -22,7 +22,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/80 flex items-center justify-center",
+      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center",
       className
     )}
     {...props}
@@ -39,8 +39,7 @@ const DialogContent = React.forwardRef<
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
-          "relative z-50 grid w-full max-w-lg gap-4 p-6 shadow-lg sm:rounded-lg",
-          "holographic-card",
+          "neumorphic-flat relative z-50 grid w-full max-w-lg gap-4 border-transparent p-6 shadow-lg sm:rounded-lg",
           className
         )}
         {...props}

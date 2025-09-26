@@ -47,7 +47,7 @@ export function AppHeader() {
   return (
     <>
       <HostEventDialog open={showHostEventDialog} onOpenChange={setShowHostEventDialog} />
-      <header className="sticky top-0 z-50 w-full border-b bg-background/30 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full border-b border-transparent bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
             <button onClick={() => setIsAppInfoOpen(true)} className="mr-2 focus:outline-none focus:ring-2 focus:ring-ring rounded-sm">
@@ -60,8 +60,8 @@ export function AppHeader() {
             </Link>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
+            <div className="flex items-center space-x-2 neumorphic-flat p-1 rounded-full">
+              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block pl-2">
                 {user.role === 'Regular User' ? 'User' : 'Club Member'}
               </Label>
               <Switch
@@ -71,7 +71,7 @@ export function AppHeader() {
                 aria-label="Toggle user role"
               />
                {user.role === 'Club Member' && isVerified && (
-                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline">
+                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline" className="neumorphic-raised-interactive">
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Host Event
                   </Button>
@@ -79,12 +79,12 @@ export function AppHeader() {
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-2 cursor-pointer">
+                <div className="flex items-center gap-2 cursor-pointer neumorphic-raised-interactive px-3 py-1.5 rounded-full">
                   <Coins className="w-5 h-5 text-yellow-400"/>
                   <span className="font-bold text-lg">{user.coins}</span>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 holographic-card" align="end" forceMount>
+              <DropdownMenuContent className="w-64 neumorphic-flat" align="end" forceMount>
                 <DropdownMenuLabel>Your Coins</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="p-2 text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ export function AppHeader() {
                 </div>
                 <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => setIsQrCodeDialogOpen(true)}>
-                    <Button className="w-full">
+                    <Button className="w-full neumorphic-raised-interactive">
                         <Coins className="mr-2 h-4 w-4" />
                         Redeem Now
                     </Button>
@@ -103,14 +103,14 @@ export function AppHeader() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full neumorphic-raised-interactive">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={avatarSrc} alt={user.email || ''} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 holographic-card" align="end" forceMount>
+              <DropdownMenuContent className="w-56 neumorphic-flat" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">
@@ -141,7 +141,7 @@ export function AppHeader() {
       </header>
       {user && <QrCodeDialog user={user} open={isQrCodeDialogOpen} onOpenChange={setIsQrCodeDialogOpen} />}
       <AlertDialog open={isAppInfoOpen} onOpenChange={setIsAppInfoOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className="neumorphic-flat">
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 text-2xl font-headline">
               <AppLogo />
@@ -159,7 +159,7 @@ export function AppHeader() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setIsAppInfoOpen(false)}>
+            <AlertDialogAction onClick={() => setIsAppInfoOpen(false)} className="neumorphic-raised-interactive">
               Got it!
             </AlertDialogAction>
           </AlertDialogFooter>

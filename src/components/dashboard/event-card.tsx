@@ -28,7 +28,7 @@ export function EventCard({ event }: EventCardProps) {
   return (
     <div className="h-full group">
       <Card
-        className="holographic-card flex flex-col h-full overflow-hidden"
+        className="neumorphic-raised flex flex-col h-full overflow-hidden"
       >
         <CardHeader>
           <div className="relative aspect-[3/2] w-full rounded-md overflow-hidden mb-4">
@@ -59,7 +59,7 @@ export function EventCard({ event }: EventCardProps) {
         </CardContent>
         <CardFooter className="flex justify-between items-center pt-4">
           <div className={cn("w-3 h-3 rounded-full", statusStyles[event.status])} title={event.status}></div>
-          <Button asChild variant="secondary">
+          <Button asChild variant="secondary" className="neumorphic-raised-interactive">
             <Link href={`/events/${event.id}`}>
               View Details <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

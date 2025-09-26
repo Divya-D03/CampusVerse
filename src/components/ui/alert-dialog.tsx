@@ -19,7 +19,7 @@ const AlertDialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-black/80 flex items-center justify-center",
+      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center",
       className
     )}
     {...props}
@@ -37,8 +37,7 @@ const AlertDialogContent = React.forwardRef<
       <AlertDialogPrimitive.Content
         ref={ref}
         className={cn(
-          "relative z-50 grid w-full max-w-lg gap-4 border bg-background/50 p-6 shadow-lg sm:rounded-lg backdrop-blur-xl",
-          "holographic-card",
+          "neumorphic-flat relative z-50 grid w-full max-w-lg gap-4 border-transparent p-6 sm:rounded-lg",
           className
         )}
         {...props}
@@ -107,7 +106,7 @@ const AlertDialogAction = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Action
     ref={ref}
-    className={cn(buttonVariants(), className)}
+    className={cn(buttonVariants(), "neumorphic-raised-interactive", className)}
     {...props}
   />
 ))
@@ -121,7 +120,7 @@ const AlertDialogCancel = React.forwardRef<
     ref={ref}
     className={cn(
       buttonVariants({ variant: "outline" }),
-      "mt-2 sm:mt-0",
+      "mt-2 sm:mt-0 neumorphic-raised-interactive",
       className
     )}
     {...props}

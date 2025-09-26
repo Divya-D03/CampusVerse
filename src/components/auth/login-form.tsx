@@ -56,7 +56,7 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-sm holographic-card">
+    <Card className="w-full max-w-sm neumorphic-flat">
       <CardHeader>
         <CardTitle className="text-2xl font-headline flex items-center gap-2">
           <LogIn className="text-primary" />
@@ -82,7 +82,7 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full neumorphic-raised-interactive">
               <LogIn className="mr-2 h-4 w-4" /> Sign In
             </Button>
           </form>

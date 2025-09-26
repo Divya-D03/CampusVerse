@@ -69,14 +69,14 @@ export function Chatbot() {
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50">
-        <Button onClick={() => setIsOpen(!isOpen)} size="icon" className="rounded-full w-14 h-14 shadow-lg">
+        <Button onClick={() => setIsOpen(!isOpen)} size="icon" className="rounded-full w-14 h-14 shadow-lg neumorphic-raised-interactive">
           {isOpen ? <X /> : <Bot />}
         </Button>
       </div>
 
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50">
-          <Card className="w-80 h-96 flex flex-col shadow-2xl holographic-card">
+          <Card className="w-80 h-96 flex flex-col shadow-2xl neumorphic-flat">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Bot /> CampusVerse Helper
@@ -90,21 +90,21 @@ export function Chatbot() {
                   {messages.map((message, index) => (
                     <div key={index} className={`flex items-start gap-2 ${message.role === 'user' ? 'justify-end' : 'flex-row'}`}>
                       {message.role === 'model' && (
-                        <Avatar className="h-8 w-8">
+                        <Avatar className="h-8 w-8 neumorphic-pressed">
                            <AvatarImage src={`https://api.dicebear.com/8.x/bottts-neutral/svg?seed=chatbot`} alt="Chatbot"/>
                            <AvatarFallback>B</AvatarFallback>
                         </Avatar>
                       )}
                       <div className={`rounded-lg px-3 py-2 text-sm max-w-[80%] ${
                           message.role === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted'
+                            ? 'bg-primary text-primary-foreground neumorphic-raised'
+                            : 'bg-muted neumorphic-flat'
                         }`}
                       >
                         {message.content}
                       </div>
                       {message.role === 'user' && user && (
-                         <Avatar className="h-8 w-8">
+                         <Avatar className="h-8 w-8 neumorphic-pressed">
                            <AvatarImage src={userAvatar} alt={user.email || ''} />
                            <AvatarFallback>{userInitial}</AvatarFallback>
                          </Avatar>
@@ -113,11 +113,11 @@ export function Chatbot() {
                   ))}
                   {isLoading && (
                     <div className="flex items-start gap-2">
-                      <Avatar className="h-8 w-8">
+                      <Avatar className="h-8 w-8 neumorphic-pressed">
                         <AvatarImage src={`https://api.dicebear.com/8.x/bottts-neutral/svg?seed=chatbot`} alt="Chatbot"/>
                         <AvatarFallback>B</AvatarFallback>
                       </Avatar>
-                      <div className="rounded-lg px-3 py-2 text-sm bg-muted flex items-center">
+                      <div className="rounded-lg px-3 py-2 text-sm bg-muted flex items-center neumorphic-flat">
                         <Loader className="w-4 h-4 animate-spin" />
                       </div>
                     </div>
@@ -135,7 +135,7 @@ export function Chatbot() {
                     placeholder="Ask a question..."
                     disabled={isLoading}
                   />
-                  <Button onClick={handleSend} size="icon" disabled={isLoading || !input.trim()}>
+                  <Button onClick={handleSend} size="icon" disabled={isLoading || !input.trim()} className="neumorphic-raised-interactive">
                     <Send className="w-4 h-4" />
                   </Button>
                 </div>
