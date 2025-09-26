@@ -31,11 +31,14 @@ export function Chatbot() {
   }
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // We use a timeout to ensure the DOM has updated before we try to scroll
+    setTimeout(scrollToBottom, 0);
   }, [messages, isLoading]);
 
 
@@ -48,11 +51,11 @@ export function Chatbot() {
     setIsLoading(true);
 
     try {
-      const response = await chat({
-        history: messages.map(m => ({role: m.role, content: m.content})),
+      const { response } = await chat({
+        history: messages.map(m => ({role: m.role as 'user' | 'model' | 'tool', content: m.content})),
         query: input,
       });
-      const modelMessage: Message = { role: 'model', content: response.response };
+      const modelMessage: Message = { role: 'model', content: response };
       setMessages((prev) => [...prev, modelMessage]);
     } catch (error) {
       console.error('Chatbot error:', error);
@@ -103,7 +106,7 @@ export function Chatbot() {
                       </div>
                       {message.role === 'user' && user && (
                          <Avatar className="h-8 w-8">
-                           <AvatarImage src={userAvatar} alt={user.email} />
+                           <AvatarImage src={userAvatar} alt={user.email || ''} />
                            <AvatarFallback>{userInitial}</AvatarFallback>
                          </Avatar>
                       )}
@@ -132,7 +135,7 @@ export function Chatbot() {
                     placeholder="Ask a question..."
                     disabled={isLoading}
                   />
-                  <Button onClick={handleSend} size="icon" disabled={isLoading}>
+                  <Button onClick={handleSend} size="icon" disabled={isLoading || !input.trim()}>
                     <Send className="w-4 h-4" />
                   </Button>
                 </div>
