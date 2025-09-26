@@ -7,7 +7,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Calendar, Ticket, ArrowRight } from 'lucide-react';
+import { Calendar, Coins, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
 
 type EventCardProps = {
@@ -50,8 +50,8 @@ export function EventCard({ event }: EventCardProps) {
         <CardContent className="flex-grow space-y-4">
           <p className="text-sm text-foreground/80">{event.description}</p>
           {event.coins > 0 && (
-              <div className="flex items-center gap-2 text-sm text-accent-foreground p-2 bg-accent/10 rounded-md">
-                  <Ticket className="w-4 h-4 text-accent" />
+              <div className="flex items-center gap-2 text-sm text-yellow-400 p-2 bg-yellow-500/10 rounded-md">
+                  <Coins className="w-4 h-4" />
                   <span className="font-medium">Win up to {event.coins} coins!</span>
               </div>
           )}

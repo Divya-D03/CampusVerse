@@ -6,7 +6,7 @@ import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Ticket, BarChart3, CalendarCheck2, Home, Camera, FileText, LogOut } from 'lucide-react';
+import { Coins, BarChart3, CalendarCheck2, Home, Camera, FileText, LogOut } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -99,7 +99,7 @@ export default function ProfilePage() {
             <Card className="holographic-card">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium">Coins</CardTitle>
-                <Ticket className="w-4 h-4 text-muted-foreground" />
+                <Coins className="w-4 h-4 text-yellow-400" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{user.coins}</div>
@@ -138,7 +138,7 @@ export default function ProfilePage() {
                       <CardDescription>{event.date}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p>Congratulations! You won <span className="font-bold text-accent">{event.coins} coins</span>.</p>
+                      <p>Congratulations! You won <span className="font-bold text-yellow-400">{event.coins} coins</span>.</p>
                     </CardContent>
                   </Card>
                 ))}
