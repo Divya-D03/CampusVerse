@@ -37,7 +37,8 @@ const AlertDialogContent = React.forwardRef<
       <AlertDialogPrimitive.Content
         ref={ref}
         className={cn(
-          "relative z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg sm:rounded-lg",
+          "relative z-50 grid w-full max-w-lg gap-4 border bg-background/50 p-6 shadow-lg sm:rounded-lg backdrop-blur-xl",
+          "holographic-card",
           className
         )}
         {...props}

@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User, UserCog, Gift, Ticket } from 'lucide-react';
+import { User, UserCog, Gift, Ticket } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ import Link from 'next/link';
 import { AppLogo } from './app-logo';
 
 export function AppHeader() {
-  const { user, logout, toggleRole } = useAuth();
+  const { user, toggleRole } = useAuth();
   const [isQrCodeDialogOpen, setIsQrCodeDialogOpen] = useState(false);
   
   if (!user) return null;
@@ -33,7 +33,7 @@ export function AppHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/60 backdrop-blur-md">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/30 backdrop-blur-xl">
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
             <Link className="mr-6 flex items-center space-x-2" href="/">
@@ -62,7 +62,7 @@ export function AppHeader() {
                   <span className="font-bold text-lg">{user.coins}</span>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64" align="end" forceMount>
+              <DropdownMenuContent className="w-64 holographic-card" align="end" forceMount>
                 <DropdownMenuLabel>Your Coins</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="p-2 text-sm text-muted-foreground">
@@ -88,7 +88,7 @@ export function AppHeader() {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuContent className="w-56 holographic-card" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">
@@ -121,4 +121,3 @@ export function AppHeader() {
     </>
   );
 }
-
