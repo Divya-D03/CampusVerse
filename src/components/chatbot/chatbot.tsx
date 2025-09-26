@@ -22,7 +22,7 @@ export function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
   
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   let userAvatar = '';
   let userInitial = 'U';
@@ -31,10 +31,12 @@ export function Chatbot() {
     userInitial = user.name ? user.name.charAt(0).toUpperCase() : (user.email.charAt(0).toUpperCase() || 'U');
   }
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
-    }
+    scrollToBottom();
   }, [messages, isLoading]);
 
   const handleSend = async () => {
@@ -82,8 +84,7 @@ export function Chatbot() {
             </CardHeader>
             <CardContent className="flex-1 flex flex-col p-0 relative">
               <ScrollArea 
-                className="flex-1 p-4" 
-                viewportRef={scrollAreaRef}
+                className="flex-1 p-4"
               >
                 <div className="space-y-4">
                   {messages.map((message, index) => (
@@ -121,6 +122,7 @@ export function Chatbot() {
                       </div>
                     </div>
                   )}
+                  <div ref={messagesEndRef} />
                 </div>
               </ScrollArea>
               
