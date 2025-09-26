@@ -15,11 +15,11 @@ type EventCardProps = {
 };
 
 const statusStyles: Record<EventStatus, string> = {
-  Available: 'bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30',
-  'Almost Full': 'bg-orange-500/20 text-orange-400 border-orange-500/30 hover:bg-orange-500/30',
-  Ended: 'bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30',
-  'On-Spot Registration': 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
-  Ongoing: 'bg-gray-500/20 text-gray-400 border-gray-500/30 hover:bg-gray-500/30',
+  Available: 'bg-green-500',
+  'Almost Full': 'bg-orange-500',
+  Ended: 'bg-red-500',
+  'On-Spot Registration': 'bg-blue-500',
+  Ongoing: 'bg-gray-500',
 };
 
 export function EventCard({ event }: EventCardProps) {
@@ -58,9 +58,7 @@ export function EventCard({ event }: EventCardProps) {
           )}
         </CardContent>
         <CardFooter className="flex justify-between items-center pt-4">
-          <Badge variant="outline" className={cn(statusStyles[event.status])}>
-            {event.status}
-          </Badge>
+          <div className={cn("w-3 h-3 rounded-full", statusStyles[event.status])} title={event.status}></div>
           <Button asChild variant="secondary">
             <Link href={`/events/${event.id}`}>
               View Details <ArrowRight className="ml-2 h-4 w-4" />
