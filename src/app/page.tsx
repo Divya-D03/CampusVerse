@@ -54,7 +54,7 @@ export default function DashboardPage() {
     const allEvents = [...culturalEvents, ...hackathons, ...techEvents];
     const wonEvents = allEvents.slice(2, 3);
     
-    const wonEventsCount = wonEvents.length;
+    const wonEventsCount = user?.eventsWon || wonEvents.length;
 
     let rank: 'Newbie' | 'Pro' | 'Master' | 'Grandmaster' = 'Newbie';
     let rankStyles = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
@@ -70,7 +70,7 @@ export default function DashboardPage() {
         rankStyles = 'bg-blue-500/20 text-blue-400 border-blue-500/30';
     }
     return { rank, rankStyles };
-  }, []);
+  }, [user]);
 
   const handleWelcomeDialogClose = () => {
     setShowWelcome(false);

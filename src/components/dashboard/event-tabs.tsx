@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/auth-context';
 import { EventCard } from './event-card';
+import { CampusView } from './campus-view';
 
 const statusLegend = [
   { status: 'Available', color: 'bg-green-500' },
@@ -23,10 +24,11 @@ export function EventTabs() {
   return (
     <>
       <Tabs defaultValue="cultural" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-4">
           <TabsTrigger value="cultural">Cultural</TabsTrigger>
           <TabsTrigger value="tech">Tech</TabsTrigger>
           <TabsTrigger value="clubs">Clubs</TabsTrigger>
+          <TabsTrigger value="campus-view">Campus View</TabsTrigger>
         </TabsList>
         <TabsContent value="cultural" className="mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,6 +81,9 @@ export function EventTabs() {
               <EventCard key={club.id} event={club} />
             ))}
           </div>
+        </TabsContent>
+         <TabsContent value="campus-view" className="mt-6">
+          <CampusView />
         </TabsContent>
       </Tabs>
       <div className="mt-8 pt-4 border-t border-dashed">
