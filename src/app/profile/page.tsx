@@ -92,12 +92,12 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
             <Card className="holographic-card">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Coupons</CardTitle>
+                <CardTitle className="text-sm font-medium">Coins</CardTitle>
                 <Ticket className="w-4 h-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{user.coupons}</div>
-                <p className="text-xs text-muted-foreground">2 coupons = 1 Rupee</p>
+                <div className="text-2xl font-bold">{user.coins}</div>
+                <p className="text-xs text-muted-foreground">2 coins = 1 Rupee</p>
               </CardContent>
             </Card>
             <Card className="holographic-card">
@@ -132,7 +132,7 @@ export default function ProfilePage() {
                       <CardDescription>{event.date}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p>Congratulations! You won <span className="font-bold text-accent">{event.coupons} coupons</span>.</p>
+                      <p>Congratulations! You won <span className="font-bold text-accent">{event.coins} coins</span>.</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -151,8 +151,8 @@ export default function ProfilePage() {
               </div>
             </div>
             <div>
-              <h2 className="text-2xl font-headline font-bold mb-4">Coupon History</h2>
-              <CouponHistory transactions={user.couponHistory || []} />
+              <h2 className="text-2xl font-headline font-bold mb-4">Coin History</h2>
+              <CouponHistory transactions={user.coinHistory || []} />
             </div>
           </div>
 

@@ -7,7 +7,7 @@ export const culturalEvents: Event[] = [
     description: 'An electrifying night of music featuring bands from across the country. Get ready to rock!',
     date: 'October 28, 2024',
     status: 'Available',
-    coupons: 10,
+    coins: 10,
     imageId: 'cultural-event-1',
   },
   {
@@ -16,7 +16,7 @@ export const culturalEvents: Event[] = [
     description: 'Experience a mesmerizing evening of classical and contemporary dance performances.',
     date: 'November 5, 2024',
     status: 'Almost Full',
-    coupons: 15,
+    coins: 15,
     imageId: 'cultural-event-2',
   },
 ];
@@ -28,7 +28,7 @@ export const hackathons: Event[] = [
     description: 'A 24-hour hackathon focused on building innovative solutions using Artificial Intelligence.',
     date: 'November 12-13, 2024',
     status: 'Available',
-    coupons: 50,
+    coins: 50,
     imageId: 'hackathon-1',
   },
   {
@@ -37,7 +37,7 @@ export const hackathons: Event[] = [
     description: 'Dive into the world of cybersecurity with challenges ranging from cryptography to network security.',
     date: 'December 1, 2024',
     status: 'On-Spot Registration',
-    coupons: 40,
+    coins: 40,
     imageId: 'hackathon-2',
   },
 ];
@@ -49,7 +49,7 @@ export const ideathons: Event[] = [
     description: 'Brainstorm and pitch innovative ideas to create sustainable and smart cities for the future.',
     date: 'November 20, 2024',
     status: 'Available',
-    coupons: 30,
+    coins: 30,
     imageId: 'ideathon-1',
   },
 ];
@@ -61,7 +61,7 @@ export const projectExpos: Event[] = [
     description: 'Showcase your best projects and see what your peers have been building. Prizes for top projects.',
     date: 'December 5, 2024',
     status: 'Available',
-    coupons: 25,
+    coins: 25,
     imageId: 'project-expo-1',
   },
 ]
@@ -73,7 +73,7 @@ export const techEvents: Event[] = [
     description: 'A seminar on the latest trends and technologies in web development, featuring industry experts.',
     date: 'October 30, 2024',
     status: 'Full',
-    coupons: 20,
+    coins: 20,
     imageId: 'tech-event-1',
   },
   {
@@ -82,7 +82,7 @@ export const techEvents: Event[] = [
     description: 'A hands-on workshop where you can build and program your own robot from scratch.',
     date: 'November 18, 2024',
     status: 'Available',
-    coupons: 25,
+    coins: 25,
     imageId: 'tech-event-2',
   },
 ];
@@ -94,7 +94,7 @@ export const clubs: Club[] = [
     description: 'The official coding club. We host weekly coding sessions, workshops, and prepare for competitions.',
     date: 'Ongoing',
     status: 'Available',
-    coupons: 0,
+    coins: 0,
     imageId: 'club-1',
   },
   {
@@ -103,7 +103,7 @@ export const clubs: Club[] = [
     description: 'Hone your public speaking and critical thinking skills with us. All arguments welcome!',
     date: 'Ongoing',
     status: 'Available',
-    coupons: 0,
+    coins: 0,
     imageId: 'club-2',
   },
    {
@@ -112,7 +112,7 @@ export const clubs: Club[] = [
     description: 'Express your creativity through various art forms. Workshops on painting, sculpture, and more.',
     date: 'Ongoing',
     status: 'Available',
-    coupons: 0,
+    coins: 0,
     imageId: 'club-3',
   },
   {
@@ -121,7 +121,7 @@ export const clubs: Club[] = [
     description: 'Join us for various sports activities and stay fit. We have teams for cricket, football, and basketball.',
     date: 'Ongoing',
     status: 'Available',
-    coupons: 0,
+    coins: 0,
     imageId: 'club-4',
   }
 ];

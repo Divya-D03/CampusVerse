@@ -49,10 +49,10 @@ export function EventCard({ event }: EventCardProps) {
         </CardHeader>
         <CardContent className="flex-grow space-y-4">
           <p className="text-sm text-foreground/80">{event.description}</p>
-          {event.coupons > 0 && (
+          {event.coins > 0 && (
               <div className="flex items-center gap-2 text-sm text-accent-foreground p-2 bg-accent/10 rounded-md">
                   <Ticket className="w-4 h-4 text-accent" />
-                  <span className="font-medium">Win up to {event.coupons} coupons!</span>
+                  <span className="font-medium">Win up to {event.coins} coins!</span>
               </div>
           )}
         </CardContent>

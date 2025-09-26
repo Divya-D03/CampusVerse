@@ -35,7 +35,7 @@ const prompt = ai.definePrompt({
   input: { schema: ChatbotInputSchema },
   output: { schema: ChatbotOutputSchema },
   prompt: `You are a friendly and helpful chatbot for CampusVerse, a university event hub application.
-Your goal is to assist users with their questions about events, clubs, coupons, and how to use the app.
+Your goal is to assist users with their questions about events, clubs, coins, and how to use the app.
 Be concise and clear in your answers.
 
 Here's the conversation history:

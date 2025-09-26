@@ -1,6 +1,6 @@
 export type UserRole = 'Regular User' | 'Club Member';
 
-export interface CouponTransaction {
+export interface CoinTransaction {
   id: string;
   reason: string;
   amount: number;
@@ -12,9 +12,9 @@ export interface User {
   name?: string;
   email: string;
   role: UserRole;
-  coupons: number;
+  coins: number;
   profilePicture?: string;
-  couponHistory?: CouponTransaction[];
+  coinHistory?: CoinTransaction[];
   mobileNumber?: string;
   githubUrl?: string;
   linkedinUrl?: string;
@@ -29,7 +29,7 @@ export interface Event {
   description: string;
   date: string;
   status: EventStatus;
-  coupons: number;
+  coins: number;
   imageId: string;
 }
 

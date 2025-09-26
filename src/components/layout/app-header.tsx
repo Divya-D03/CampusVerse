@@ -35,26 +35,26 @@ export function AppHeader() {
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <Award className="h-6 w-6 text-primary" />
+              <Ticket className="h-6 w-6 text-primary" />
               <span className="hidden font-bold sm:inline-block font-headline">
                 CampusVerse
               </span>
             </Link>
           </div>
-          <div className="flex items-center justify-end space-x-4">
+          <div className="flex flex-1 items-center justify-end space-x-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-2 cursor-pointer">
                   <Ticket className="w-5 h-5 text-primary"/>
-                  <span className="font-bold text-lg">{user.coupons}</span>
+                  <span className="font-bold text-lg">{user.coins}</span>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64" align="end" forceMount>
-                <DropdownMenuLabel>Your Coupons</DropdownMenuLabel>
+                <DropdownMenuLabel>Your Coins</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="p-2 text-sm text-muted-foreground">
-                  <p>Redeem your coupons at the college food court.</p>
-                  <p className="font-bold text-foreground mt-1">2 Coupons = 1 Rupee</p>
+                  <p>Redeem your coins at the college food court.</p>
+                  <p className="font-bold text-foreground mt-1">2 Coins = 1 Rupee</p>
                 </div>
                 <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => setIsQrCodeDialogOpen(true)}>

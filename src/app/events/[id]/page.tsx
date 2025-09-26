@@ -106,10 +106,10 @@ export default function EventDetailsPage() {
               </CardHeader>
               <CardContent className="space-y-6 text-base">
                 <p className="text-foreground/80">{event.description}</p>
-                {event.coupons > 0 && (
+                {event.coins > 0 && (
                     <div className="flex items-center gap-3 text-lg text-accent-foreground p-4 bg-accent/10 rounded-lg">
                         <Ticket className="w-6 h-6 text-accent" />
-                        <span className="font-medium">Win up to {event.coupons} coupons!</span>
+                        <span className="font-medium">Win up to {event.coins} coins!</span>
                     </div>
                 )}
                  <Button onClick={() => setShowRegistration(true)} size="lg" className="w-full sm:w-auto">

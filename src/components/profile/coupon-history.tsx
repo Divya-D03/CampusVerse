@@ -1,17 +1,17 @@
 'use client';
 
-import { type CouponTransaction } from '@/lib/types';
+import { type CoinTransaction } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowDownLeft, ArrowUpRight, History } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 
-interface CouponHistoryProps {
-  transactions: CouponTransaction[];
+interface CoinHistoryProps {
+  transactions: CoinTransaction[];
 }
 
-export function CouponHistory({ transactions }: CouponHistoryProps) {
+export function CouponHistory({ transactions }: CoinHistoryProps) {
   const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
@@ -22,7 +22,7 @@ export function CouponHistory({ transactions }: CouponHistoryProps) {
           Transaction Log
         </CardTitle>
          <CardDescription>
-          A record of your coupon earnings and spending.
+          A record of your coin earnings and spending.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -62,7 +62,7 @@ export function CouponHistory({ transactions }: CouponHistoryProps) {
         ) : (
           <div className="text-center text-muted-foreground py-10">
             <p>No transactions yet.</p>
-            <p className="text-sm">Start participating in events to earn coupons!</p>
+            <p className="text-sm">Start participating in events to earn coins!</p>
           </div>
         )}
       </CardContent>
