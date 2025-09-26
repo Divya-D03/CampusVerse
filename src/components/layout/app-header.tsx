@@ -10,8 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
 } from '@/components/ui/dropdown-menu';
-import { User, UserCog, Coins, PlusCircle, Sun, Moon } from 'lucide-react';
+import { User, UserCog, Coins, PlusCircle, Sun, Moon, LayoutDashboard, Paintbrush, Code, Users2 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
@@ -66,12 +67,65 @@ export function AppHeader() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center">
           <div className="mr-auto flex items-center">
-            <Link className="mr-6 flex items-center space-x-2" href="/">
-              <AppLogo />
-              <span className="hidden font-bold sm:inline-block">
-                CampusVerse
-              </span>
-            </Link>
+             <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="flex items-center space-x-2 px-2">
+                  <AppLogo />
+                  <span className="hidden font-bold sm:inline-block">
+                    CampusVerse
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64" align="start" forceMount>
+                 <DropdownMenuLabel>Dashboard</DropdownMenuLabel>
+                 <DropdownMenuSeparator />
+                 <DropdownMenuGroup>
+                    <DropdownMenuItem asChild>
+                        <Link href="/">
+                            <LayoutDashboard className="mr-2 h-4 w-4" />
+                            <span>Home</span>
+                        </Link>
+                    </DropdownMenuItem>
+                 </DropdownMenuGroup>
+                 <DropdownMenuSeparator />
+                 <DropdownMenuLabel>Event Categories</DropdownMenuLabel>
+                 <DropdownMenuGroup>
+                     <DropdownMenuItem asChild>
+                        <Link href="/?category=cultural">
+                            <Paintbrush className="mr-2 h-4 w-4" />
+                            <span>Cultural</span>
+                        </Link>
+                    </DropdownMenuItem>
+                     <DropdownMenuItem asChild>
+                        <Link href="/?category=tech">
+                            <Code className="mr-2 h-4 w-4" />
+                            <span>Tech</span>
+                        </Link>
+                    </DropdownMenuItem>
+                     <DropdownMenuItem asChild>
+                        <Link href="/?category=clubs">
+                            <Users2 className="mr-2 h-4 w-4" />
+                            <span>Clubs</span>
+                        </Link>
+                    </DropdownMenuItem>
+                 </DropdownMenuGroup>
+                 <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile">
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/settings">
+                        <UserCog className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
             <ThemeToggle />
