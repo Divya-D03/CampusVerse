@@ -21,7 +21,7 @@ export function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
   
@@ -31,8 +31,8 @@ export function Chatbot() {
   }
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTo({ top: scrollAreaRef.current.scrollHeight, behavior: 'smooth' });
+    if (viewportRef.current) {
+      viewportRef.current.scrollTo({ top: viewportRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [messages, isLoading]);
 
@@ -47,7 +47,7 @@ export function Chatbot() {
 
     try {
       const response = await chat({
-        history: messages,
+        history: messages.map(m => ({role: m.role, content: m.content})),
         query: input,
       });
       const modelMessage: Message = { role: 'model', content: response.response };
@@ -81,7 +81,7 @@ export function Chatbot() {
               </CardTitle>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col p-0">
-              <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+              <ScrollArea className="flex-1 p-4" viewportRef={viewportRef}>
                 <div className="space-y-4">
                   {messages.map((message, index) => (
                     <div key={index} className={`flex items-start gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
