@@ -21,7 +21,7 @@ export interface User {
   gender?: 'Male' | 'Female' | 'Other' | 'Prefer not to say';
 }
 
-export type EventStatus = 'Available' | 'Almost Full' | 'Full' | 'On-Spot Registration';
+export type EventStatus = 'Available' | 'Almost Full' | 'Ended' | 'On-Spot Registration' | 'Ongoing';
 
 export interface Event {
   id: string;
