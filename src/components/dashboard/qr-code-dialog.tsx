@@ -37,7 +37,7 @@ export function QrCodeDialog({ user, open, onOpenChange }: QrCodeDialogProps) {
                 <Image src={qrCodeUrl} alt="Coin QR Code" width={200} height={200} />
               </div>
               <p className="font-bold text-lg">You have {user.coins} coins</p>
-              <p className="text-muted-foreground">(2 Coins = 1 Rupee)</p>
+              <p className="text-muted-foreground">(5 Coins = 1 Rupee)</p>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>

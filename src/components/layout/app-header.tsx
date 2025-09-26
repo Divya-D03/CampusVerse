@@ -67,7 +67,7 @@ export function AppHeader() {
                 <DropdownMenuSeparator />
                 <div className="p-2 text-sm text-muted-foreground">
                   <p>Redeem your coins at the college food court.</p>
-                  <p className="font-bold text-foreground mt-1">2 Coins = 1 Rupee</p>
+                  <p className="font-bold text-foreground mt-1">5 Coins = 1 Rupee</p>
                 </div>
                 <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => setIsQrCodeDialogOpen(true)}>

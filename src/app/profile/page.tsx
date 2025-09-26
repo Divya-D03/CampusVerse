@@ -103,7 +103,7 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{user.coins}</div>
-                <p className="text-xs text-muted-foreground">2 coins = 1 Rupee</p>
+                <p className="text-xs text-muted-foreground">5 coins = 1 Rupee</p>
               </CardContent>
             </Card>
             <Card className="holographic-card">

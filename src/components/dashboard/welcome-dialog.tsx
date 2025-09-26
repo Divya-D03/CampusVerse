@@ -34,7 +34,7 @@ export function WelcomeDialog({ open, onOpenChange }: WelcomeDialogProps) {
               <div className="p-3 rounded-md bg-muted/50 border">
                 <div className="flex items-center gap-2">
                   <Coins className="w-4 h-4 text-yellow-400" />
-                  <span>2 Coins = 1 Rupee</span>
+                  <span>5 Coins = 1 Rupee</span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">Participate in events to win more coins and redeem exciting rewards.</p>
               </div>
