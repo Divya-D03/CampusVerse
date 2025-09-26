@@ -3,26 +3,26 @@
     {
       "id": "cultural-event-1",
       "description": "A vibrant cultural music festival at night.",
-      "imageUrl": "https://images.unsplash.com/photo-1658227633934-b589ca17d602?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxtdXNpYyUyMGZlc3RpdmFsfGVufDB8fHx8MTc1ODcwOTEwOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdXNpYyUyMGZlc3RpdmFsfGVufDB8fHx8MTc2MDQ1MjgyNnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "music festival"
     },
     {
       "id": "cultural-event-2",
       "description": "Traditional dance performance on a stage.",
-      "imageUrl": "https://images.unsplash.com/photo-1511715282680-fbf93a50e721?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkYW5jZSUyMHBlcmZvcm1hbmNlfGVufDB8fHx8MTc1ODczMjcxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1504048039313-c928178a2f35?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYW5jZSUyMHBlcmZvcm1hbmNlfGVufDB8fHx8MTc2MDQ1Mjg0NXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "dance performance"
     },
     {
       "id": "hackathon-1",
       "description": "Students collaborating on laptops during a hackathon.",
-      "imageUrl": "https://images.unsplash.com/photo-1629905679177-4c4e2623654f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZW9wbGUlMjBjb2Rpbmd8ZW58MHx8fHwxNzU4Nzg5MzA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBjb2Rpbmd8ZW58MHx8fHwxNzYwNDUyODcyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "people coding"
     },
     {
       "id": "hackathon-2",
       "description": "A futuristic interface being projected on a screen.",
-      "imageUrl": "https://images.unsplash.com/photo-1720962158883-b0f2021fb51e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmdXR1cmlzdGljJTIwaW50ZXJmYWNlfGVufDB8fHx8MTc1ODcxMTE0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "futuristic interface"
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc2MDQ1MzkzOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cybersecurity"
     },
     {
       "id": "ideathon-1",
@@ -39,37 +39,37 @@
     {
       "id": "tech-event-1",
       "description": "A speaker presenting at a tech conference.",
-      "imageUrl": "https://images.unsplash.com/photo-1582192493926-93f4847e1323?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0ZWNoJTIwY29uZmVyZW5jZXxlbnwwfHx8fDE3NTg3ODUwNzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29uZmVyZW5jZXxlbnwwfHx8fDE3NjA0NTI5NzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "tech conference"
     },
     {
       "id": "tech-event-2",
       "description": "A workshop on robotics and AI.",
-      "imageUrl": "https://images.unsplash.com/photo-1581092334247-44dd684e3c82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyb2JvdGljcyUyMHdvcmtzaG9wfGVufDB8fHx8MTc1ODc5MDIyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-95fc69afd524?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb2JvdGljcyUyMHdvcmtzaG9wfGVufDB8fHx8MTc2MDQ1Mjk5NHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "robotics workshop"
     },
     {
       "id": "club-1",
       "description": "Logo for a university coding club.",
-      "imageUrl": "https://images.unsplash.com/photo-1663770114127-4f61cb62b56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc1ODczMjcyM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1550063873-ab792950096b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2Rpbmd8ZW58MHx8fHwxNzYwNDUzNzMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "coding logo"
     },
     {
       "id": "club-2",
       "description": "Logo for a university debate club.",
-      "imageUrl": "https://images.unsplash.com/photo-1653499676737-becf2c9562c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkZWJhdGUlMjBsb2dvfGVufDB8fHx8MTc1ODgwMjU3MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1589561253898-768105ca91a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZWJhdGV8ZW58MHx8fHwxNzYwNDUzNzQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "debate logo"
     },
     {
       "id": "club-3",
       "description": "Logo for an arts and culture club.",
-      "imageUrl": "https://images.unsplash.com/photo-1662057168154-89300791ad6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcnQlMjBsb2dvfGVufDB8fHx8MTc1ODczMjcyM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcnR8ZW58MHx8fHwxNzYwNDUzNzQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "art logo"
     },
     {
       "id": "club-4",
       "description": "Logo for a sports club.",
-      "imageUrl": "https://images.unsplash.com/photo-1565992441121-4367c2967103?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzb3J0c3xlbnwwfHx8fDE3NjA0NTM3NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzb3J0c3xlbnwwfHx8fDE3NjA0NTM3NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "sports logo"
     }
   ]
