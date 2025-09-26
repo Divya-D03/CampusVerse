@@ -120,7 +120,7 @@ export default function EventDetailsPage() {
                         {event.registrationFee && event.registrationFee > 0 && (
                             <div className="flex items-center gap-3 text-md text-primary p-2 bg-primary/10 rounded-lg">
                                 <Ticket className="w-5 h-5" />
-                                <span className="font-medium flex items-center gap-1">Fee: <Coins className="w-4 h-4 text-yellow-400" /> {event.registrationFee}</span>
+                                <span className="font-medium flex items-center gap-1">Fee: ₹{event.registrationFee}</span>
                             </div>
                         )}
                       </div>

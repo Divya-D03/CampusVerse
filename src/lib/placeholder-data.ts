@@ -7,10 +7,10 @@ export const culturalEvents: Event[] = [
     description: 'An electrifying night of music featuring bands from across the country. Get ready to rock!',
     date: 'October 28, 2024',
     status: 'Available',
-    coins: 10,
+    coins: 100,
     imageId: 'cultural-event-1',
     category: 'cultural',
-    registrationFee: 20,
+    registrationFee: 200,
   },
   {
     id: 'ce2',
@@ -18,10 +18,10 @@ export const culturalEvents: Event[] = [
     description: 'Experience a mesmerizing evening of classical and contemporary dance performances.',
     date: 'November 5, 2024',
     status: 'Almost Full',
-    coins: 15,
+    coins: 150,
     imageId: 'cultural-event-2',
     category: 'cultural',
-    registrationFee: 30,
+    registrationFee: 200,
   },
 ];
 
@@ -32,10 +32,10 @@ export const hackathons: Event[] = [
     description: 'A 24-hour hackathon focused on building innovative solutions using Artificial Intelligence.',
     date: 'November 12-13, 2024',
     status: 'Available',
-    coins: 50,
+    coins: 500,
     imageId: 'hackathon-1',
     category: 'hackathon',
-    registrationFee: 50,
+    registrationFee: 500,
   },
   {
     id: 'hk2',
@@ -43,10 +43,10 @@ export const hackathons: Event[] = [
     description: 'Dive into the world of cybersecurity with challenges ranging from cryptography to network security.',
     date: 'December 1, 2024',
     status: 'On-Spot Registration',
-    coins: 40,
+    coins: 400,
     imageId: 'hackathon-2',
     category: 'hackathon',
-    registrationFee: 40,
+    registrationFee: 500,
   },
 ];
 
@@ -57,10 +57,10 @@ export const ideathons: Event[] = [
     description: 'Brainstorm and pitch innovative ideas to create sustainable and smart cities for the future.',
     date: 'November 20, 2024',
     status: 'Ongoing',
-    coins: 30,
+    coins: 300,
     imageId: 'ideathon-1',
     category: 'ideathon',
-    registrationFee: 25,
+    registrationFee: 200,
   },
 ];
 
@@ -71,10 +71,10 @@ export const projectExpos: Event[] = [
     description: 'Showcase your best projects and see what your peers have been building. Prizes for top projects.',
     date: 'December 5, 2024',
     status: 'Available',
-    coins: 25,
+    coins: 250,
     imageId: 'project-expo-1',
     category: 'project-expo',
-    registrationFee: 15,
+    registrationFee: 200,
   },
 ]
 
@@ -85,10 +85,10 @@ export const techEvents: Event[] = [
     description: 'A seminar on the latest trends and technologies in web development, featuring industry experts.',
     date: 'October 30, 2024',
     status: 'Ended',
-    coins: 20,
+    coins: 200,
     imageId: 'tech-event-1',
     category: 'tech',
-    registrationFee: 10,
+    registrationFee: 200,
   },
   {
     id: 'te2',
@@ -96,10 +96,10 @@ export const techEvents: Event[] = [
     description: 'A hands-on workshop where you can build and program your own robot from scratch.',
     date: 'November 18, 2024',
     status: 'Available',
-    coins: 25,
+    coins: 250,
     imageId: 'tech-event-2',
     category: 'tech',
-    registrationFee: 35,
+    registrationFee: 500,
   },
 ];
 
