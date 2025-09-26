@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { User, UserCog, Gift, Coins } from 'lucide-react';
+import { User, UserCog, Coins } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
@@ -26,6 +26,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Label } from '@/components/ui/label';
 
 export function AppHeader() {
   const { user, toggleRole } = useAuth();
@@ -82,7 +83,7 @@ export function AppHeader() {
                 <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => setIsQrCodeDialogOpen(true)}>
                     <Button className="w-full">
-                        <Gift className="mr-2 h-4 w-4" />
+                        <Coins className="mr-2 h-4 w-4" />
                         Redeem Now
                     </Button>
                 </DropdownMenuItem>
