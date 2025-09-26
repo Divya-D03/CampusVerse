@@ -4,12 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Bot, Send, X, Loader, User, ArrowDown, ChevronDown, ChevronUp } from 'lucide-react';
+import { Bot, Send, X, Loader } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { chat } from '@/ai/flows/chatbot-flow';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useAuth } from '@/contexts/auth-context';
-import { cn } from '@/lib/utils';
 
 type Message = {
   role: 'user' | 'model';
@@ -23,49 +22,20 @@ export function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
   
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const isAtBottomRef = useRef(true);
-  const [showScrollToBottom, setShowScrollToBottom] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
-  
   let userAvatar = '';
+  let userInitial = 'U';
   if (user) {
     userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
+    userInitial = user.name ? user.name.charAt(0).toUpperCase() : (user.email.charAt(0).toUpperCase() || 'U');
   }
-
-  const scrollToBottom = () => {
-    if (viewportRef.current) {
-      viewportRef.current.scrollTo({ top: viewportRef.current.scrollHeight, behavior: 'smooth' });
-    }
-  };
-
-  const scrollUp = () => {
-    if (viewportRef.current) {
-      viewportRef.current.scrollTo({ top: viewportRef.current.scrollTop - viewportRef.current.clientHeight, behavior: 'smooth' });
-    }
-  };
 
   useEffect(() => {
-    if (isAtBottomRef.current) {
-        scrollToBottom();
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
-  
-  const handleScroll = () => {
-    const viewport = viewportRef.current;
-    if (viewport) {
-      const isScrolledToBottom = viewport.scrollHeight - viewport.scrollTop <= viewport.clientHeight + 1; // +1 for tolerance
-      isAtBottomRef.current = isScrolledToBottom;
-      setShowScrollToBottom(!isScrolledToBottom);
-    }
-  };
-
-  const handleManualScrollToBottom = () => {
-    scrollToBottom();
-    isAtBottomRef.current = true;
-    setShowScrollToBottom(false);
-  }
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -113,8 +83,7 @@ export function Chatbot() {
             <CardContent className="flex-1 flex flex-col p-0 relative">
               <ScrollArea 
                 className="flex-1 p-4" 
-                viewportRef={viewportRef}
-                onScroll={handleScroll}
+                viewportRef={scrollAreaRef}
               >
                 <div className="space-y-4">
                   {messages.map((message, index) => (
@@ -155,24 +124,6 @@ export function Chatbot() {
                 </div>
               </ScrollArea>
               
-              <div className="absolute top-2 right-2 z-10 flex flex-col gap-1">
-                <Button onClick={scrollUp} size="icon" variant="ghost" className="h-6 w-6 rounded-full"><ChevronUp className="h-4 w-4" /></Button>
-                <Button onClick={scrollToBottom} size="icon" variant="ghost" className="h-6 w-6 rounded-full"><ChevronDown className="h-4 w-4" /></Button>
-              </div>
-
-              {showScrollToBottom && (
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
-                  <Button
-                    onClick={handleManualScrollToBottom}
-                    size="icon"
-                    variant="secondary"
-                    className="rounded-full h-8 w-8"
-                  >
-                    <ArrowDown className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
-
               <div className="p-4 border-t">
                 <div className="flex items-center gap-2">
                   <Input
