@@ -219,6 +219,24 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                         <RadioGroupItem value="card" id="card" />
                         <Label htmlFor="card" className="flex-1 cursor-pointer">Credit/Debit Card</Label>
                     </div>
+                    {paymentMethod === 'card' && (
+                        <div className="grid gap-4 p-4 border rounded-md ml-6 bg-muted/50">
+                            <div className="space-y-2">
+                                <Label htmlFor="cardNumber">Card Number</Label>
+                                <Input id="cardNumber" placeholder="**** **** **** ****" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="expiry">Expiry Date</Label>
+                                    <Input id="expiry" placeholder="MM/YY" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="cvc">CVC</Label>
+                                    <Input id="cvc" placeholder="***" />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
                         <RadioGroupItem value="paypal" id="paypal" />
                         <Label htmlFor="paypal" className="flex-1 cursor-pointer">PayPal</Label>
