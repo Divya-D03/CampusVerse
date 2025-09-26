@@ -67,9 +67,9 @@ export default function EventDetailsPage() {
       />
       <div className="flex flex-col min-h-screen">
         <AppHeader />
-        <main className="flex-1 p-4 sm:p-6 md:p-8">
+        <main className="flex-1 p-6 sm:p-8 md:p-12">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-6">
+            <div className="mb-8">
               <Button asChild variant="outline">
                 <Link href="/">
                   <ArrowLeft className="mr-2 h-4 w-4" />
@@ -93,9 +93,9 @@ export default function EventDetailsPage() {
                     </div>
                   )}
                 </div>
-                <div className="md:col-span-2 p-6 flex flex-col">
+                <div className="md:col-span-2 p-8 flex flex-col">
                   <div className="flex-grow">
-                    <CardHeader className="p-0 mb-4">
+                    <CardHeader className="p-0 mb-6">
                       <div className="flex justify-between items-start gap-4">
                           <CardTitle className="font-headline text-2xl md:text-3xl">{event.title}</CardTitle>
                           <Badge variant="outline" className={cn("text-sm", statusStyles[event.status])}>
@@ -107,7 +107,7 @@ export default function EventDetailsPage() {
                         <span>{event.date}</span>
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="p-0 space-y-4 text-base">
+                    <CardContent className="p-0 space-y-6 text-base">
                       <p className="text-foreground/80 text-sm">{event.description}</p>
                       
                       <div className="flex flex-wrap items-center gap-4">
@@ -126,7 +126,7 @@ export default function EventDetailsPage() {
                       </div>
                     </CardContent>
                   </div>
-                  <div className="mt-6">
+                  <div className="mt-8">
                     <button 
                       onClick={() => setShowRegistration(true)} 
                       disabled={isRegistrationDisabled}

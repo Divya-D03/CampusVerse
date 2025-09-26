@@ -146,7 +146,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-6 py-4">
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="srn">Student Registration Number (SRN)</Label>
                   <Input id="srn" value={srn} onChange={(e) => setSrn(e.target.value)} placeholder="Enter your unique SRN" disabled={isSubmitting} />
@@ -187,7 +187,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                 
                 <div className="space-y-4">
                     <Label>Select Payment Method</Label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-4">
                        { (['paytm', 'phonepe', 'gpay'] as UpiApp[]).map(app => (
                           <button key={app} onClick={() => setSelectedUpiApp(app)}
                             className={cn(
@@ -195,16 +195,16 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                               selectedUpiApp === app ? "ring-2 ring-primary" : ""
                             )}
                           >
-                            <UpiApps app={app} className="w-8 h-8"/>
-                            <span className="text-xs font-medium capitalize">{app}</span>
-                            {selectedUpiApp === app && <Check className="w-4 h-4 text-primary absolute top-1 right-1"/>}
+                            <UpiApps app={app} className="w-10 h-10"/>
+                            <span className="text-sm font-medium capitalize">{app}</span>
+                            {selectedUpiApp === app && <Check className="w-4 h-4 text-primary absolute top-2 right-2"/>}
                           </button>
                        ))}
                     </div>
                 </div>
 
                 {selectedUpiApp && (
-                  <div className="text-center bg-muted/50 p-4 rounded-lg border space-y-4">
+                  <div className="text-center bg-muted/50 p-6 rounded-lg border space-y-4">
                       <p className='font-semibold'>Scan to Pay with {selectedUpiApp}</p>
                       <div className="flex justify-center">
                         <Image src={qrCodeUrl} alt="Payment QR Code" width={150} height={150} className='rounded-md' />

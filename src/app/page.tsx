@@ -101,7 +101,7 @@ export default function DashboardPage() {
         <main className="p-6 sm:p-8 md:p-12">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex-shrink-0">
-               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8">
+               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-10">
                 <div className="flex items-center gap-4">
                   <h1 className="text-3xl font-bold tracking-tight text-foreground">Events</h1>
                   <TooltipProvider>

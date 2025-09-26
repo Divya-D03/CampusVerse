@@ -154,7 +154,7 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
             Fill in the details below to create your event.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <div className="space-y-6 py-4">
           <div className="space-y-2">
             <Label htmlFor="title">Event Title</Label>
             <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g., Code & Coffee" />

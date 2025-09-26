@@ -104,9 +104,9 @@ export default function ProfilePage() {
       <HostEventDialog open={showHostEventDialog} onOpenChange={setShowHostEventDialog} />
       <div className="flex flex-col min-h-screen">
         <AppHeader />
-        <main className="flex-1 p-4 sm:p-6 md:p-8">
+        <main className="flex-1 p-6 sm:p-8 md:p-12">
           <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-start mb-8">
+            <div className="flex justify-between items-start mb-10">
               <div className="flex items-center gap-6">
                 <div className="relative group">
                   <input
@@ -160,7 +160,7 @@ export default function ProfilePage() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
               <Card className="md:col-span-2">
                 <CardHeader>
                   <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
@@ -191,9 +191,9 @@ export default function ProfilePage() {
               </Card>
             </div>
 
-            <div className="mb-8">
+            <div className="mb-10">
                 <h2 className="text-2xl font-bold mb-4">My Skills</h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {userSkills.map((skill, index) => (
                      <Badge key={index} variant="secondary" className="text-base py-1 px-3">{skill}</Badge>
                   ))}
@@ -201,7 +201,7 @@ export default function ProfilePage() {
               </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
               <div>
                 <h2 className="text-2xl font-bold mb-4">Event History</h2>
                 <div className="space-y-4">
@@ -239,7 +239,7 @@ export default function ProfilePage() {
 
             <div>
               <h2 className="text-2xl font-bold mb-4">Certificates</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div>
                     <h3 className="font-bold text-lg text-primary mb-4">Winning Certificates</h3>
                      <div className="space-y-4">
