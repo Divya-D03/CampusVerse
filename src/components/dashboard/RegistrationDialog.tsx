@@ -24,6 +24,7 @@ import { useToast } from '@/hooks/use-toast';
 import type { Event } from '@/lib/types';
 import { CreditCard, Loader2 } from 'lucide-react';
 import { Separator } from '../ui/separator';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface RegistrationDialogProps {
   event: Event | null;
@@ -51,6 +52,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
   const [school, setSchool] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState('card');
   const { toast } = useToast();
 
   const handleNextStep = () => {
@@ -86,8 +88,8 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
     await new Promise((resolve) => setTimeout(resolve, 1500));
     // In a real app, you would handle payment submission here.
     toast({
-      title: 'Payment Method Added',
-      description: 'Redirecting to confirm your registration...',
+      title: 'Redirecting to Payment',
+      description: 'You will be redirected to a secure payment page to finalize your payment.',
     });
     await handleSubmit();
   }
@@ -109,6 +111,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
     setCourse('');
     setSemester('');
     setSchool('');
+    setPaymentMethod('card');
   };
 
   const handleOpenChange = (newOpen: boolean) => {
@@ -119,6 +122,7 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
       setCourse('');
       setSemester('');
       setSchool('');
+      setPaymentMethod('card');
     }
     onOpenChange(newOpen);
   }
@@ -200,33 +204,46 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
         )}
         
         {step === 2 && (
-            <div className="space-y-4 py-4">
-                <p className="text-sm text-muted-foreground">To complete your registration, please add a payment method. After adding your payment details, you will be redirected to the payment page to confirm your order.</p>
-                <Separator />
-                <div className="flex flex-col items-center justify-center gap-4 text-center">
-                    <h3 className="font-semibold">Pay with Coins</h3>
-                    <p className="text-2xl font-bold text-yellow-400">{event?.registrationFee} Coins</p>
-                    <Button onClick={handlePaymentAndSubmit} disabled={isSubmitting} className="w-full">
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          <>
-                            <CreditCard className="mr-2 h-4 w-4" />
-                            Add Payment Method
-                          </>
-                        )}
-                    </Button>
+            <div className="space-y-6 py-4">
+                <div>
+                    <h3 className="font-semibold text-lg">Step 2: Payment</h3>
+                    <p className="text-sm text-muted-foreground">Please select your preferred payment method to complete your registration.</p>
                 </div>
+                <div className="flex flex-col items-center justify-center gap-4 text-center p-4 border rounded-lg">
+                    <p className="text-lg">Total Amount</p>
+                    <p className="text-3xl font-bold text-yellow-400">{event?.registrationFee} Coins</p>
+                </div>
+                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="space-y-2">
+                    <Label className='font-semibold'>Choose a payment method:</Label>
+                    <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
+                        <RadioGroupItem value="card" id="card" />
+                        <Label htmlFor="card" className="flex-1 cursor-pointer">Credit/Debit Card</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
+                        <RadioGroupItem value="paypal" id="paypal" />
+                        <Label htmlFor="paypal" className="flex-1 cursor-pointer">PayPal</Label>
+                    </div>
+                     <div className="flex items-center space-x-2 p-3 border rounded-md has-[:checked]:border-primary">
+                        <RadioGroupItem value="other" id="other" />
+                        <Label htmlFor="other" className="flex-1 cursor-pointer">Other options...</Label>
+                    </div>
+                </RadioGroup>
+                <p className="text-xs text-muted-foreground text-center">
+                    By clicking Continue, you'll be redirected to a secure payment page to finalize your payment.
+                </p>
             </div>
         )}
 
         <DialogFooter>
+          {step === 2 && (
+            <Button variant="outline" onClick={() => setStep(1)} disabled={isSubmitting}>
+              Back
+            </Button>
+          )}
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
             Cancel
           </Button>
+
           {step === 1 && (
              <Button onClick={handleNextStep} disabled={isSubmitting}>
                 {event?.registrationFee && event.registrationFee > 0 ? 'Proceed to Payment' : (
@@ -238,6 +255,22 @@ export function RegistrationDialog({ event, open, onOpenChange }: RegistrationDi
                   ) : 'Register Now'
                 )}
             </Button>
+          )}
+
+          {step === 2 && (
+              <Button onClick={handlePaymentAndSubmit} disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      Proceed to Payment
+                    </>
+                  )}
+              </Button>
           )}
         </DialogFooter>
       </DialogContent>
