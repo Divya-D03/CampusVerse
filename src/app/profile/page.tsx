@@ -15,6 +15,7 @@ import { CouponHistory } from '@/components/profile/coupon-history';
 import { HostEventDialog } from '@/components/dashboard/host-event-dialog';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 export default function ProfilePage() {
   const { user, loading, updateUserProfilePicture, logout } = useAuth();
@@ -64,6 +65,21 @@ export default function ProfilePage() {
   const participatedEvents = allEvents.slice(0, 2);
   const wonEvents = allEvents.slice(2, 3);
   const userSkills = user.skills || ['React', 'Node.js', 'Cybersecurity', 'Public Speaking'];
+
+  const participationCount = participatedEvents.length;
+  let rank: 'Newbie' | 'Pro' | 'Master' | 'Grandmaster' = 'Newbie';
+  let rankStyles = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+
+  if (participationCount >= 10) {
+    rank = 'Grandmaster';
+    rankStyles = 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+  } else if (participationCount >= 6) {
+    rank = 'Master';
+    rankStyles = 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+  } else if (participationCount >= 3) {
+    rank = 'Pro';
+    rankStyles = 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+  }
 
   const handleAvatarClick = () => {
     fileInputRef.current?.click();
@@ -119,6 +135,9 @@ export default function ProfilePage() {
                       {isClubMemberVerified ? 'Verified Club Member' : 'Unverified Club Member'}
                     </p>
                    )}
+                   <Badge variant="outline" className={cn("mt-2 text-base", rankStyles)}>
+                        {rank}
+                    </Badge>
                 </div>
               </div>
               <div className='flex items-start gap-2'>
