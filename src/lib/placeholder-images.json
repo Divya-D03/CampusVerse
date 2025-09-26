@@ -8,8 +8,8 @@
     },
     {
       "id": "cultural-event-2",
-      "description": "A classical Indian dancer in traditional attire performing on stage.",
-      "imageUrl": "https://images.unsplash.com/photo-1616163393933-a27b3b44b20a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBpbmRpYW4lMjBkYW5jZXxlbnwwfHx8fDE3NjA1OTQxODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A graceful classical Indian dancer in mid-air, wearing a vibrant yellow and red costume.",
+      "imageUrl": "https://storage.googleapis.com/aifirebase/images/8ed703a5-b1b7-4a47-a7d1-a957a051de1d.webp",
       "imageHint": "classical indian dance"
     },
     {
@@ -45,7 +45,7 @@
     {
       "id": "tech-event-2",
       "description": "A workshop on robotics and AI.",
-      "imageUrl": "https://images.unsplash.com/photo-1620712943543-95fc69afd524?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb2JvdGljcyUyMHdvcmtzaG9wfGVufDB8fHx8MTc2MDQ1Mjk5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-95fc6ih9afd524?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb2JvdGljcyUyMHdvcmtzaG9wfGVufDB8fHx8MTc2MDQ1Mjk5NHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "robotics workshop"
     },
     {
