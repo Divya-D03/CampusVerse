@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useAuth } from '@/contexts/auth-context';
@@ -14,15 +13,24 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { User, UserCog, Gift, Coins } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
 import Link from 'next/link';
 import { AppLogo } from './app-logo';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export function AppHeader() {
   const { user, toggleRole } = useAuth();
   const [isQrCodeDialogOpen, setIsQrCodeDialogOpen] = useState(false);
+  const [isAppInfoOpen, setIsAppInfoOpen] = useState(false);
   
   if (!user) return null;
 
@@ -36,8 +44,10 @@ export function AppHeader() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/30 backdrop-blur-xl">
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
+            <button onClick={() => setIsAppInfoOpen(true)} className="mr-2 focus:outline-none focus:ring-2 focus:ring-ring rounded-sm">
+                <AppLogo />
+            </button>
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <AppLogo />
               <span className="hidden font-bold sm:inline-block font-headline">
                 CampusVerse
               </span>
@@ -118,6 +128,29 @@ export function AppHeader() {
         </div>
       </header>
       {user && <QrCodeDialog user={user} open={isQrCodeDialogOpen} onOpenChange={setIsQrCodeDialogOpen} />}
+      <AlertDialog open={isAppInfoOpen} onOpenChange={setIsAppInfoOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-2xl font-headline">
+              <AppLogo />
+              About CampusVerse
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base pt-4 space-y-2">
+              <p>
+                Welcome to CampusVerse, your all-in-one university event hub! 
+              </p>
+              <p>
+                Discover and register for cultural fests, tech hackathons, club activities, and more. Participate to earn coins, and redeem them for rewards at campus food courts.
+              </p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setIsAppInfoOpen(false)}>
+              Got it!
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

@@ -19,9 +19,9 @@ export function AppLogo({ className }: { className?: string }) {
           y2="0"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#D946EF" />
-          <stop offset="0.5" stopColor="#F59E0B" />
-          <stop offset="1" stopColor="#84CC16" />
+          <stop stopColor="hsl(var(--primary))" />
+          <stop offset="0.5" stopColor="hsl(var(--accent))" />
+          <stop offset="1" stopColor="hsl(var(--primary))" />
         </linearGradient>
         <linearGradient
           id="chevron-gradient"
@@ -31,8 +31,8 @@ export function AppLogo({ className }: { className?: string }) {
           y2="75"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#A855F7" />
-          <stop offset="1" stopColor="#6D28D9" />
+          <stop stopColor="hsl(var(--primary))" />
+          <stop offset="1" stopColor="hsl(var(--accent))" />
         </linearGradient>
       </defs>
       {/* Atomic Orbits */}
@@ -86,15 +86,15 @@ export function AppLogo({ className }: { className?: string }) {
       />
 
       {/* Nodes and Cubes */}
-      <circle cx="12" cy="62" r="3" fill="#A855F7" />
-      <circle cx="88" cy="38" r="3" fill="#84CC16" />
-      <circle cx="28" cy="23" r="2" fill="#F59E0B" />
-      <circle cx="72" cy="77" r="2" fill="#D946EF" />
+      <circle cx="12" cy="62" r="3" fill="hsl(var(--accent))" />
+      <circle cx="88" cy="38" r="3" fill="hsl(var(--primary))" />
+      <circle cx="28" cy="23" r="2" fill="hsl(var(--accent))" />
+      <circle cx="72" cy="77" r="2" fill="hsl(var(--primary))" />
 
-      <path d="M80 15 l 5 2 l 0 5 l -5 -2 z" fill="#F59E0B" opacity="0.8"/>
-      <path d="M85 17 l 5 2 l -2 4 l -5 -2 z" fill="#F59E0B" />
+      <path d="M80 15 l 5 2 l 0 5 l -5 -2 z" fill="hsl(var(--accent))" opacity="0.8"/>
+      <path d="M85 17 l 5 2 l -2 4 l -5 -2 z" fill="hsl(var(--accent))" />
 
-      <path d="M55 10 l 4 1 l 0 4 l -4 -1 z" fill="#F59E0B" opacity="0.5"/>
+      <path d="M55 10 l 4 1 l 0 4 l -4 -1 z" fill="hsl(var(--accent))" opacity="0.5"/>
 
     </svg>
   );
