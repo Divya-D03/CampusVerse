@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/auth-context';
 import { EventCard } from './event-card';
 import { CampusView } from './campus-view';
-import { LayoutGrid, Map } from 'lucide-react';
+import { Paintbrush, Code, Users, Map } from 'lucide-react';
 
 const statusLegend = [
   { status: 'Available', color: 'bg-green-500' },
@@ -15,22 +15,51 @@ const statusLegend = [
 export function EventTabs() {
   const { events } = useAuth();
 
+  const culturalEvents = events.filter((event) => event.category === 'cultural');
+  const techEvents = events.filter((event) =>
+    ['hackathon', 'tech', 'ideathon', 'project-expo'].includes(event.category)
+  );
+  const clubs = events.filter((event) => event.category === 'club');
+
+
   return (
     <>
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="all">
-            <LayoutGrid className="mr-2 h-4 w-4" />
-            All Events
+      <Tabs defaultValue="cultural" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="cultural">
+            <Paintbrush className="mr-2 h-4 w-4" />
+            Cultural
+          </TabsTrigger>
+          <TabsTrigger value="tech">
+            <Code className="mr-2 h-4 w-4" />
+            Tech
+          </TabsTrigger>
+          <TabsTrigger value="clubs">
+            <Users className="mr-2 h-4 w-4" />
+            Clubs
           </TabsTrigger>
           <TabsTrigger value="campus-view">
             <Map className="mr-2 h-4 w-4" />
             Campus View
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="all" className="mt-6">
+        <TabsContent value="cultural" className="mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event) => (
+            {culturalEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </TabsContent>
+        <TabsContent value="tech" className="mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {techEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </TabsContent>
+        <TabsContent value="clubs" className="mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {clubs.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
