@@ -18,19 +18,37 @@ import { Loader2, Sparkles } from 'lucide-react';
 import { createEvent } from '@/ai/flows/create-event';
 import { generateEventDescription } from '@/ai/flows/generate-event-description';
 import { useAuth } from '@/contexts/auth-context';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { EventCategory } from '@/lib/types';
 
 interface HostEventDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
+const eventCategories: { value: EventCategory, label: string }[] = [
+    { value: 'cultural', label: 'Cultural' },
+    { value: 'hackathon', label: 'Hackathon' },
+    { value: 'ideathon', label: 'Ideathon' },
+    { value: 'project-expo', label: 'Project Expo' },
+    { value: 'club', label: 'Club' },
+    { value: 'tech', label: 'Tech Workshop' },
+];
+
 export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
-  const { addCoinTransaction } = useAuth();
+  const { addCoinTransaction, addEvent } = useAuth();
   const [title, setTitle] = useState('');
   const [keywords, setKeywords] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [coins, setCoins] = useState('');
+  const [category, setCategory] = useState<EventCategory | ''>('');
   
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,11 +80,11 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
   };
 
   const handleSubmit = async () => {
-    if (!title || !description || !date || !coins) {
+    if (!title || !description || !date || !coins || !category) {
       toast({
         variant: 'destructive',
         title: 'Incomplete Form',
-        description: 'Please fill out all the fields to create the event.',
+        description: 'Please fill out all the fields, including category, to create the event.',
       });
       return;
     }
@@ -74,17 +92,26 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
     setIsSubmitting(true);
     try {
       const coinAmount = parseInt(coins, 10);
+      const newEventId = `evt-${Date.now()}`;
       
-      // We are not using the AI response here, just calling it to simulate.
       await createEvent({
         title,
         description,
         date,
         coins: coinAmount,
+        category,
       });
 
-      // Here you would typically add the new event to your state management
-      // For now, we will just show a success toast.
+      addEvent({
+        id: newEventId,
+        title,
+        description,
+        date,
+        coins: coinAmount,
+        status: 'Available',
+        imageId: `new-event-${Math.floor(Math.random() * 5) + 1}`, // Assign a random placeholder image
+        category,
+      });
       
       addCoinTransaction({
         reason: `Hosted event: ${title}`,
@@ -104,6 +131,7 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
       setDescription('');
       setDate('');
       setCoins('');
+      setCategory('');
 
     } catch (error) {
       console.error('Error creating event:', error);
@@ -152,6 +180,22 @@ export function HostEventDialog({ open, onOpenChange }: HostEventDialogProps) {
               placeholder="Describe your event..." 
               rows={4}
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="category">Event Category</Label>
+            <Select onValueChange={(value) => setCategory(value as EventCategory)} value={category}>
+                <SelectTrigger id="category">
+                    <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                    {eventCategories.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value}>
+                        {cat.label}
+                    </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

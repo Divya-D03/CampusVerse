@@ -5,12 +5,14 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { EventCategory } from '@/lib/types';
 
 const CreateEventInputSchema = z.object({
   title: z.string().describe('The title of the event.'),
   description: z.string().describe('The description of the event.'),
   date: z.string().describe('The date of the event.'),
   coins: z.number().describe('The number of coins offered as a prize.'),
+  category: z.enum(['cultural', 'hackathon', 'ideathon', 'project-expo', 'tech', 'club']).describe('The category of the event.'),
 });
 export type CreateEventInput = z.infer<typeof CreateEventInputSchema>;
 

@@ -18,10 +18,11 @@ export interface User {
   mobileNumber?: string;
   githubUrl?: string;
   linkedinUrl?: string;
-  gender?: 'Male' | 'Female' | 'Other' | 'Prefer not to say';
+  gender?: 'Male' | 'Female' | 'Other';
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Ended' | 'On-Spot Registration' | 'Ongoing';
+export type EventCategory = 'cultural' | 'hackathon' | 'ideathon' | 'project-expo' | 'tech' | 'club';
 
 export interface Event {
   id: string;
@@ -32,6 +33,7 @@ export interface Event {
   coins: number;
   imageId: string;
   registrationFee?: number;
+  category: EventCategory;
 }
 
-export type Club = Event;
+export type Club = Omit<Event, 'category'> & { category: 'club' };

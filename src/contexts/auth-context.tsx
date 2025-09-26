@@ -1,13 +1,15 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import type { User, UserRole, CoinTransaction } from '@/lib/types';
+import type { User, UserRole, CoinTransaction, Event } from '@/lib/types';
 import { useRouter } from 'next/navigation';
+import { culturalEvents, hackathons, techEvents, clubs, ideathons, projectExpos } from '@/lib/placeholder-data';
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   isFirstLogin: boolean;
+  events: Event[];
   login: (email: string) => void;
   logout: () => void;
   toggleRole: () => void;
@@ -16,6 +18,7 @@ interface AuthContextType {
   updateUserSettings: (settings: Pick<User, 'mobileNumber' | 'githubUrl' | 'linkedinUrl'>) => void;
   markFirstLoginDone: () => void;
   addCoinTransaction: (transaction: Omit<CoinTransaction, 'id' | 'date'>) => void;
+  addEvent: (event: Event) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,11 +26,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // Helper to generate unique IDs for transactions
 const generateUniqueTxId = () => crypto.randomUUID();
 
+const initialEvents: Event[] = [
+  ...culturalEvents,
+  ...hackathons,
+  ...techEvents,
+  ...clubs,
+  ...ideathons,
+  ...projectExpos
+];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
+  const [events, setEvents] = useState<Event[]>(initialEvents);
   const router = useRouter();
 
   useEffect(() => {
@@ -42,9 +54,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setIsFirstLogin(true);
         }
       }
+      const storedEvents = localStorage.getItem('campusverse_events');
+      if (storedEvents) {
+        setEvents(JSON.parse(storedEvents));
+      } else {
+        setEvents(initialEvents);
+      }
     } catch (error) {
-      console.error('Failed to parse user from localStorage', error);
+      console.error('Failed to parse data from localStorage', error);
       localStorage.removeItem('campusverse_user');
+      localStorage.removeItem('campusverse_events');
     } finally {
       setLoading(false);
     }
@@ -67,7 +86,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('campusverse_user', JSON.stringify(newUser));
     localStorage.removeItem('campusverse_first_login_done');
     localStorage.removeItem('club_member_verified');
+    localStorage.setItem('campusverse_events', JSON.stringify(initialEvents));
     setUser(newUser);
+    setEvents(initialEvents);
     setIsFirstLogin(true);
   };
 
@@ -75,6 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('campusverse_user');
     localStorage.removeItem('campusverse_first_login_done');
     localStorage.removeItem('club_member_verified');
+    localStorage.removeItem('campusverse_events');
     setUser(null);
     setIsFirstLogin(false);
     router.push('/login');
@@ -146,8 +168,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const addEvent = (event: Event) => {
+    setEvents(currentEvents => {
+      const updatedEvents = [...currentEvents, event];
+      localStorage.setItem('campusverse_events', JSON.stringify(updatedEvents));
+      return updatedEvents;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, isFirstLogin, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction }}>
+    <AuthContext.Provider value={{ user, loading, isFirstLogin, events, login, logout, toggleRole, updateUser, updateUserProfilePicture, updateUserSettings, markFirstLoginDone, addCoinTransaction, addEvent }}>
       {children}
     </AuthContext.Provider>
   );

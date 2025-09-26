@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/auth-context';
 import { type Event, type EventStatus } from '@/lib/types';
-import { culturalEvents, hackathons, techEvents, clubs, ideathons, projectExpos } from '@/lib/placeholder-data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { LoadingScreen } from '@/components/layout/loading-screen';
 import { AppHeader } from '@/components/layout/app-header';
@@ -17,8 +16,6 @@ import { RegistrationDialog } from '@/components/dashboard/RegistrationDialog';
 import { Calendar, Coins, ArrowLeft, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const allEvents: Event[] = [...culturalEvents, ...hackathons, ...techEvents, ...clubs, ...ideathons, ...projectExpos];
-
 const statusStyles: Record<EventStatus, string> = {
   Available: 'bg-green-500/20 text-green-400 border-green-500/30',
   'Almost Full': 'bg-orange-500/20 text-orange-400 border-orange-500/30',
@@ -28,7 +25,7 @@ const statusStyles: Record<EventStatus, string> = {
 };
 
 export default function EventDetailsPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, events } = useAuth();
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -43,15 +40,16 @@ export default function EventDetailsPage() {
   }, [user, loading, router]);
 
   useEffect(() => {
-    if (id) {
-      const foundEvent = allEvents.find((e) => e.id === id);
+    if (id && events.length > 0) {
+      const foundEvent = events.find((e) => e.id === id);
       if (foundEvent) {
         setEvent(foundEvent);
       } else {
+        // If event not found, maybe redirect to a 404 page or home
         router.replace('/');
       }
     }
-  }, [id, router]);
+  }, [id, events, router]);
 
   if (loading || !user || !event) {
     return <LoadingScreen />;

@@ -9,6 +9,7 @@ export const culturalEvents: Event[] = [
     status: 'Available',
     coins: 10,
     imageId: 'cultural-event-1',
+    category: 'cultural',
   },
   {
     id: 'ce2',
@@ -18,6 +19,7 @@ export const culturalEvents: Event[] = [
     status: 'Almost Full',
     coins: 15,
     imageId: 'cultural-event-2',
+    category: 'cultural',
   },
 ];
 
@@ -31,6 +33,7 @@ export const hackathons: Event[] = [
     coins: 50,
     imageId: 'hackathon-1',
     registrationFee: 20,
+    category: 'hackathon',
   },
   {
     id: 'hk2',
@@ -40,6 +43,7 @@ export const hackathons: Event[] = [
     status: 'On-Spot Registration',
     coins: 40,
     imageId: 'hackathon-2',
+    category: 'hackathon',
   },
 ];
 
@@ -52,6 +56,7 @@ export const ideathons: Event[] = [
     status: 'Ongoing',
     coins: 30,
     imageId: 'ideathon-1',
+    category: 'ideathon',
   },
 ];
 
@@ -64,6 +69,7 @@ export const projectExpos: Event[] = [
     status: 'Available',
     coins: 25,
     imageId: 'project-expo-1',
+    category: 'project-expo',
   },
 ]
 
@@ -76,6 +82,7 @@ export const techEvents: Event[] = [
     status: 'Ended',
     coins: 20,
     imageId: 'tech-event-1',
+    category: 'tech',
   },
   {
     id: 'te2',
@@ -85,6 +92,7 @@ export const techEvents: Event[] = [
     status: 'Available',
     coins: 25,
     imageId: 'tech-event-2',
+    category: 'tech',
   },
 ];
 
@@ -97,6 +105,7 @@ export const clubs: Club[] = [
     status: 'Available',
     coins: 0,
     imageId: 'club-1',
+    category: 'club',
   },
   {
     id: 'cl2',
@@ -106,6 +115,7 @@ export const clubs: Club[] = [
     status: 'Available',
     coins: 0,
     imageId: 'club-2',
+    category: 'club',
   },
    {
     id: 'cl3',
@@ -115,6 +125,7 @@ export const clubs: Club[] = [
     status: 'Available',
     coins: 0,
     imageId: 'club-3',
+    category: 'club',
   },
   {
     id: 'cl4',
@@ -124,5 +135,6 @@ export const clubs: Club[] = [
     status: 'Available',
     coins: 0,
     imageId: 'club-4',
+    category: 'club',
   }
 ];

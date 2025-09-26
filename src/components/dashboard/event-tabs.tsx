@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { culturalEvents, hackathons, techEvents, clubs, ideathons, projectExpos } from '@/lib/placeholder-data';
+import { useAuth } from '@/contexts/auth-context';
 import { EventCard } from './event-card';
 
 const statusLegend = [
@@ -11,6 +11,15 @@ const statusLegend = [
 ];
 
 export function EventTabs() {
+  const { events } = useAuth();
+
+  const culturalEvents = events.filter(e => e.category === 'cultural');
+  const hackathons = events.filter(e => e.category === 'hackathon');
+  const ideathons = events.filter(e => e.category === 'ideathon');
+  const projectExpos = events.filter(e => e.category === 'project-expo');
+  const clubs = events.filter(e => e.category === 'club');
+  const techWorkshops = events.filter(e => e.category === 'tech');
+
   return (
     <>
       <Tabs defaultValue="cultural" className="w-full">
@@ -28,10 +37,11 @@ export function EventTabs() {
         </TabsContent>
         <TabsContent value="tech" className="mt-6">
           <Tabs defaultValue="hackathons" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="hackathons">Hackathons</TabsTrigger>
               <TabsTrigger value="ideathons">Ideathons</TabsTrigger>
               <TabsTrigger value="expos">Project Expos</TabsTrigger>
+              <TabsTrigger value="workshops">Workshops</TabsTrigger>
             </TabsList>
             <TabsContent value="hackathons" className="mt-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -50,6 +60,13 @@ export function EventTabs() {
              <TabsContent value="expos" className="mt-6">
                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projectExpos.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="workshops" className="mt-6">
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {techWorkshops.map((event) => (
                   <EventCard key={event.id} event={event} />
                 ))}
               </div>
