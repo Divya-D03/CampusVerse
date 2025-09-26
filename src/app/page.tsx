@@ -101,33 +101,13 @@ export default function DashboardPage() {
         <main className="p-6 sm:p-8 md:p-12">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex-shrink-0">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
-                <div className="flex items-center gap-4">
-                  <h1 className="text-3xl md:text-4xl font-bold font-headline">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                         <Badge variant="outline" className={cn("text-base cursor-pointer", rankStyles)}>
-                            {rank}
-                        </Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p className="font-bold text-lg text-center mb-2">{rank} Rank</p>
-                        <ul className="list-disc list-inside space-y-1">
-                            <li><span className="font-semibold">Newbie:</span> Default rank.</li>
-                            <li><span className="font-semibold">Pro:</span> Win 5 events.</li>
-                            <li><span className="font-semibold">Master:</span> Win 10 events.</li>
-                            <li><span className="font-semibold">Grandmaster:</span> Win 20+ events.</li>
-                        </ul>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                  <Button variant="ghost" size="icon" onClick={() => setShowLeaderboard(true)}>
-                    <Trophy className="w-6 h-6 text-yellow-500" />
+               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8">
+                 <h1 className="text-3xl font-bold tracking-tight">Events</h1>
+                <Button variant="outline" onClick={() => setShowLeaderboard(true)}>
+                    <Trophy className="w-4 h-4 mr-2" />
+                    Leaderboard
                   </Button>
-                </div>
               </div>
-              <p className="text-muted-foreground mb-10">Your central hub for all university events and clubs.</p>
               {user.role === 'Club Member' && <ClubMemberProof />}
             </div>
             <EventTabs />

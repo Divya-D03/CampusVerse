@@ -16,36 +16,36 @@ export function EventTabs() {
   return (
     <>
       <Tabs defaultValue="cultural" className="w-full">
-        <TabsList className="grid w-full max-w-md grid-cols-3 bg-transparent p-0 mb-8">
-          <TabsTrigger value="cultural" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+        <TabsList className="grid w-full max-w-md grid-cols-3">
+          <TabsTrigger value="cultural">
             <Paintbrush className="mr-2 h-5 w-5" />
             Cultural
           </TabsTrigger>
-          <TabsTrigger value="tech" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+          <TabsTrigger value="tech">
             <Code className="mr-2 h-5 w-5" />
             Tech
           </TabsTrigger>
-          <TabsTrigger value="clubs" className="text-base font-semibold pb-2 rounded-none bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:border-b-2 data-[state=active]:border-accent">
+          <TabsTrigger value="clubs">
             <Users className="mr-2 h-5 w-5" />
             Clubs
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="cultural" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <TabsContent value="cultural">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
             {culturalEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="tech" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <TabsContent value="tech">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
             {techEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="clubs" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <TabsContent value="clubs">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
             {clubs.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}

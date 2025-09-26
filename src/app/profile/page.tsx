@@ -118,7 +118,7 @@ export default function ProfilePage() {
                   />
                   <button
                     onClick={handleAvatarClick}
-                    className="relative h-24 w-24 rounded-full overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 neumorphic-pressed"
+                    className="relative h-24 w-24 rounded-full overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                   >
                     <Image src={avatarSrc} alt={user.email || 'user avatar'} fill className="object-cover" />
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -127,7 +127,7 @@ export default function ProfilePage() {
                   </button>
                 </div>
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>
+                  <h1 className="text-3xl md:text-4xl font-bold">{user.name || user.email.split('@')[0]}</h1>
                   <p className="text-muted-foreground">{user.email}</p>
                    {user.role === 'Club Member' && (
                     <p className="text-sm font-semibold mt-1 flex items-center gap-1">
@@ -135,25 +135,25 @@ export default function ProfilePage() {
                       {isClubMemberVerified ? 'Verified Club Member' : 'Unverified Club Member'}
                     </p>
                    )}
-                   <Badge variant="outline" className={cn("mt-2 text-base neumorphic-raised", rankStyles)}>
+                   <Badge variant="outline" className={cn("mt-2 text-base", rankStyles)}>
                         {rank}
                     </Badge>
                 </div>
               </div>
               <div className='flex items-start gap-2'>
                 {user.role === 'Club Member' && isClubMemberVerified && (
-                  <Button onClick={() => setShowHostEventDialog(true)} className="neumorphic-raised-interactive">
+                  <Button onClick={() => setShowHostEventDialog(true)}>
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Host Event
                   </Button>
                 )}
-                <Button asChild variant="outline" className="neumorphic-raised-interactive">
+                <Button asChild variant="outline">
                   <Link href="/">
                     <Home className="mr-2 h-4 w-4" />
                     Back to Home
                   </Link>
                 </Button>
-                 <Button variant="destructive" onClick={logout} className="neumorphic-raised-interactive">
+                 <Button variant="destructive" onClick={logout}>
                   <LogOut className="mr-2 h-4 w-4" />
                   Log Out
                 </Button>
@@ -161,7 +161,7 @@ export default function ProfilePage() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-              <Card className="neumorphic-raised md:col-span-2">
+              <Card className="md:col-span-2">
                 <CardHeader>
                   <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
                 </CardHeader>
@@ -170,7 +170,7 @@ export default function ProfilePage() {
                   <p className="text-xs text-muted-foreground mt-2">{Math.round(profileCompletion)}% complete. <Link href="/settings" className="text-primary hover:underline">Add more details</Link>.</p>
                 </CardContent>
               </Card>
-              <Card className="neumorphic-raised">
+              <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Coins</CardTitle>
                   <Coins className="w-4 h-4 text-yellow-400" />
@@ -180,7 +180,7 @@ export default function ProfilePage() {
                   <p className="text-xs text-muted-foreground">5 coins = 1 Rupee</p>
                 </CardContent>
               </Card>
-              <Card className="neumorphic-raised">
+              <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Events Won</CardTitle>
                   <BarChart3 className="w-4 h-4 text-muted-foreground" />
@@ -192,10 +192,10 @@ export default function ProfilePage() {
             </div>
 
             <div className="mb-8">
-                <h2 className="text-2xl font-headline font-bold mb-4">My Skills</h2>
+                <h2 className="text-2xl font-bold mb-4">My Skills</h2>
                 <div className="flex flex-wrap gap-2">
                   {userSkills.map((skill, index) => (
-                     <Badge key={index} variant="secondary" className="text-base py-1 px-3 neumorphic-raised">{skill}</Badge>
+                     <Badge key={index} variant="secondary" className="text-base py-1 px-3">{skill}</Badge>
                   ))}
                 </div>
               </div>
@@ -203,11 +203,11 @@ export default function ProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <h2 className="text-2xl font-headline font-bold mb-4">Event History</h2>
+                <h2 className="text-2xl font-bold mb-4">Event History</h2>
                 <div className="space-y-4">
                   <h3 className="font-bold text-lg text-primary">Events Won</h3>
                   {wonEvents.map(event => (
-                    <Card key={event.id} className="neumorphic-raised">
+                    <Card key={event.id}>
                        <CardHeader>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.date}</CardDescription>
@@ -219,7 +219,7 @@ export default function ProfilePage() {
                   ))}
                    <h3 className="font-bold text-lg text-primary mt-6">Events Participated</h3>
                    {participatedEvents.map(event => (
-                    <Card key={event.id} className="neumorphic-raised">
+                    <Card key={event.id}>
                       <CardHeader>
                         <CardTitle>{event.title}</CardTitle>
                         <CardDescription>{event.date}</CardDescription>
@@ -232,19 +232,19 @@ export default function ProfilePage() {
                 </div>
               </div>
               <div>
-                <h2 className="text-2xl font-headline font-bold mb-4">Coin History</h2>
+                <h2 className="text-2xl font-bold mb-4">Coin History</h2>
                 <CouponHistory transactions={user.coinHistory || []} />
               </div>
             </div>
 
             <div>
-              <h2 className="text-2xl font-headline font-bold mb-4">Certificates</h2>
+              <h2 className="text-2xl font-bold mb-4">Certificates</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h3 className="font-bold text-lg text-primary mb-4">Winning Certificates</h3>
                      <div className="space-y-4">
                       {wonEvents.map(event => (
-                        <Card key={`cert-won-${event.id}`} className="neumorphic-raised">
+                        <Card key={`cert-won-${event.id}`}>
                           <CardContent className="p-4 flex items-center justify-between">
                               <div className='flex items-center gap-4'>
                                   <FileText className="w-6 h-6 text-accent"/>
@@ -253,7 +253,7 @@ export default function ProfilePage() {
                                       <p className="text-sm text-muted-foreground">Winning Certificate</p>
                                   </div>
                               </div>
-                              <Button variant="outline" size="sm" className="neumorphic-raised-interactive">Download</Button>
+                              <Button variant="outline" size="sm">Download</Button>
                           </CardContent>
                         </Card>
                       ))}
@@ -263,7 +263,7 @@ export default function ProfilePage() {
                     <h3 className="font-bold text-lg text-primary mb-4">Participation Certificates</h3>
                     <div className="space-y-4">
                       {participatedEvents.map(event => (
-                        <Card key={`cert-part-${event.id}`} className="neumorphic-raised">
+                        <Card key={`cert-part-${event.id}`}>
                            <CardContent className="p-4 flex items-center justify-between">
                               <div className='flex items-center gap-4'>
                                   <FileText className="w-6 h-6 text-accent"/>
@@ -272,7 +272,7 @@ export default function ProfilePage() {
                                       <p className="text-sm text-muted-foreground">Participation Certificate</p>
                                   </div>
                               </div>
-                              <Button variant="outline" size="sm" className="neumorphic-raised-interactive">Download</Button>
+                              <Button variant="outline" size="sm">Download</Button>
                           </CardContent>
                         </Card>
                       ))}

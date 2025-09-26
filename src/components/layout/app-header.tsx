@@ -63,22 +63,20 @@ export function AppHeader() {
   return (
     <>
       <HostEventDialog open={showHostEventDialog} onOpenChange={setShowHostEventDialog} />
-      <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm">
-        <div className="container flex h-20 items-center">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 items-center">
           <div className="mr-auto flex items-center">
-            <button onClick={() => setIsAppInfoOpen(true)} className="mr-2 focus:outline-none focus:ring-2 focus:ring-ring rounded-sm">
-                <AppLogo />
-            </button>
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <span className="hidden font-bold sm:inline-block font-headline text-lg">
+              <AppLogo />
+              <span className="hidden font-bold sm:inline-block">
                 CampusVerse
               </span>
             </Link>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
             <ThemeToggle />
-            <div className="flex items-center space-x-2 bg-card/50 p-1 rounded-full">
-              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block pl-2">
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="role-switch" className="text-sm text-muted-foreground hidden sm:block">
                 {user.role === 'Regular User' ? 'User' : 'Club Member'}
               </Label>
               <Switch
@@ -88,7 +86,7 @@ export function AppHeader() {
                 aria-label="Toggle user role"
               />
                {user.role === 'Club Member' && isVerified && (
-                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline">
+                  <Button onClick={() => setShowHostEventDialog(true)} size="sm">
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Host Event
                   </Button>
@@ -96,7 +94,7 @@ export function AppHeader() {
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="px-3 py-1.5 rounded-full h-auto">
+                <Button variant="outline">
                   <div className="flex items-center gap-2 cursor-pointer">
                     <Coins className="w-5 h-5 text-yellow-400"/>
                     <span className="font-bold text-lg">{user.coins}</span>
