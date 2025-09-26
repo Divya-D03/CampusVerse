@@ -142,7 +142,7 @@ export function AppHeader() {
                   Welcome to CampusVerse, your all-in-one university event hub! 
                 </p>
                 <p>
-                  Discover and register for cultural fests, tech hackathons, club activities, and more. Participate to earn coins, and redeem them for rewards at campus food courts.
+                  Discover and register for cultural fests, tech hackathons, club activities, and more. Participate in events to win coins and redeem them for rewards at campus food courts.
                 </p>
               </div>
             </AlertDialogDescription>
