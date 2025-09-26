@@ -66,17 +66,17 @@ export default function ProfilePage() {
   const wonEvents = allEvents.slice(2, 3);
   const userSkills = user.skills || ['React', 'Node.js', 'Cybersecurity', 'Public Speaking'];
 
-  const participationCount = participatedEvents.length;
+  const wonEventsCount = wonEvents.length;
   let rank: 'Newbie' | 'Pro' | 'Master' | 'Grandmaster' = 'Newbie';
   let rankStyles = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
 
-  if (participationCount >= 10) {
+  if (wonEventsCount >= 20) {
     rank = 'Grandmaster';
     rankStyles = 'bg-purple-500/20 text-purple-400 border-purple-500/30';
-  } else if (participationCount >= 6) {
+  } else if (wonEventsCount >= 10) {
     rank = 'Master';
     rankStyles = 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-  } else if (participationCount >= 3) {
+  } else if (wonEventsCount >= 5) {
     rank = 'Pro';
     rankStyles = 'bg-blue-500/20 text-blue-400 border-blue-500/30';
   }
