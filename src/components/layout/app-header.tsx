@@ -136,13 +136,15 @@ export function AppHeader() {
               <AppLogo />
               About CampusVerse
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-base pt-4 space-y-2">
-              <p>
-                Welcome to CampusVerse, your all-in-one university event hub! 
-              </p>
-              <p>
-                Discover and register for cultural fests, tech hackathons, club activities, and more. Participate to earn coins, and redeem them for rewards at campus food courts.
-              </p>
+            <AlertDialogDescription asChild>
+              <div className="text-base pt-4 space-y-2">
+                <p>
+                  Welcome to CampusVerse, your all-in-one university event hub! 
+                </p>
+                <p>
+                  Discover and register for cultural fests, tech hackathons, club activities, and more. Participate to earn coins, and redeem them for rewards at campus food courts.
+                </p>
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
