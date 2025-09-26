@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { User, UserCog, Coins } from 'lucide-react';
+import { User, UserCog, Coins, PlusCircle } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import { QrCodeDialog } from '../dashboard/qr-code-dialog';
@@ -27,11 +27,15 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Label } from '@/components/ui/label';
+import { useClubMemberVerification } from '../dashboard/club-member-proof';
+import { HostEventDialog } from '../dashboard/host-event-dialog';
 
 export function AppHeader() {
   const { user, toggleRole } = useAuth();
   const [isQrCodeDialogOpen, setIsQrCodeDialogOpen] = useState(false);
   const [isAppInfoOpen, setIsAppInfoOpen] = useState(false);
+  const [showHostEventDialog, setShowHostEventDialog] = useState(false);
+  const { isVerified } = useClubMemberVerification();
   
   if (!user) return null;
 
@@ -42,6 +46,7 @@ export function AppHeader() {
 
   return (
     <>
+      <HostEventDialog open={showHostEventDialog} onOpenChange={setShowHostEventDialog} />
       <header className="sticky top-0 z-50 w-full border-b bg-background/30 backdrop-blur-xl">
         <div className="container flex h-16 items-center">
           <div className="mr-auto flex items-center">
@@ -65,6 +70,12 @@ export function AppHeader() {
                 onCheckedChange={toggleRole}
                 aria-label="Toggle user role"
               />
+               {user.role === 'Club Member' && isVerified && (
+                  <Button onClick={() => setShowHostEventDialog(true)} size="sm" variant="outline">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Host Event
+                  </Button>
+                )}
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
