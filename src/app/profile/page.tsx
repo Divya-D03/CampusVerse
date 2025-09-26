@@ -6,7 +6,7 @@ import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Ticket, BarChart3, CalendarCheck2, Home, Camera, FileText } from 'lucide-react';
+import { Ticket, BarChart3, CalendarCheck2, Home, Camera, FileText, LogOut } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { CouponHistory } from '@/components/profile/coupon-history';
 
 export default function ProfilePage() {
-  const { user, loading, updateUserProfilePicture } = useAuth();
+  const { user, loading, updateUserProfilePicture, logout } = useAuth();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -81,12 +81,18 @@ export default function ProfilePage() {
                 <p className="text-muted-foreground">{user.email}</p>
               </div>
             </div>
-            <Button asChild variant="outline">
-              <Link href="/">
-                <Home className="mr-2 h-4 w-4" />
-                Back to Home
-              </Link>
-            </Button>
+            <div className='flex gap-2'>
+              <Button asChild variant="outline">
+                <Link href="/">
+                  <Home className="mr-2 h-4 w-4" />
+                  Back to Home
+                </Link>
+              </Button>
+               <Button variant="destructive" onClick={logout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Log Out
+              </Button>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">

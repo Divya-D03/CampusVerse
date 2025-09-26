@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Award, LogOut, User, UserCog, Gift, Ticket } from 'lucide-react';
+import { LogOut, User, UserCog, Gift, Ticket } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
@@ -110,11 +110,6 @@ export function AppHeader() {
                     <UserCog className="mr-2 h-4 w-4" />
                     <span>Settings</span>
                   </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout}>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
