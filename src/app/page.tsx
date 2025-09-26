@@ -90,7 +90,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
       <UserDetailsDialog open={showDetailsDialog} onOpenChange={handleDetailsDialogClose} />
@@ -102,11 +102,25 @@ export default function DashboardPage() {
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex-shrink-0">
                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8">
-                 <h1 className="text-3xl font-bold tracking-tight">Events</h1>
-                <Button variant="outline" onClick={() => setShowLeaderboard(true)}>
+                <div className="flex items-center gap-4">
+                  <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Events</h1>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                         <Badge variant="outline" className={cn("text-base", rankStyles)}>
+                           {rank}
+                         </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Win 5 events to become a Pro, 10 to become a Master, and 20+ to become a Grandmaster.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+                <Button variant="outline" onClick={() => setShowLeaderboard(true)} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     <Trophy className="w-4 h-4 mr-2" />
                     Leaderboard
-                  </Button>
+                </Button>
               </div>
               {user.role === 'Club Member' && <ClubMemberProof />}
             </div>
