@@ -74,7 +74,7 @@ export function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>College Email</FormLabel>
+                  <FormLabel>College Email Address</FormLabel>
                   <FormControl>
                     <Input placeholder="your.name@reva.edu.in" {...field} />
                   </FormControl>
