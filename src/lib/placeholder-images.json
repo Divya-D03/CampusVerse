@@ -71,24 +71,6 @@
       "description": "Logo for a sports club.",
       "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzb3J0c3xlbnwwfHx8fDE3NjA0NTM3NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "sports logo"
-    },
-    {
-      "id": "location-auditorium",
-      "description": "An empty, grand auditorium with red seats.",
-      "imageUrl": "https://images.unsplash.com/photo-1596232386133-324558419614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhdWRpdG9yaXVtfGVufDB8fHx8MTc2MDQ1Mzg1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "grand auditorium"
-    },
-    {
-      "id": "location-library",
-      "description": "A modern library with rows of bookshelves and study areas.",
-      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsaWJyYXJ5fGVufDB8fHx8MTc2MDQ1Mzg2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "modern library"
-    },
-    {
-      "id": "location-student-center",
-      "description": "A lively university student center with students chatting.",
-      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudCUyMGNlbnRlcnxlbnwwfHx8fDE3NjA0NTM4NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "student center"
     }
   ]
 }

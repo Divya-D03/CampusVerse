@@ -1,8 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/auth-context';
 import { EventCard } from './event-card';
-import { CampusView } from './campus-view';
-import { Paintbrush, Code, Users, Map } from 'lucide-react';
+import { Paintbrush, Code, Users } from 'lucide-react';
 
 const statusLegend = [
   { status: 'Available', color: 'bg-green-500' },
@@ -25,7 +24,7 @@ export function EventTabs() {
   return (
     <>
       <Tabs defaultValue="cultural" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="cultural">
             <Paintbrush className="mr-2 h-4 w-4" />
             Cultural
@@ -37,10 +36,6 @@ export function EventTabs() {
           <TabsTrigger value="clubs">
             <Users className="mr-2 h-4 w-4" />
             Clubs
-          </TabsTrigger>
-          <TabsTrigger value="campus-view">
-            <Map className="mr-2 h-4 w-4" />
-            Campus View
           </TabsTrigger>
         </TabsList>
         <TabsContent value="cultural" className="mt-6">
@@ -63,9 +58,6 @@ export function EventTabs() {
               <EventCard key={event.id} event={event} />
             ))}
           </div>
-        </TabsContent>
-        <TabsContent value="campus-view" className="mt-6">
-          <CampusView />
         </TabsContent>
       </Tabs>
       <div className="mt-8 pt-4 border-t border-dashed">
