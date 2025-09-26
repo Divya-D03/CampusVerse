@@ -90,7 +90,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="flex flex-col h-screen bg-background text-foreground">
       {showWelcome && <Confetti />}
       <WelcomeDialog open={showWelcome} onOpenChange={handleWelcomeDialogClose} />
       <UserDetailsDialog open={showDetailsDialog} onOpenChange={handleDetailsDialogClose} />
@@ -103,7 +103,7 @@ export default function DashboardPage() {
             <div className="flex-shrink-0">
                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8">
                 <div className="flex items-center gap-4">
-                  <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Events</h1>
+                  <h1 className="text-3xl font-bold tracking-tight text-foreground">Events</h1>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger>
@@ -112,12 +112,19 @@ export default function DashboardPage() {
                          </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Win 5 events to become a Pro, 10 to become a Master, and 20+ to become a Grandmaster.</p>
+                        <div className="text-center">
+                          <p className="font-bold">Rank Progression</p>
+                          <ul className="list-none text-left text-sm text-muted-foreground mt-2 space-y-1">
+                            <li><span className="font-semibold text-foreground">Pro:</span> 5 wins</li>
+                            <li><span className="font-semibold text-foreground">Master:</span> 10 wins</li>
+                            <li><span className="font-semibold text-foreground">Grandmaster:</span> 20+ wins</li>
+                          </ul>
+                        </div>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 </div>
-                <Button variant="outline" onClick={() => setShowLeaderboard(true)} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Button variant="outline" onClick={() => setShowLeaderboard(true)} className="neumorphic-raised-interactive">
                     <Trophy className="w-4 h-4 mr-2" />
                     Leaderboard
                 </Button>
