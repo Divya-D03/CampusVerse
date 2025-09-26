@@ -17,6 +17,8 @@ import { RegistrationDialog } from '@/components/dashboard/RegistrationDialog';
 import { Calendar, Coins, ArrowLeft, Ticket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+const allEvents: Event[] = [...culturalEvents, ...hackathons, ...techEvents, ...clubs, ...ideathons, ...projectExpos];
+
 const statusStyles: Record<EventStatus, string> = {
   Available: 'bg-green-500/20 text-green-400 border-green-500/30',
   'Almost Full': 'bg-orange-500/20 text-orange-400 border-orange-500/30',
@@ -42,12 +44,10 @@ export default function EventDetailsPage() {
 
   useEffect(() => {
     if (id) {
-      const allEvents = [...culturalEvents, ...hackathons, ...techEvents, ...clubs, ...ideathons, ...projectExpos];
       const foundEvent = allEvents.find((e) => e.id === id);
       if (foundEvent) {
         setEvent(foundEvent);
       } else {
-        // Handle event not found, maybe redirect to a 404 page or back to home
         router.replace('/');
       }
     }
