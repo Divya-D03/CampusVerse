@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Bot, Send, X, Loader, User, ArrowDown } from 'lucide-react';
+import { Bot, Send, X, Loader, User, ArrowDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { chat } from '@/ai/flows/chatbot-flow';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -37,6 +37,12 @@ export function Chatbot() {
   const scrollToBottom = () => {
     if (viewportRef.current) {
       viewportRef.current.scrollTo({ top: viewportRef.current.scrollHeight, behavior: 'smooth' });
+    }
+  };
+
+  const scrollUp = () => {
+    if (viewportRef.current) {
+      viewportRef.current.scrollTo({ top: viewportRef.current.scrollTop - viewportRef.current.clientHeight, behavior: 'smooth' });
     }
   };
 
@@ -112,14 +118,14 @@ export function Chatbot() {
               >
                 <div className="space-y-4">
                   {messages.map((message, index) => (
-                    <div key={index} className={`flex items-start gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
+                    <div key={index} className={`flex items-start gap-2 ${message.role === 'user' ? 'justify-end' : 'flex-row'}`}>
                       {message.role === 'model' && (
                         <Avatar className="h-8 w-8">
                            <AvatarImage src={`https://api.dicebear.com/8.x/bottts-neutral/svg?seed=chatbot`} alt="Chatbot"/>
                            <AvatarFallback>B</AvatarFallback>
                         </Avatar>
                       )}
-                      <div className={`rounded-lg px-3 py-2 text-sm ${
+                      <div className={`rounded-lg px-3 py-2 text-sm max-w-[80%] ${
                           message.role === 'user'
                             ? 'bg-primary text-primary-foreground'
                             : 'bg-muted'
@@ -148,6 +154,11 @@ export function Chatbot() {
                   )}
                 </div>
               </ScrollArea>
+              
+              <div className="absolute top-2 right-2 z-10 flex flex-col gap-1">
+                <Button onClick={scrollUp} size="icon" variant="ghost" className="h-6 w-6 rounded-full"><ChevronUp className="h-4 w-4" /></Button>
+                <Button onClick={scrollToBottom} size="icon" variant="ghost" className="h-6 w-6 rounded-full"><ChevronDown className="h-4 w-4" /></Button>
+              </div>
 
               {showScrollToBottom && (
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
