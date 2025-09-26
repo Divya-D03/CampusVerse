@@ -24,10 +24,17 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+
+    --sidebar: 222 47% 11%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-accent: 222 47% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-ring: 222 47% 30%;
   }
 
   .dark {
-    --background: 240 5% 18%; /* Cool grey background */
+    --background: 240 5% 14%; /* Cool grey background */
     --foreground: 0 0% 98%;
     --card: 240 5% 18%; /* Slightly lighter grey for cards */
     --card-foreground: 0 0% 98%;
