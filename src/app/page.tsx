@@ -59,20 +59,18 @@ export default function DashboardPage() {
       <UserDetailsDialog open={showDetailsDialog} onOpenChange={handleDetailsDialogClose} />
       
       <AppHeader />
-      <main className="flex-1 flex flex-col p-4 sm:p-6 md:p-8 overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full flex flex-col flex-1">
-          <div className="flex-shrink-0">
-            <h1 className="text-3xl md:text-4xl font-bold font-headline mb-2">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
-            <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
-            {user.role === 'Club Member' && <ClubMemberProof />}
+      <ScrollArea className="flex-1">
+        <main className="p-4 sm:p-6 md:p-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="flex-shrink-0">
+              <h1 className="text-3xl md:text-4xl font-bold font-headline mb-2">Welcome{user.name ? `, ${user.name}` : ''} to CampusVerse</h1>
+              <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
+              {user.role === 'Club Member' && <ClubMemberProof />}
+            </div>
+            <EventTabs />
           </div>
-          <div className="flex-1 min-h-0">
-            <ScrollArea className="h-full">
-                <EventTabs />
-            </ScrollArea>
-          </div>
-        </div>
-      </main>
+        </main>
+      </ScrollArea>
       <Chatbot />
     </div>
   );
