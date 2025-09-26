@@ -19,6 +19,7 @@ export interface User {
   githubUrl?: string;
   linkedinUrl?: string;
   gender?: 'Male' | 'Female' | 'Other';
+  skills?: string[];
 }
 
 export type EventStatus = 'Available' | 'Almost Full' | 'Ended' | 'On-Spot Registration' | 'Ongoing';

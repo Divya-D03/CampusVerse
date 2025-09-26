@@ -4,15 +4,17 @@ import { useAuth } from '@/contexts/auth-context';
 import { LoadingScreen } from '@/components/layout/loading-screen';
 import { AppHeader } from '@/components/layout/app-header';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Coins, BarChart3, CalendarCheck2, Home, Camera, FileText, LogOut, PlusCircle } from 'lucide-react';
+import { Coins, BarChart3, CalendarCheck2, Home, Camera, FileText, LogOut, PlusCircle, CheckCircle } from 'lucide-react';
 import { culturalEvents, hackathons, techEvents } from '@/lib/placeholder-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CouponHistory } from '@/components/profile/coupon-history';
 import { HostEventDialog } from '@/components/dashboard/host-event-dialog';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 
 export default function ProfilePage() {
   const { user, loading, updateUserProfilePicture, logout } = useAuth();
@@ -41,6 +43,18 @@ export default function ProfilePage() {
   }, [user?.role]);
 
 
+  const profileCompletion = useMemo(() => {
+    if (!user) return 0;
+    let score = 0;
+    if (user.name) score++;
+    if (user.profilePicture) score++;
+    if (user.mobileNumber) score++;
+    if (user.githubUrl) score++;
+    if (user.linkedinUrl) score++;
+    return (score / 5) * 100;
+  }, [user]);
+
+
   if (loading || !user) {
     return <LoadingScreen />;
   }
@@ -49,6 +63,7 @@ export default function ProfilePage() {
   // Dummy data for demonstration
   const participatedEvents = allEvents.slice(0, 2);
   const wonEvents = allEvents.slice(2, 3);
+  const userSkills = user.skills || ['React', 'Node.js', 'Cybersecurity', 'Public Speaking'];
 
   const handleAvatarClick = () => {
     fileInputRef.current?.click();
@@ -99,7 +114,10 @@ export default function ProfilePage() {
                   <h1 className="text-3xl md:text-4xl font-bold font-headline">{user.name || user.email.split('@')[0]}</h1>
                   <p className="text-muted-foreground">{user.email}</p>
                    {user.role === 'Club Member' && (
-                    <p className="text-sm text-primary font-semibold mt-1">{isClubMemberVerified ? 'Verified Club Member' : 'Unverified Club Member'}</p>
+                    <p className="text-sm font-semibold mt-1 flex items-center gap-1">
+                      {isClubMemberVerified ? <CheckCircle className="text-green-400 w-4 h-4" /> : null}
+                      {isClubMemberVerified ? 'Verified Club Member' : 'Unverified Club Member'}
+                    </p>
                    )}
                 </div>
               </div>
@@ -123,7 +141,16 @@ export default function ProfilePage() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+              <Card className="holographic-card md:col-span-2">
+                <CardHeader>
+                  <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Progress value={profileCompletion} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-2">{Math.round(profileCompletion)}% complete. <Link href="/settings" className="text-primary hover:underline">Add more details</Link>.</p>
+                </CardContent>
+              </Card>
               <Card className="holographic-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Coins</CardTitle>
@@ -136,15 +163,6 @@ export default function ProfilePage() {
               </Card>
               <Card className="holographic-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">Events Participated</CardTitle>
-                  <CalendarCheck2 className="w-4 h-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{participatedEvents.length}</div>
-                </CardContent>
-              </Card>
-              <Card className="holographic-card">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Events Won</CardTitle>
                   <BarChart3 className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
@@ -153,6 +171,16 @@ export default function ProfilePage() {
                 </CardContent>
               </Card>
             </div>
+
+            <div className="mb-8">
+                <h2 className="text-2xl font-headline font-bold mb-4">My Skills</h2>
+                <div className="flex flex-wrap gap-2">
+                  {userSkills.map((skill, index) => (
+                     <Badge key={index} variant="secondary" className="text-base py-1 px-3">{skill}</Badge>
+                  ))}
+                </div>
+              </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
