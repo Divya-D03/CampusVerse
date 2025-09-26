@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Bot, Send, X, Loader, User } from 'lucide-react';
+import { Bot, Send, X, Loader, User, ArrowDown } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { chat } from '@/ai/flows/chatbot-flow';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useAuth } from '@/contexts/auth-context';
+import { cn } from '@/lib/utils';
 
 type Message = {
   role: 'user' | 'model';
@@ -21,12 +22,43 @@ export function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
+  
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const isAtBottomRef = useRef(true);
+  const [showScrollToBottom, setShowScrollToBottom] = useState(false);
 
   const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email.charAt(0).toUpperCase() || 'U');
   
   let userAvatar = '';
   if (user) {
     userAvatar = user.profilePicture || `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${user.email}`;
+  }
+
+  const scrollToBottom = () => {
+    if (viewportRef.current) {
+      viewportRef.current.scrollTo({ top: viewportRef.current.scrollHeight, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (isAtBottomRef.current) {
+        scrollToBottom();
+    }
+  }, [messages, isLoading]);
+  
+  const handleScroll = () => {
+    const viewport = viewportRef.current;
+    if (viewport) {
+      const isScrolledToBottom = viewport.scrollHeight - viewport.scrollTop <= viewport.clientHeight + 1; // +1 for tolerance
+      isAtBottomRef.current = isScrolledToBottom;
+      setShowScrollToBottom(!isScrolledToBottom);
+    }
+  };
+
+  const handleManualScrollToBottom = () => {
+    scrollToBottom();
+    isAtBottomRef.current = true;
+    setShowScrollToBottom(false);
   }
 
   const handleSend = async () => {
@@ -72,8 +104,12 @@ export function Chatbot() {
                 <Bot /> CampusVerse Helper
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex-1 flex flex-col p-0">
-              <ScrollArea className="flex-1 p-4">
+            <CardContent className="flex-1 flex flex-col p-0 relative">
+              <ScrollArea 
+                className="flex-1 p-4" 
+                viewportRef={viewportRef}
+                onScroll={handleScroll}
+              >
                 <div className="space-y-4">
                   {messages.map((message, index) => (
                     <div key={index} className={`flex items-start gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
@@ -112,6 +148,20 @@ export function Chatbot() {
                   )}
                 </div>
               </ScrollArea>
+
+              {showScrollToBottom && (
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
+                  <Button
+                    onClick={handleManualScrollToBottom}
+                    size="icon"
+                    variant="secondary"
+                    className="rounded-full h-8 w-8"
+                  >
+                    <ArrowDown className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+
               <div className="p-4 border-t">
                 <div className="flex items-center gap-2">
                   <Input
