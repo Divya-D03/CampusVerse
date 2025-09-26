@@ -11,6 +11,7 @@ import Confetti from '@/components/effects/confetti';
 import { UserDetailsDialog } from '@/components/dashboard/name-dialog';
 import { ClubMemberProof } from '@/components/dashboard/club-member-proof';
 import { Chatbot } from '@/components/chatbot/chatbot';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function DashboardPage() {
   const { user, loading, isFirstLogin, markFirstLoginDone } = useAuth();
@@ -65,7 +66,11 @@ export default function DashboardPage() {
             <p className="text-muted-foreground mb-8">Your central hub for all university events and clubs.</p>
             {user.role === 'Club Member' && <ClubMemberProof />}
           </div>
-          <EventTabs />
+          <div className="flex-1 min-h-0">
+            <ScrollArea className="h-full">
+                <EventTabs />
+            </ScrollArea>
+          </div>
         </div>
       </main>
       <Chatbot />
